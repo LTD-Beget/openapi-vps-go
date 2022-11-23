@@ -1,4 +1,4 @@
-module github.com/LTD-Beget/openapi-go/vps
+module github.com/LTD-Beget/openapi-vps-go
 
 go 1.13
 
