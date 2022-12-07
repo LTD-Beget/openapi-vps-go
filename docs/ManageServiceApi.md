@@ -20,7 +20,6 @@ Method | HTTP request | Description
 [**ManageServiceGetInfo**](ManageServiceApi.md#ManageServiceGetInfo) | **Get** /v1/vps/server/{id} | 
 [**ManageServiceGetInstalledSoftware**](ManageServiceApi.md#ManageServiceGetInstalledSoftware) | **Get** /v1/vps/{id}/software | 
 [**ManageServiceGetList**](ManageServiceApi.md#ManageServiceGetList) | **Get** /v1/vps/server/list | 
-[**ManageServiceGetSoftwareList**](ManageServiceApi.md#ManageServiceGetSoftwareList) | **Get** /v1/vps/software | 
 [**ManageServiceGetStatuses**](ManageServiceApi.md#ManageServiceGetStatuses) | **Get** /v1/vps/server/statuses | 
 [**ManageServiceRebootVps**](ManageServiceApi.md#ManageServiceRebootVps) | **Post** /v1/vps/server/{id}/reboot | 
 [**ManageServiceReinstall**](ManageServiceApi.md#ManageServiceReinstall) | **Post** /v1/vps/server/{id}/reinstall | 
@@ -1107,65 +1106,6 @@ Other parameters are passed through a pointer to a apiManageServiceGetListReques
 ### Return type
 
 [**ManageGetListResponse**](ManageGetListResponse.md)
-
-### Authorization
-
-[bearerAuth](../README.md#bearerAuth)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## ManageServiceGetSoftwareList
-
-> ManageGetSoftwareListResponse ManageServiceGetSoftwareList(ctx).Execute()
-
-
-
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
-)
-
-func main() {
-
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.ManageServiceApi.ManageServiceGetSoftwareList(context.Background()).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ManageServiceApi.ManageServiceGetSoftwareList``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `ManageServiceGetSoftwareList`: ManageGetSoftwareListResponse
-    fmt.Fprintf(os.Stdout, "Response from `ManageServiceApi.ManageServiceGetSoftwareList`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-This endpoint does not need any parameter.
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiManageServiceGetSoftwareListRequest struct via the builder pattern
-
-
-### Return type
-
-[**ManageGetSoftwareListResponse**](ManageGetSoftwareListResponse.md)
 
 ### Authorization
 

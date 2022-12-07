@@ -10,10 +10,7 @@ Name | Type | Description | Notes
 **Version** | Pointer to **string** |  | [optional] 
 **Description** | Pointer to **string** |  | [optional] 
 **DescriptionEn** | Pointer to **string** |  | [optional] 
-**DescriptionVersion** | Pointer to **string** |  | [optional] 
-**DescriptionVersionEn** | Pointer to **string** |  | [optional] 
 **Metadata** | Pointer to [**StructuresSoftwareMetadata**](StructuresSoftwareMetadata.md) |  | [optional] 
-**Variable** | Pointer to **[]string** |  | [optional] 
 **FieldData** | Pointer to [**[]MarketplaceFieldDesc**](MarketplaceFieldDesc.md) |  | [optional] 
 **Requirements** | Pointer to [**MarketplaceGetSoftwareListResponseSoftwareInfoRequirements**](MarketplaceGetSoftwareListResponseSoftwareInfoRequirements.md) |  | [optional] 
 **Category** | Pointer to [**[]StructuresSoftwareCategory**](StructuresSoftwareCategory.md) |  | [optional] 
@@ -189,56 +186,6 @@ SetDescriptionEn sets DescriptionEn field to given value.
 
 HasDescriptionEn returns a boolean if a field has been set.
 
-### GetDescriptionVersion
-
-`func (o *MarketplaceGetSoftwareListResponseSoftwareInfo) GetDescriptionVersion() string`
-
-GetDescriptionVersion returns the DescriptionVersion field if non-nil, zero value otherwise.
-
-### GetDescriptionVersionOk
-
-`func (o *MarketplaceGetSoftwareListResponseSoftwareInfo) GetDescriptionVersionOk() (*string, bool)`
-
-GetDescriptionVersionOk returns a tuple with the DescriptionVersion field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetDescriptionVersion
-
-`func (o *MarketplaceGetSoftwareListResponseSoftwareInfo) SetDescriptionVersion(v string)`
-
-SetDescriptionVersion sets DescriptionVersion field to given value.
-
-### HasDescriptionVersion
-
-`func (o *MarketplaceGetSoftwareListResponseSoftwareInfo) HasDescriptionVersion() bool`
-
-HasDescriptionVersion returns a boolean if a field has been set.
-
-### GetDescriptionVersionEn
-
-`func (o *MarketplaceGetSoftwareListResponseSoftwareInfo) GetDescriptionVersionEn() string`
-
-GetDescriptionVersionEn returns the DescriptionVersionEn field if non-nil, zero value otherwise.
-
-### GetDescriptionVersionEnOk
-
-`func (o *MarketplaceGetSoftwareListResponseSoftwareInfo) GetDescriptionVersionEnOk() (*string, bool)`
-
-GetDescriptionVersionEnOk returns a tuple with the DescriptionVersionEn field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetDescriptionVersionEn
-
-`func (o *MarketplaceGetSoftwareListResponseSoftwareInfo) SetDescriptionVersionEn(v string)`
-
-SetDescriptionVersionEn sets DescriptionVersionEn field to given value.
-
-### HasDescriptionVersionEn
-
-`func (o *MarketplaceGetSoftwareListResponseSoftwareInfo) HasDescriptionVersionEn() bool`
-
-HasDescriptionVersionEn returns a boolean if a field has been set.
-
 ### GetMetadata
 
 `func (o *MarketplaceGetSoftwareListResponseSoftwareInfo) GetMetadata() StructuresSoftwareMetadata`
@@ -263,31 +210,6 @@ SetMetadata sets Metadata field to given value.
 `func (o *MarketplaceGetSoftwareListResponseSoftwareInfo) HasMetadata() bool`
 
 HasMetadata returns a boolean if a field has been set.
-
-### GetVariable
-
-`func (o *MarketplaceGetSoftwareListResponseSoftwareInfo) GetVariable() []string`
-
-GetVariable returns the Variable field if non-nil, zero value otherwise.
-
-### GetVariableOk
-
-`func (o *MarketplaceGetSoftwareListResponseSoftwareInfo) GetVariableOk() (*[]string, bool)`
-
-GetVariableOk returns a tuple with the Variable field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetVariable
-
-`func (o *MarketplaceGetSoftwareListResponseSoftwareInfo) SetVariable(v []string)`
-
-SetVariable sets Variable field to given value.
-
-### HasVariable
-
-`func (o *MarketplaceGetSoftwareListResponseSoftwareInfo) HasVariable() bool`
-
-HasVariable returns a boolean if a field has been set.
 
 ### GetFieldData
 

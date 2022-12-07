@@ -1,7 +1,7 @@
 openapi: 3.0.3
 info:
   title: API Облачных серверов
-  version: v1.2.0
+  version: v1.2.1
 servers:
 - url: https://api.beget.com
 security:
@@ -624,18 +624,6 @@ paths:
           description: OK
       tags:
       - SnapshotService
-  /v1/vps/software:
-    get:
-      operationId: ManageService_GetSoftwareList
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Manage_GetSoftwareListResponse'
-          description: OK
-      tags:
-      - ManageService
   /v1/vps/software/requirements:
     post:
       operationId: ManageService_CheckSoftwareRequirements
@@ -2481,7 +2469,6 @@ components:
       example:
         error:
           domain_error: _
-          wordpress_error: _
       properties:
         error:
           $ref: '#/components/schemas/Manage_CheckSoftwareRequirementsResponse_Error'
@@ -2489,18 +2476,7 @@ components:
     Manage_CheckSoftwareRequirementsResponse_Error:
       example:
         domain_error: _
-        wordpress_error: _
       properties:
-        wordpress_error:
-          enum:
-          - _
-          - DOMAIN_NOT_REGISTERED
-          - WRONG_NS_RECORD
-          - DOMAIN_NOT_DELEGATED
-          - INVALID_DOMAIN
-          - DOMAIN_IS_NEW
-          format: enum
-          type: string
         domain_error:
           enum:
           - _
@@ -3565,116 +3541,6 @@ components:
           items:
             $ref: '#/components/schemas/Manage_VpsInfo'
           type: array
-      type: object
-    Manage_GetSoftwareListResponse:
-      example:
-        software:
-        - description_version: description_version
-          requirements:
-            memory: 5
-            disk_size: 5
-            cpu_count: 1
-          name: name
-          variable:
-          - variable
-          - variable
-          description: description
-          id: 0
-          display_name: display_name
-          type: PANEL
-          image_id:
-          - 6
-          - 6
-          version: version
-        - description_version: description_version
-          requirements:
-            memory: 5
-            disk_size: 5
-            cpu_count: 1
-          name: name
-          variable:
-          - variable
-          - variable
-          description: description
-          id: 0
-          display_name: display_name
-          type: PANEL
-          image_id:
-          - 6
-          - 6
-          version: version
-      properties:
-        software:
-          items:
-            $ref: '#/components/schemas/Manage_GetSoftwareListResponse_SoftwareInfo'
-          type: array
-      type: object
-    Manage_GetSoftwareListResponse_SoftwareInfo:
-      example:
-        description_version: description_version
-        requirements:
-          memory: 5
-          disk_size: 5
-          cpu_count: 1
-        name: name
-        variable:
-        - variable
-        - variable
-        description: description
-        id: 0
-        display_name: display_name
-        type: PANEL
-        image_id:
-        - 6
-        - 6
-        version: version
-      properties:
-        id:
-          format: uint32
-          type: integer
-        name:
-          type: string
-        display_name:
-          type: string
-        version:
-          type: string
-        type:
-          enum:
-          - PANEL
-          - SOFTWARE
-          format: enum
-          type: string
-        description:
-          type: string
-        description_version:
-          type: string
-        image_id:
-          items:
-            format: uint32
-            type: integer
-          type: array
-        variable:
-          items:
-            type: string
-          type: array
-        requirements:
-          $ref: '#/components/schemas/Manage_GetSoftwareListResponse_SoftwareInfo_Requirements'
-      type: object
-    Manage_GetSoftwareListResponse_SoftwareInfo_Requirements:
-      example:
-        memory: 5
-        disk_size: 5
-        cpu_count: 1
-      properties:
-        cpu_count:
-          format: uint32
-          type: integer
-        disk_size:
-          format: uint32
-          type: integer
-        memory:
-          format: uint32
-          type: integer
       type: object
     Manage_GetStatusesResponse:
       example:
@@ -5610,13 +5476,6 @@ components:
             memory: 5
             disk_size: 1
             cpu_count: 6
-          description_version_en: description_version_en
-          documentation_slug: documentation_slug
-          description_en: description_en
-          description: description
-          display_name: display_name
-          version: version
-          description_version: description_version
           field_data:
           - password_field:
               auto_generated: true
@@ -5736,11 +5595,12 @@ components:
                 label: label
                 label_en: label_en
                 validation_error_text: validation_error_text
+          documentation_slug: documentation_slug
+          description_en: description_en
           name: name
-          variable:
-          - variable
-          - variable
+          description: description
           id: 0
+          display_name: display_name
           category:
           - is_main: true
             name: name
@@ -5750,6 +5610,7 @@ components:
             name: name
             sys_name: sys_name
             name_en: name_en
+          version: version
           slug: slug
         - metadata:
             is_new: true
@@ -5765,13 +5626,6 @@ components:
             memory: 5
             disk_size: 1
             cpu_count: 6
-          description_version_en: description_version_en
-          documentation_slug: documentation_slug
-          description_en: description_en
-          description: description
-          display_name: display_name
-          version: version
-          description_version: description_version
           field_data:
           - password_field:
               auto_generated: true
@@ -5891,11 +5745,12 @@ components:
                 label: label
                 label_en: label_en
                 validation_error_text: validation_error_text
+          documentation_slug: documentation_slug
+          description_en: description_en
           name: name
-          variable:
-          - variable
-          - variable
+          description: description
           id: 0
+          display_name: display_name
           category:
           - is_main: true
             name: name
@@ -5905,6 +5760,7 @@ components:
             name: name
             sys_name: sys_name
             name_en: name_en
+          version: version
           slug: slug
       properties:
         software:
@@ -5928,13 +5784,6 @@ components:
           memory: 5
           disk_size: 1
           cpu_count: 6
-        description_version_en: description_version_en
-        documentation_slug: documentation_slug
-        description_en: description_en
-        description: description
-        display_name: display_name
-        version: version
-        description_version: description_version
         field_data:
         - password_field:
             auto_generated: true
@@ -6054,11 +5903,12 @@ components:
               label: label
               label_en: label_en
               validation_error_text: validation_error_text
+        documentation_slug: documentation_slug
+        description_en: description_en
         name: name
-        variable:
-        - variable
-        - variable
+        description: description
         id: 0
+        display_name: display_name
         category:
         - is_main: true
           name: name
@@ -6068,6 +5918,7 @@ components:
           name: name
           sys_name: sys_name
           name_en: name_en
+        version: version
         slug: slug
       properties:
         id:
@@ -6083,16 +5934,8 @@ components:
           type: string
         description_en:
           type: string
-        description_version:
-          type: string
-        description_version_en:
-          type: string
         metadata:
           $ref: '#/components/schemas/Structures_SoftwareMetadata'
-        variable:
-          items:
-            type: string
-          type: array
         field_data:
           items:
             $ref: '#/components/schemas/Marketplace_FieldDesc'
