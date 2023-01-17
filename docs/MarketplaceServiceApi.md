@@ -10,7 +10,7 @@ Method | HTTP request | Description
 
 ## MarketplaceServiceGetSoftwareList
 
-> MarketplaceGetSoftwareListResponse MarketplaceServiceGetSoftwareList(ctx).Execute()
+> MarketplaceGetSoftwareListResponse MarketplaceServiceGetSoftwareList(ctx).CategoryName(categoryName).DisplayName(displayName).IsPinned(isPinned).Execute()
 
 
 
@@ -27,10 +27,13 @@ import (
 )
 
 func main() {
+    categoryName := "categoryName_example" // string |  (optional)
+    displayName := "displayName_example" // string |  (optional)
+    isPinned := true // bool |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.MarketplaceServiceApi.MarketplaceServiceGetSoftwareList(context.Background()).Execute()
+    resp, r, err := apiClient.MarketplaceServiceApi.MarketplaceServiceGetSoftwareList(context.Background()).CategoryName(categoryName).DisplayName(displayName).IsPinned(isPinned).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `MarketplaceServiceApi.MarketplaceServiceGetSoftwareList``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -42,12 +45,18 @@ func main() {
 
 ### Path Parameters
 
-This endpoint does not need any parameter.
+
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiMarketplaceServiceGetSoftwareListRequest struct via the builder pattern
 
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **categoryName** | **string** |  | 
+ **displayName** | **string** |  | 
+ **isPinned** | **bool** |  | 
 
 ### Return type
 

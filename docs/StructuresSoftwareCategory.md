@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **Name** | Pointer to **string** |  | [optional] 
 **NameEn** | Pointer to **string** |  | [optional] 
 **IsMain** | Pointer to **bool** |  | [optional] 
+**IconSvg** | Pointer to **string** |  | [optional] 
 
 ## Methods
 
@@ -127,6 +128,31 @@ SetIsMain sets IsMain field to given value.
 `func (o *StructuresSoftwareCategory) HasIsMain() bool`
 
 HasIsMain returns a boolean if a field has been set.
+
+### GetIconSvg
+
+`func (o *StructuresSoftwareCategory) GetIconSvg() string`
+
+GetIconSvg returns the IconSvg field if non-nil, zero value otherwise.
+
+### GetIconSvgOk
+
+`func (o *StructuresSoftwareCategory) GetIconSvgOk() (*string, bool)`
+
+GetIconSvgOk returns a tuple with the IconSvg field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIconSvg
+
+`func (o *StructuresSoftwareCategory) SetIconSvg(v string)`
+
+SetIconSvg sets IconSvg field to given value.
+
+### HasIconSvg
+
+`func (o *StructuresSoftwareCategory) HasIconSvg() bool`
+
+HasIconSvg returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

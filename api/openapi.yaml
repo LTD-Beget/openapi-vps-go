@@ -1,7 +1,7 @@
 openapi: 3.0.3
 info:
   title: API Облачных серверов
-  version: v1.2.1
+  version: v1.3.0
 servers:
 - url: https://api.beget.com
 security:
@@ -91,6 +91,28 @@ paths:
   /v1/vps/marketplace/software/list:
     get:
       operationId: MarketplaceService_GetSoftwareList
+      parameters:
+      - explode: true
+        in: query
+        name: category_name
+        required: false
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: display_name
+        required: false
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: is_pinned
+        required: false
+        schema:
+          type: boolean
+        style: form
       responses:
         "200":
           content:
@@ -1363,10 +1385,12 @@ components:
             display_name: display_name
             category:
             - is_main: true
+              icon_svg: icon_svg
               name: name
               sys_name: sys_name
               name_en: name_en
             - is_main: true
+              icon_svg: icon_svg
               name: name
               sys_name: sys_name
               name_en: name_en
@@ -1411,10 +1435,12 @@ components:
             display_name: display_name
             category:
             - is_main: true
+              icon_svg: icon_svg
               name: name
               sys_name: sys_name
               name_en: name_en
             - is_main: true
+              icon_svg: icon_svg
               name: name
               sys_name: sys_name
               name_en: name_en
@@ -1504,10 +1530,12 @@ components:
               display_name: display_name
               category:
               - is_main: true
+                icon_svg: icon_svg
                 name: name
                 sys_name: sys_name
                 name_en: name_en
               - is_main: true
+                icon_svg: icon_svg
                 name: name
                 sys_name: sys_name
                 name_en: name_en
@@ -1569,10 +1597,12 @@ components:
               display_name: display_name
               category:
               - is_main: true
+                icon_svg: icon_svg
                 name: name
                 sys_name: sys_name
                 name_en: name_en
               - is_main: true
+                icon_svg: icon_svg
                 name: name
                 sys_name: sys_name
                 name_en: name_en
@@ -1661,10 +1691,12 @@ components:
               display_name: display_name
               category:
               - is_main: true
+                icon_svg: icon_svg
                 name: name
                 sys_name: sys_name
                 name_en: name_en
               - is_main: true
+                icon_svg: icon_svg
                 name: name
                 sys_name: sys_name
                 name_en: name_en
@@ -1762,10 +1794,12 @@ components:
               display_name: display_name
               category:
               - is_main: true
+                icon_svg: icon_svg
                 name: name
                 sys_name: sys_name
                 name_en: name_en
               - is_main: true
+                icon_svg: icon_svg
                 name: name
                 sys_name: sys_name
                 name_en: name_en
@@ -1846,10 +1880,12 @@ components:
             display_name: display_name
             category:
             - is_main: true
+              icon_svg: icon_svg
               name: name
               sys_name: sys_name
               name_en: name_en
             - is_main: true
+              icon_svg: icon_svg
               name: name
               sys_name: sys_name
               name_en: name_en
@@ -1968,10 +2004,12 @@ components:
             display_name: display_name
             category:
             - is_main: true
+              icon_svg: icon_svg
               name: name
               sys_name: sys_name
               name_en: name_en
             - is_main: true
+              icon_svg: icon_svg
               name: name
               sys_name: sys_name
               name_en: name_en
@@ -2099,10 +2137,12 @@ components:
             display_name: display_name
             category:
             - is_main: true
+              icon_svg: icon_svg
               name: name
               sys_name: sys_name
               name_en: name_en
             - is_main: true
+              icon_svg: icon_svg
               name: name
               sys_name: sys_name
               name_en: name_en
@@ -2233,10 +2273,12 @@ components:
             display_name: display_name
             category:
             - is_main: true
+              icon_svg: icon_svg
               name: name
               sys_name: sys_name
               name_en: name_en
             - is_main: true
+              icon_svg: icon_svg
               name: name
               sys_name: sys_name
               name_en: name_en
@@ -2366,10 +2408,12 @@ components:
             display_name: display_name
             category:
             - is_main: true
+              icon_svg: icon_svg
               name: name
               sys_name: sys_name
               name_en: name_en
             - is_main: true
+              icon_svg: icon_svg
               name: name
               sys_name: sys_name
               name_en: name_en
@@ -2548,10 +2592,12 @@ components:
             display_name: display_name
             category:
             - is_main: true
+              icon_svg: icon_svg
               name: name
               sys_name: sys_name
               name_en: name_en
             - is_main: true
+              icon_svg: icon_svg
               name: name
               sys_name: sys_name
               name_en: name_en
@@ -2766,10 +2812,12 @@ components:
             display_name: display_name
             category:
             - is_main: true
+              icon_svg: icon_svg
               name: name
               sys_name: sys_name
               name_en: name_en
             - is_main: true
+              icon_svg: icon_svg
               name: name
               sys_name: sys_name
               name_en: name_en
@@ -2888,10 +2936,12 @@ components:
             display_name: display_name
             category:
             - is_main: true
+              icon_svg: icon_svg
               name: name
               sys_name: sys_name
               name_en: name_en
             - is_main: true
+              icon_svg: icon_svg
               name: name
               sys_name: sys_name
               name_en: name_en
@@ -3010,10 +3060,12 @@ components:
             display_name: display_name
             category:
             - is_main: true
+              icon_svg: icon_svg
               name: name
               sys_name: sys_name
               name_en: name_en
             - is_main: true
+              icon_svg: icon_svg
               name: name
               sys_name: sys_name
               name_en: name_en
@@ -3225,10 +3277,12 @@ components:
             display_name: display_name
             category:
             - is_main: true
+              icon_svg: icon_svg
               name: name
               sys_name: sys_name
               name_en: name_en
             - is_main: true
+              icon_svg: icon_svg
               name: name
               sys_name: sys_name
               name_en: name_en
@@ -3327,10 +3381,12 @@ components:
           display_name: display_name
           category:
           - is_main: true
+            icon_svg: icon_svg
             name: name
             sys_name: sys_name
             name_en: name_en
           - is_main: true
+            icon_svg: icon_svg
             name: name
             sys_name: sys_name
             name_en: name_en
@@ -3373,10 +3429,12 @@ components:
             display_name: display_name
             category:
             - is_main: true
+              icon_svg: icon_svg
               name: name
               sys_name: sys_name
               name_en: name_en
             - is_main: true
+              icon_svg: icon_svg
               name: name
               sys_name: sys_name
               name_en: name_en
@@ -3469,10 +3527,12 @@ components:
             display_name: display_name
             category:
             - is_main: true
+              icon_svg: icon_svg
               name: name
               sys_name: sys_name
               name_en: name_en
             - is_main: true
+              icon_svg: icon_svg
               name: name
               sys_name: sys_name
               name_en: name_en
@@ -3675,10 +3735,12 @@ components:
             display_name: display_name
             category:
             - is_main: true
+              icon_svg: icon_svg
               name: name
               sys_name: sys_name
               name_en: name_en
             - is_main: true
+              icon_svg: icon_svg
               name: name
               sys_name: sys_name
               name_en: name_en
@@ -3812,10 +3874,12 @@ components:
             display_name: display_name
             category:
             - is_main: true
+              icon_svg: icon_svg
               name: name
               sys_name: sys_name
               name_en: name_en
             - is_main: true
+              icon_svg: icon_svg
               name: name
               sys_name: sys_name
               name_en: name_en
@@ -3996,10 +4060,12 @@ components:
             display_name: display_name
             category:
             - is_main: true
+              icon_svg: icon_svg
               name: name
               sys_name: sys_name
               name_en: name_en
             - is_main: true
+              icon_svg: icon_svg
               name: name
               sys_name: sys_name
               name_en: name_en
@@ -4145,10 +4211,12 @@ components:
             display_name: display_name
             category:
             - is_main: true
+              icon_svg: icon_svg
               name: name
               sys_name: sys_name
               name_en: name_en
             - is_main: true
+              icon_svg: icon_svg
               name: name
               sys_name: sys_name
               name_en: name_en
@@ -4267,10 +4335,12 @@ components:
             display_name: display_name
             category:
             - is_main: true
+              icon_svg: icon_svg
               name: name
               sys_name: sys_name
               name_en: name_en
             - is_main: true
+              icon_svg: icon_svg
               name: name
               sys_name: sys_name
               name_en: name_en
@@ -4400,10 +4470,12 @@ components:
             display_name: display_name
             category:
             - is_main: true
+              icon_svg: icon_svg
               name: name
               sys_name: sys_name
               name_en: name_en
             - is_main: true
+              icon_svg: icon_svg
               name: name
               sys_name: sys_name
               name_en: name_en
@@ -4523,10 +4595,12 @@ components:
             display_name: display_name
             category:
             - is_main: true
+              icon_svg: icon_svg
               name: name
               sys_name: sys_name
               name_en: name_en
             - is_main: true
+              icon_svg: icon_svg
               name: name
               sys_name: sys_name
               name_en: name_en
@@ -4646,10 +4720,12 @@ components:
             display_name: display_name
             category:
             - is_main: true
+              icon_svg: icon_svg
               name: name
               sys_name: sys_name
               name_en: name_en
             - is_main: true
+              icon_svg: icon_svg
               name: name
               sys_name: sys_name
               name_en: name_en
@@ -4769,10 +4845,12 @@ components:
             display_name: display_name
             category:
             - is_main: true
+              icon_svg: icon_svg
               name: name
               sys_name: sys_name
               name_en: name_en
             - is_main: true
+              icon_svg: icon_svg
               name: name
               sys_name: sys_name
               name_en: name_en
@@ -4892,10 +4970,12 @@ components:
             display_name: display_name
             category:
             - is_main: true
+              icon_svg: icon_svg
               name: name
               sys_name: sys_name
               name_en: name_en
             - is_main: true
+              icon_svg: icon_svg
               name: name
               sys_name: sys_name
               name_en: name_en
@@ -5006,10 +5086,12 @@ components:
             display_name: display_name
             category:
             - is_main: true
+              icon_svg: icon_svg
               name: name
               sys_name: sys_name
               name_en: name_en
             - is_main: true
+              icon_svg: icon_svg
               name: name
               sys_name: sys_name
               name_en: name_en
@@ -5165,10 +5247,12 @@ components:
           display_name: display_name
           category:
           - is_main: true
+            icon_svg: icon_svg
             name: name
             sys_name: sys_name
             name_en: name_en
           - is_main: true
+            icon_svg: icon_svg
             name: name
             sys_name: sys_name
             name_en: name_en
@@ -5603,10 +5687,12 @@ components:
           display_name: display_name
           category:
           - is_main: true
+            icon_svg: icon_svg
             name: name
             sys_name: sys_name
             name_en: name_en
           - is_main: true
+            icon_svg: icon_svg
             name: name
             sys_name: sys_name
             name_en: name_en
@@ -5753,10 +5839,12 @@ components:
           display_name: display_name
           category:
           - is_main: true
+            icon_svg: icon_svg
             name: name
             sys_name: sys_name
             name_en: name_en
           - is_main: true
+            icon_svg: icon_svg
             name: name
             sys_name: sys_name
             name_en: name_en
@@ -5911,10 +5999,12 @@ components:
         display_name: display_name
         category:
         - is_main: true
+          icon_svg: icon_svg
           name: name
           sys_name: sys_name
           name_en: name_en
         - is_main: true
+          icon_svg: icon_svg
           name: name
           sys_name: sys_name
           name_en: name_en
@@ -6221,10 +6311,12 @@ components:
             display_name: display_name
             category:
             - is_main: true
+              icon_svg: icon_svg
               name: name
               sys_name: sys_name
               name_en: name_en
             - is_main: true
+              icon_svg: icon_svg
               name: name
               sys_name: sys_name
               name_en: name_en
@@ -6304,10 +6396,12 @@ components:
             display_name: display_name
             category:
             - is_main: true
+              icon_svg: icon_svg
               name: name
               sys_name: sys_name
               name_en: name_en
             - is_main: true
+              icon_svg: icon_svg
               name: name
               sys_name: sys_name
               name_en: name_en
@@ -6362,10 +6456,12 @@ components:
             display_name: display_name
             category:
             - is_main: true
+              icon_svg: icon_svg
               name: name
               sys_name: sys_name
               name_en: name_en
             - is_main: true
+              icon_svg: icon_svg
               name: name
               sys_name: sys_name
               name_en: name_en
@@ -6413,10 +6509,12 @@ components:
             display_name: display_name
             category:
             - is_main: true
+              icon_svg: icon_svg
               name: name
               sys_name: sys_name
               name_en: name_en
             - is_main: true
+              icon_svg: icon_svg
               name: name
               sys_name: sys_name
               name_en: name_en
@@ -6480,10 +6578,12 @@ components:
               display_name: display_name
               category:
               - is_main: true
+                icon_svg: icon_svg
                 name: name
                 sys_name: sys_name
                 name_en: name_en
               - is_main: true
+                icon_svg: icon_svg
                 name: name
                 sys_name: sys_name
                 name_en: name_en
@@ -6539,10 +6639,12 @@ components:
               display_name: display_name
               category:
               - is_main: true
+                icon_svg: icon_svg
                 name: name
                 sys_name: sys_name
                 name_en: name_en
               - is_main: true
+                icon_svg: icon_svg
                 name: name
                 sys_name: sys_name
                 name_en: name_en
@@ -6603,10 +6705,12 @@ components:
             display_name: display_name
             category:
             - is_main: true
+              icon_svg: icon_svg
               name: name
               sys_name: sys_name
               name_en: name_en
             - is_main: true
+              icon_svg: icon_svg
               name: name
               sys_name: sys_name
               name_en: name_en
@@ -6700,10 +6804,12 @@ components:
             display_name: display_name
             category:
             - is_main: true
+              icon_svg: icon_svg
               name: name
               sys_name: sys_name
               name_en: name_en
             - is_main: true
+              icon_svg: icon_svg
               name: name
               sys_name: sys_name
               name_en: name_en
@@ -6795,10 +6901,12 @@ components:
               display_name: display_name
               category:
               - is_main: true
+                icon_svg: icon_svg
                 name: name
                 sys_name: sys_name
                 name_en: name_en
               - is_main: true
+                icon_svg: icon_svg
                 name: name
                 sys_name: sys_name
                 name_en: name_en
@@ -6874,10 +6982,12 @@ components:
           display_name: display_name
           category:
           - is_main: true
+            icon_svg: icon_svg
             name: name
             sys_name: sys_name
             name_en: name_en
           - is_main: true
+            icon_svg: icon_svg
             name: name
             sys_name: sys_name
             name_en: name_en
@@ -7401,10 +7511,12 @@ components:
           display_name: display_name
           category:
           - is_main: true
+            icon_svg: icon_svg
             name: name
             sys_name: sys_name
             name_en: name_en
           - is_main: true
+            icon_svg: icon_svg
             name: name
             sys_name: sys_name
             name_en: name_en
@@ -7516,10 +7628,12 @@ components:
         display_name: display_name
         category:
         - is_main: true
+          icon_svg: icon_svg
           name: name
           sys_name: sys_name
           name_en: name_en
         - is_main: true
+          icon_svg: icon_svg
           name: name
           sys_name: sys_name
           name_en: name_en
@@ -7643,10 +7757,12 @@ components:
             display_name: display_name
             category:
             - is_main: true
+              icon_svg: icon_svg
               name: name
               sys_name: sys_name
               name_en: name_en
             - is_main: true
+              icon_svg: icon_svg
               name: name
               sys_name: sys_name
               name_en: name_en
@@ -7747,6 +7863,7 @@ components:
     Structures_SoftwareCategory:
       example:
         is_main: true
+        icon_svg: icon_svg
         name: name
         sys_name: sys_name
         name_en: name_en
@@ -7759,6 +7876,8 @@ components:
           type: string
         is_main:
           type: boolean
+        icon_svg:
+          type: string
       type: object
     Structures_SoftwareMetadata:
       example:
