@@ -13,6 +13,7 @@ Name | Type | Description | Notes
 **PriceMonth** | Pointer to **float64** |  | [optional] 
 **Available** | Pointer to **bool** |  | [optional] 
 **Custom** | Pointer to **bool** |  | [optional] 
+**Configurable** | Pointer to **bool** |  | [optional] 
 
 ## Methods
 
@@ -257,6 +258,31 @@ SetCustom sets Custom field to given value.
 `func (o *ManageVpsConfiguration) HasCustom() bool`
 
 HasCustom returns a boolean if a field has been set.
+
+### GetConfigurable
+
+`func (o *ManageVpsConfiguration) GetConfigurable() bool`
+
+GetConfigurable returns the Configurable field if non-nil, zero value otherwise.
+
+### GetConfigurableOk
+
+`func (o *ManageVpsConfiguration) GetConfigurableOk() (*bool, bool)`
+
+GetConfigurableOk returns a tuple with the Configurable field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetConfigurable
+
+`func (o *ManageVpsConfiguration) SetConfigurable(v bool)`
+
+SetConfigurable sets Configurable field to given value.
+
+### HasConfigurable
+
+`func (o *ManageVpsConfiguration) HasConfigurable() bool`
+
+HasConfigurable returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

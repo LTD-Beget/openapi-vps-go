@@ -1,13 +1,14 @@
 openapi: 3.0.3
 info:
   title: API Облачных серверов
-  version: v1.3.0
+  version: v1.4.0
 servers:
 - url: https://api.beget.com
 security:
 - bearerAuth: []
 tags:
 - name: BackupService
+- name: ConfiguratorService
 - name: ManageService
 - name: MarketplaceService
 - name: NetworkService
@@ -88,6 +89,62 @@ paths:
           description: OK
       tags:
       - ManageService
+  /v1/vps/configurator/calculation:
+    get:
+      operationId: ConfiguratorService_GetCalculation
+      parameters:
+      - explode: true
+        in: query
+        name: params.cpu_count
+        required: false
+        schema:
+          format: uint32
+          type: integer
+        style: form
+      - explode: true
+        in: query
+        name: params.disk_size
+        required: false
+        schema:
+          format: uint32
+          type: integer
+        style: form
+      - explode: true
+        in: query
+        name: params.memory
+        required: false
+        schema:
+          format: uint32
+          type: integer
+        style: form
+      - explode: true
+        in: query
+        name: vps_id
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Configurator_GetCalculationResponse'
+          description: OK
+      tags:
+      - ConfiguratorService
+  /v1/vps/configurator/info:
+    get:
+      operationId: ConfiguratorService_GetConfiguratorInfo
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Configurator_GetConfiguratorInfoResponse'
+          description: OK
+      tags:
+      - ConfiguratorService
   /v1/vps/marketplace/software/list:
     get:
       operationId: MarketplaceService_GetSoftwareList
@@ -1841,6 +1898,241 @@ components:
         message:
           type: string
       type: object
+    Configurator_ConfiguratorSettings:
+      example:
+        memory_settings:
+          available_range:
+            min: 0
+            max: 6
+          range:
+            min: 0
+            max: 6
+          step: 5
+        cpu_settings:
+          available_range:
+            min: 0
+            max: 6
+          range:
+            min: 0
+            max: 6
+          step: 1
+        disk_settings:
+          available_range:
+            min: 0
+            max: 6
+          range:
+            min: 0
+            max: 6
+          step: 5
+      properties:
+        cpu_settings:
+          $ref: '#/components/schemas/Configurator_CpuSettings'
+        disk_settings:
+          $ref: '#/components/schemas/Configurator_DiskSettings'
+        memory_settings:
+          $ref: '#/components/schemas/Configurator_MemorySettings'
+      type: object
+    Configurator_CpuSettings:
+      example:
+        available_range:
+          min: 0
+          max: 6
+        range:
+          min: 0
+          max: 6
+        step: 1
+      properties:
+        range:
+          $ref: '#/components/schemas/Configurator_Range'
+        available_range:
+          $ref: '#/components/schemas/Configurator_Range'
+        step:
+          format: uint32
+          type: integer
+      type: object
+    Configurator_DiskSettings:
+      example:
+        available_range:
+          min: 0
+          max: 6
+        range:
+          min: 0
+          max: 6
+        step: 5
+      properties:
+        range:
+          $ref: '#/components/schemas/Configurator_Range'
+        available_range:
+          $ref: '#/components/schemas/Configurator_Range'
+        step:
+          format: uint32
+          type: integer
+      type: object
+    Configurator_GetCalculationResponse:
+      example:
+        success:
+          settings:
+            memory_settings:
+              available_range:
+                min: 0
+                max: 6
+              range:
+                min: 0
+                max: 6
+              step: 5
+            cpu_settings:
+              available_range:
+                min: 0
+                max: 6
+              range:
+                min: 0
+                max: 6
+              step: 1
+            disk_settings:
+              available_range:
+                min: 0
+                max: 6
+              range:
+                min: 0
+                max: 6
+              step: 5
+          price_month: 2.027123023002322
+          price_day: 3.616076749251911
+          params:
+            memory: 9
+            disk_size: 7
+            cpu_count: 2
+        error:
+          code: TEMPORARILY_UNAVAILABLE
+          message: message
+      properties:
+        success:
+          $ref: '#/components/schemas/Configurator_GetCalculationResponse_Success'
+        error:
+          $ref: '#/components/schemas/Configurator_GetCalculationResponse_Error'
+      type: object
+    Configurator_GetCalculationResponse_Error:
+      example:
+        code: TEMPORARILY_UNAVAILABLE
+        message: message
+      properties:
+        code:
+          enum:
+          - TEMPORARILY_UNAVAILABLE
+          format: enum
+          type: string
+        message:
+          type: string
+      type: object
+    Configurator_GetCalculationResponse_Success:
+      example:
+        settings:
+          memory_settings:
+            available_range:
+              min: 0
+              max: 6
+            range:
+              min: 0
+              max: 6
+            step: 5
+          cpu_settings:
+            available_range:
+              min: 0
+              max: 6
+            range:
+              min: 0
+              max: 6
+            step: 1
+          disk_settings:
+            available_range:
+              min: 0
+              max: 6
+            range:
+              min: 0
+              max: 6
+            step: 5
+        price_month: 2.027123023002322
+        price_day: 3.616076749251911
+        params:
+          memory: 9
+          disk_size: 7
+          cpu_count: 2
+      properties:
+        settings:
+          $ref: '#/components/schemas/Configurator_ConfiguratorSettings'
+        params:
+          $ref: '#/components/schemas/Structures_ConfigurationParams'
+        price_day:
+          format: double
+          type: number
+        price_month:
+          format: double
+          type: number
+      type: object
+    Configurator_GetConfiguratorInfoResponse:
+      example:
+        settings:
+          memory_settings:
+            available_range:
+              min: 0
+              max: 6
+            range:
+              min: 0
+              max: 6
+            step: 5
+          cpu_settings:
+            available_range:
+              min: 0
+              max: 6
+            range:
+              min: 0
+              max: 6
+            step: 1
+          disk_settings:
+            available_range:
+              min: 0
+              max: 6
+            range:
+              min: 0
+              max: 6
+            step: 5
+        is_available: true
+      properties:
+        settings:
+          $ref: '#/components/schemas/Configurator_ConfiguratorSettings'
+        is_available:
+          type: boolean
+      type: object
+    Configurator_MemorySettings:
+      example:
+        available_range:
+          min: 0
+          max: 6
+        range:
+          min: 0
+          max: 6
+        step: 5
+      properties:
+        range:
+          $ref: '#/components/schemas/Configurator_Range'
+        available_range:
+          $ref: '#/components/schemas/Configurator_Range'
+        step:
+          format: uint32
+          type: integer
+      type: object
+    Configurator_Range:
+      example:
+        min: 0
+        max: 6
+      properties:
+        min:
+          format: uint32
+          type: integer
+        max:
+          format: uint32
+          type: integer
+      type: object
     Manage_AttachIpAddressRequest:
       properties:
         id:
@@ -1901,6 +2193,7 @@ components:
             available: true
             disk_size: 6
             id: id
+            configurable: true
             cpu_count: 0
           description: description
           restoring: true
@@ -2025,6 +2318,7 @@ components:
             available: true
             disk_size: 6
             id: id
+            configurable: true
             cpu_count: 0
           description: description
           restoring: true
@@ -2158,6 +2452,7 @@ components:
             available: true
             disk_size: 6
             id: id
+            configurable: true
             cpu_count: 0
           description: description
           restoring: true
@@ -2240,6 +2535,8 @@ components:
           type: string
         configuration_id:
           type: string
+        configuration_params:
+          $ref: '#/components/schemas/Structures_ConfigurationParams'
       type: object
     Manage_ChangeConfigurationResponse:
       example:
@@ -2294,6 +2591,7 @@ components:
             available: true
             disk_size: 6
             id: id
+            configurable: true
             cpu_count: 0
           description: description
           restoring: true
@@ -2429,6 +2727,7 @@ components:
             available: true
             disk_size: 6
             id: id
+            configurable: true
             cpu_count: 0
           description: description
           restoring: true
@@ -2542,6 +2841,8 @@ components:
           type: string
         configuration_id:
           type: string
+        configuration_params:
+          $ref: '#/components/schemas/Structures_ConfigurationParams'
         software:
           $ref: '#/components/schemas/Manage_SoftwareInstallInfo'
         snapshot_id:
@@ -2613,6 +2914,7 @@ components:
             available: true
             disk_size: 6
             id: id
+            configurable: true
             cpu_count: 0
           description: description
           restoring: true
@@ -2833,6 +3135,7 @@ components:
             available: true
             disk_size: 6
             id: id
+            configurable: true
             cpu_count: 0
           description: description
           restoring: true
@@ -2957,6 +3260,7 @@ components:
             available: true
             disk_size: 6
             id: id
+            configurable: true
             cpu_count: 0
           description: description
           restoring: true
@@ -3081,6 +3385,7 @@ components:
             available: true
             disk_size: 6
             id: id
+            configurable: true
             cpu_count: 0
           description: description
           restoring: true
@@ -3163,6 +3468,7 @@ components:
           available: true
           disk_size: 6
           id: id
+          configurable: true
           cpu_count: 0
         - memory: 1
           price_month: 5.637376656633329
@@ -3172,6 +3478,7 @@ components:
           available: true
           disk_size: 6
           id: id
+          configurable: true
           cpu_count: 0
       properties:
         configurations:
@@ -3298,6 +3605,7 @@ components:
             available: true
             disk_size: 6
             id: id
+            configurable: true
             cpu_count: 0
           description: description
           restoring: true
@@ -3450,6 +3758,7 @@ components:
             available: true
             disk_size: 6
             id: id
+            configurable: true
             cpu_count: 0
           description: description
           restoring: true
@@ -3548,6 +3857,7 @@ components:
             available: true
             disk_size: 6
             id: id
+            configurable: true
             cpu_count: 0
           description: description
           restoring: true
@@ -3756,6 +4066,7 @@ components:
             available: true
             disk_size: 6
             id: id
+            configurable: true
             cpu_count: 0
           description: description
           restoring: true
@@ -3895,6 +4206,7 @@ components:
             available: true
             disk_size: 6
             id: id
+            configurable: true
             cpu_count: 0
           description: description
           restoring: true
@@ -4081,6 +4393,7 @@ components:
             available: true
             disk_size: 6
             id: id
+            configurable: true
             cpu_count: 0
           description: description
           restoring: true
@@ -4232,6 +4545,7 @@ components:
             available: true
             disk_size: 6
             id: id
+            configurable: true
             cpu_count: 0
           description: description
           restoring: true
@@ -4356,6 +4670,7 @@ components:
             available: true
             disk_size: 6
             id: id
+            configurable: true
             cpu_count: 0
           description: description
           restoring: true
@@ -4491,6 +4806,7 @@ components:
             available: true
             disk_size: 6
             id: id
+            configurable: true
             cpu_count: 0
           description: description
           restoring: true
@@ -4616,6 +4932,7 @@ components:
             available: true
             disk_size: 6
             id: id
+            configurable: true
             cpu_count: 0
           description: description
           restoring: true
@@ -4741,6 +5058,7 @@ components:
             available: true
             disk_size: 6
             id: id
+            configurable: true
             cpu_count: 0
           description: description
           restoring: true
@@ -4866,6 +5184,7 @@ components:
             available: true
             disk_size: 6
             id: id
+            configurable: true
             cpu_count: 0
           description: description
           restoring: true
@@ -4991,6 +5310,7 @@ components:
             available: true
             disk_size: 6
             id: id
+            configurable: true
             cpu_count: 0
           description: description
           restoring: true
@@ -5107,6 +5427,7 @@ components:
             available: true
             disk_size: 6
             id: id
+            configurable: true
             cpu_count: 0
           description: description
           restoring: true
@@ -5190,6 +5511,7 @@ components:
         available: true
         disk_size: 6
         id: id
+        configurable: true
         cpu_count: 0
       properties:
         id:
@@ -5214,6 +5536,8 @@ components:
         available:
           type: boolean
         custom:
+          type: boolean
+        configurable:
           type: boolean
       type: object
     Manage_VpsInfo:
@@ -5268,6 +5592,7 @@ components:
           available: true
           disk_size: 6
           id: id
+          configurable: true
           cpu_count: 0
         description: description
         restoring: true
@@ -7472,6 +7797,22 @@ components:
           items:
             type: string
           type: array
+      type: object
+    Structures_ConfigurationParams:
+      example:
+        memory: 9
+        disk_size: 7
+        cpu_count: 2
+      properties:
+        cpu_count:
+          format: uint32
+          type: integer
+        disk_size:
+          format: uint32
+          type: integer
+        memory:
+          format: uint32
+          type: integer
       type: object
     Structures_CopyInfo:
       example:

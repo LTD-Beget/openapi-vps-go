@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **Hostname** | Pointer to **string** |  | [optional] 
 **Description** | Pointer to **string** |  | [optional] 
 **ConfigurationId** | Pointer to **string** |  | [optional] 
+**ConfigurationParams** | Pointer to [**StructuresConfigurationParams**](StructuresConfigurationParams.md) |  | [optional] 
 **Software** | Pointer to [**ManageSoftwareInstallInfo**](ManageSoftwareInstallInfo.md) |  | [optional] 
 **SnapshotId** | Pointer to **string** |  | [optional] 
 **SshKeys** | Pointer to **[]int32** |  | [optional] 
@@ -133,6 +134,31 @@ SetConfigurationId sets ConfigurationId field to given value.
 `func (o *ManageCreateVpsRequest) HasConfigurationId() bool`
 
 HasConfigurationId returns a boolean if a field has been set.
+
+### GetConfigurationParams
+
+`func (o *ManageCreateVpsRequest) GetConfigurationParams() StructuresConfigurationParams`
+
+GetConfigurationParams returns the ConfigurationParams field if non-nil, zero value otherwise.
+
+### GetConfigurationParamsOk
+
+`func (o *ManageCreateVpsRequest) GetConfigurationParamsOk() (*StructuresConfigurationParams, bool)`
+
+GetConfigurationParamsOk returns a tuple with the ConfigurationParams field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetConfigurationParams
+
+`func (o *ManageCreateVpsRequest) SetConfigurationParams(v StructuresConfigurationParams)`
+
+SetConfigurationParams sets ConfigurationParams field to given value.
+
+### HasConfigurationParams
+
+`func (o *ManageCreateVpsRequest) HasConfigurationParams() bool`
+
+HasConfigurationParams returns a boolean if a field has been set.
 
 ### GetSoftware
 
