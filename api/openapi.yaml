@@ -1,7 +1,7 @@
 openapi: 3.0.3
 info:
   title: API Облачных серверов
-  version: v1.4.0
+  version: v1.4.1
 servers:
 - url: https://api.beget.com
 security:
@@ -120,6 +120,21 @@ paths:
       - explode: true
         in: query
         name: vps_id
+        required: false
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: software_id
+        required: false
+        schema:
+          format: uint32
+          type: integer
+        style: form
+      - explode: true
+        in: query
+        name: snapshot_id
         required: false
         schema:
           type: string

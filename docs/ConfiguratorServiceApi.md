@@ -11,7 +11,7 @@ Method | HTTP request | Description
 
 ## ConfiguratorServiceGetCalculation
 
-> ConfiguratorGetCalculationResponse ConfiguratorServiceGetCalculation(ctx).ParamsCpuCount(paramsCpuCount).ParamsDiskSize(paramsDiskSize).ParamsMemory(paramsMemory).VpsId(vpsId).Execute()
+> ConfiguratorGetCalculationResponse ConfiguratorServiceGetCalculation(ctx).ParamsCpuCount(paramsCpuCount).ParamsDiskSize(paramsDiskSize).ParamsMemory(paramsMemory).VpsId(vpsId).SoftwareId(softwareId).SnapshotId(snapshotId).Execute()
 
 
 
@@ -32,10 +32,12 @@ func main() {
     paramsDiskSize := int32(56) // int32 |  (optional)
     paramsMemory := int32(56) // int32 |  (optional)
     vpsId := "vpsId_example" // string |  (optional)
+    softwareId := int32(56) // int32 |  (optional)
+    snapshotId := "snapshotId_example" // string |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.ConfiguratorServiceApi.ConfiguratorServiceGetCalculation(context.Background()).ParamsCpuCount(paramsCpuCount).ParamsDiskSize(paramsDiskSize).ParamsMemory(paramsMemory).VpsId(vpsId).Execute()
+    resp, r, err := apiClient.ConfiguratorServiceApi.ConfiguratorServiceGetCalculation(context.Background()).ParamsCpuCount(paramsCpuCount).ParamsDiskSize(paramsDiskSize).ParamsMemory(paramsMemory).VpsId(vpsId).SoftwareId(softwareId).SnapshotId(snapshotId).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `ConfiguratorServiceApi.ConfiguratorServiceGetCalculation``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -60,6 +62,8 @@ Name | Type | Description  | Notes
  **paramsDiskSize** | **int32** |  | 
  **paramsMemory** | **int32** |  | 
  **vpsId** | **string** |  | 
+ **softwareId** | **int32** |  | 
+ **snapshotId** | **string** |  | 
 
 ### Return type
 
