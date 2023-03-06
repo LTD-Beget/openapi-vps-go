@@ -16,6 +16,7 @@ Name | Type | Description | Notes
 **Category** | Pointer to [**[]StructuresSoftwareCategory**](StructuresSoftwareCategory.md) |  | [optional] 
 **Slug** | Pointer to **string** |  | [optional] 
 **DocumentationSlug** | Pointer to **string** |  | [optional] 
+**UnattendedInstallAvailable** | Pointer to **bool** |  | [optional] 
 
 ## Methods
 
@@ -335,6 +336,31 @@ SetDocumentationSlug sets DocumentationSlug field to given value.
 `func (o *MarketplaceGetSoftwareListResponseSoftwareInfo) HasDocumentationSlug() bool`
 
 HasDocumentationSlug returns a boolean if a field has been set.
+
+### GetUnattendedInstallAvailable
+
+`func (o *MarketplaceGetSoftwareListResponseSoftwareInfo) GetUnattendedInstallAvailable() bool`
+
+GetUnattendedInstallAvailable returns the UnattendedInstallAvailable field if non-nil, zero value otherwise.
+
+### GetUnattendedInstallAvailableOk
+
+`func (o *MarketplaceGetSoftwareListResponseSoftwareInfo) GetUnattendedInstallAvailableOk() (*bool, bool)`
+
+GetUnattendedInstallAvailableOk returns a tuple with the UnattendedInstallAvailable field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetUnattendedInstallAvailable
+
+`func (o *MarketplaceGetSoftwareListResponseSoftwareInfo) SetUnattendedInstallAvailable(v bool)`
+
+SetUnattendedInstallAvailable sets UnattendedInstallAvailable field to given value.
+
+### HasUnattendedInstallAvailable
+
+`func (o *MarketplaceGetSoftwareListResponseSoftwareInfo) HasUnattendedInstallAvailable() bool`
+
+HasUnattendedInstallAvailable returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

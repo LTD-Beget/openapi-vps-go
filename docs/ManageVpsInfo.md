@@ -31,6 +31,7 @@ Name | Type | Description | Notes
 **TechnicalDomain** | Pointer to **string** |  | [optional] 
 **SoftwareDomain** | Pointer to **string** |  | [optional] 
 **Software** | Pointer to [**StructuresInstalledSoftwareInfo**](StructuresInstalledSoftwareInfo.md) |  | [optional] 
+**LinkSlug** | Pointer to **string** |  | [optional] 
 
 ## Methods
 
@@ -725,6 +726,31 @@ SetSoftware sets Software field to given value.
 `func (o *ManageVpsInfo) HasSoftware() bool`
 
 HasSoftware returns a boolean if a field has been set.
+
+### GetLinkSlug
+
+`func (o *ManageVpsInfo) GetLinkSlug() string`
+
+GetLinkSlug returns the LinkSlug field if non-nil, zero value otherwise.
+
+### GetLinkSlugOk
+
+`func (o *ManageVpsInfo) GetLinkSlugOk() (*string, bool)`
+
+GetLinkSlugOk returns a tuple with the LinkSlug field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetLinkSlug
+
+`func (o *ManageVpsInfo) SetLinkSlug(v string)`
+
+SetLinkSlug sets LinkSlug field to given value.
+
+### HasLinkSlug
+
+`func (o *ManageVpsInfo) HasLinkSlug() bool`
+
+HasLinkSlug returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

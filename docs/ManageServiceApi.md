@@ -14,6 +14,7 @@ Method | HTTP request | Description
 [**ManageServiceDetachFromPrivateNetwork**](ManageServiceApi.md#ManageServiceDetachFromPrivateNetwork) | **Delete** /v1/vps/{id}/private-network/{network_id} | 
 [**ManageServiceDetachIpAddress**](ManageServiceApi.md#ManageServiceDetachIpAddress) | **Delete** /v1/vps/network/detach/{ip_address} | 
 [**ManageServiceDetachSshKey**](ManageServiceApi.md#ManageServiceDetachSshKey) | **Delete** /v1/vps/{id}/sshKey/{ssh_key_id} | 
+[**ManageServiceDisablePostInstallAlert**](ManageServiceApi.md#ManageServiceDisablePostInstallAlert) | **Delete** /v1/vps/{id}/software/post-install-alert | 
 [**ManageServiceGetAvailableConfiguration**](ManageServiceApi.md#ManageServiceGetAvailableConfiguration) | **Get** /v1/vps/configuration | 
 [**ManageServiceGetFileManagerSettings**](ManageServiceApi.md#ManageServiceGetFileManagerSettings) | **Post** /v1/vps/{id}/fm | 
 [**ManageServiceGetHistory**](ManageServiceApi.md#ManageServiceGetHistory) | **Get** /v1/vps/{id}/history | 
@@ -716,6 +717,74 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**ManageDetachSshKeyResponse**](ManageDetachSshKeyResponse.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## ManageServiceDisablePostInstallAlert
+
+> ManageDisablePostInstallAlertResponse ManageServiceDisablePostInstallAlert(ctx, id).Execute()
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    id := "id_example" // string | 
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.ManageServiceApi.ManageServiceDisablePostInstallAlert(context.Background(), id).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `ManageServiceApi.ManageServiceDisablePostInstallAlert``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `ManageServiceDisablePostInstallAlert`: ManageDisablePostInstallAlertResponse
+    fmt.Fprintf(os.Stdout, "Response from `ManageServiceApi.ManageServiceDisablePostInstallAlert`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**id** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiManageServiceDisablePostInstallAlertRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**ManageDisablePostInstallAlertResponse**](ManageDisablePostInstallAlertResponse.md)
 
 ### Authorization
 

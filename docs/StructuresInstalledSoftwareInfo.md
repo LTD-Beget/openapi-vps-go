@@ -15,6 +15,7 @@ Name | Type | Description | Notes
 **DescriptionEn** | Pointer to **string** |  | [optional] 
 **Category** | Pointer to [**[]StructuresSoftwareCategory**](StructuresSoftwareCategory.md) |  | [optional] 
 **Slug** | Pointer to **string** |  | [optional] 
+**PostInstallAlert** | Pointer to **bool** |  | [optional] 
 
 ## Methods
 
@@ -309,6 +310,31 @@ SetSlug sets Slug field to given value.
 `func (o *StructuresInstalledSoftwareInfo) HasSlug() bool`
 
 HasSlug returns a boolean if a field has been set.
+
+### GetPostInstallAlert
+
+`func (o *StructuresInstalledSoftwareInfo) GetPostInstallAlert() bool`
+
+GetPostInstallAlert returns the PostInstallAlert field if non-nil, zero value otherwise.
+
+### GetPostInstallAlertOk
+
+`func (o *StructuresInstalledSoftwareInfo) GetPostInstallAlertOk() (*bool, bool)`
+
+GetPostInstallAlertOk returns a tuple with the PostInstallAlert field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPostInstallAlert
+
+`func (o *StructuresInstalledSoftwareInfo) SetPostInstallAlert(v bool)`
+
+SetPostInstallAlert sets PostInstallAlert field to given value.
+
+### HasPostInstallAlert
+
+`func (o *StructuresInstalledSoftwareInfo) HasPostInstallAlert() bool`
+
+HasPostInstallAlert returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
