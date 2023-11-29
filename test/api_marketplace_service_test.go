@@ -22,6 +22,21 @@ func Test_begetOpenapiVps_MarketplaceServiceApiService(t *testing.T) {
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
 
+    t.Run("Test MarketplaceServiceApiService MarketplaceServiceGetSoftwareInfo", func(t *testing.T) {
+
+        t.Skip("skip test")  // remove to run test
+
+        var name string
+        var version string
+
+        resp, httpRes, err := apiClient.MarketplaceServiceApi.MarketplaceServiceGetSoftwareInfo(context.Background(), name, version).Execute()
+
+        require.Nil(t, err)
+        require.NotNil(t, resp)
+        assert.Equal(t, 200, httpRes.StatusCode)
+
+    })
+
     t.Run("Test MarketplaceServiceApiService MarketplaceServiceGetSoftwareList", func(t *testing.T) {
 
         t.Skip("skip test")  // remove to run test

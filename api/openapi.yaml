@@ -1,7 +1,7 @@
 openapi: 3.0.3
 info:
   title: API Облачных серверов
-  version: v1.5.1
+  version: v1.6.0
 servers:
 - url: https://api.beget.com
 security:
@@ -13,6 +13,7 @@ tags:
 - name: MarketplaceService
 - name: NetworkService
 - name: SnapshotService
+- name: SoftwareLicenseService
 - name: SshKeyService
 - name: StatisticService
 paths:
@@ -119,6 +120,13 @@ paths:
         style: form
       - explode: true
         in: query
+        name: region
+        required: false
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
         name: vps_id
         required: false
         schema:
@@ -151,6 +159,14 @@ paths:
   /v1/vps/configurator/info:
     get:
       operationId: ConfiguratorService_GetConfiguratorInfo
+      parameters:
+      - explode: true
+        in: query
+        name: region
+        required: false
+        schema:
+          type: string
+        style: form
       responses:
         "200":
           content:
@@ -191,6 +207,33 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Marketplace_GetSoftwareListResponse'
+          description: OK
+      tags:
+      - MarketplaceService
+  /v1/vps/marketplace/software/{name}/{version}:
+    get:
+      operationId: MarketplaceService_GetSoftwareInfo
+      parameters:
+      - explode: false
+        in: path
+        name: name
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: version
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Marketplace_GetSoftwareInfoResponse'
           description: OK
       tags:
       - MarketplaceService
@@ -266,6 +309,12 @@ paths:
   /v1/vps/private-network:
     post:
       operationId: NetworkService_CreatePrivateNetwork
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Network_CreatePrivateNetworkRequest'
+        required: true
       responses:
         "200":
           content:
@@ -301,6 +350,18 @@ paths:
           description: OK
       tags:
       - NetworkService
+  /v1/vps/region:
+    get:
+      operationId: ManageService_GetRegionList
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Manage_GetRegionListResponse'
+          description: OK
+      tags:
+      - ManageService
   /v1/vps/server:
     post:
       operationId: ManageService_CreateVps
@@ -718,6 +779,53 @@ paths:
           description: OK
       tags:
       - SnapshotService
+  /v1/vps/software/license:
+    get:
+      operationId: SoftwareLicenseService_GetLicenseInfo
+      parameters:
+      - explode: true
+        in: query
+        name: license_id
+        required: false
+        schema:
+          format: uint32
+          type: integer
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SoftwareLicense_GetLicenseInfoResponse'
+          description: OK
+      tags:
+      - SoftwareLicenseService
+  /v1/vps/software/license/{vps_id}:
+    patch:
+      operationId: SoftwareLicenseService_ChangeLicensePlan
+      parameters:
+      - explode: false
+        in: path
+        name: vps_id
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SoftwareLicense_ChangeLicensePlanRequest'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SoftwareLicense_ChangeLicensePlanResponse'
+          description: OK
+      tags:
+      - SoftwareLicenseService
   /v1/vps/software/requirements:
     post:
       operationId: ManageService_CheckSoftwareRequirements
@@ -1454,13 +1562,43 @@ components:
               icon: icon
               logo: logo
               logo2x: logo2x
-              weight: 9.301444
+              weight: 3.6160767
               secondary_color: secondary_color
               icon2x: icon2x
               primary_color: primary_color
               is_pinned: true
             address: address
             description_en: description_en
+            description: description
+            display_name: display_name
+            version: version
+            license:
+            - additional_info: additional_info
+              additional_info_en: additional_info_en
+              id: 2
+              type: type
+              display_name: display_name
+              plan: plan
+              primary: true
+              billing:
+                daily:
+                  price_month: 7
+                  price_day: 4.145608029883936
+                monthly:
+                  price_month: 1
+            - additional_info: additional_info
+              additional_info_en: additional_info_en
+              id: 2
+              type: type
+              display_name: display_name
+              plan: plan
+              primary: true
+              billing:
+                daily:
+                  price_month: 7
+                  price_day: 4.145608029883936
+                monthly:
+                  price_month: 1
             name: name
             field_value:
             - label_ru: label_ru
@@ -1473,8 +1611,6 @@ components:
               label_en: label_en
               type: UNKNOWN
               value: value
-            description: description
-            display_name: display_name
             category:
             - is_main: true
               icon_svg: icon_svg
@@ -1487,11 +1623,11 @@ components:
               sys_name: sys_name
               name_en: name_en
             post_install_alert: true
-            version: version
             slug: slug
             status: PENDING
           vps_id: vps_id
           id: id
+          region: region
         - date: date
           vps_name: vps_name
           size: size
@@ -1505,13 +1641,43 @@ components:
               icon: icon
               logo: logo
               logo2x: logo2x
-              weight: 9.301444
+              weight: 3.6160767
               secondary_color: secondary_color
               icon2x: icon2x
               primary_color: primary_color
               is_pinned: true
             address: address
             description_en: description_en
+            description: description
+            display_name: display_name
+            version: version
+            license:
+            - additional_info: additional_info
+              additional_info_en: additional_info_en
+              id: 2
+              type: type
+              display_name: display_name
+              plan: plan
+              primary: true
+              billing:
+                daily:
+                  price_month: 7
+                  price_day: 4.145608029883936
+                monthly:
+                  price_month: 1
+            - additional_info: additional_info
+              additional_info_en: additional_info_en
+              id: 2
+              type: type
+              display_name: display_name
+              plan: plan
+              primary: true
+              billing:
+                daily:
+                  price_month: 7
+                  price_day: 4.145608029883936
+                monthly:
+                  price_month: 1
             name: name
             field_value:
             - label_ru: label_ru
@@ -1524,8 +1690,6 @@ components:
               label_en: label_en
               type: UNKNOWN
               value: value
-            description: description
-            display_name: display_name
             category:
             - is_main: true
               icon_svg: icon_svg
@@ -1538,11 +1702,11 @@ components:
               sys_name: sys_name
               name_en: name_en
             post_install_alert: true
-            version: version
             slug: slug
             status: PENDING
           vps_id: vps_id
           id: id
+          region: region
       properties:
         copy:
           items:
@@ -1601,13 +1765,43 @@ components:
                 icon: icon
                 logo: logo
                 logo2x: logo2x
-                weight: 9.301444
+                weight: 3.6160767
                 secondary_color: secondary_color
                 icon2x: icon2x
                 primary_color: primary_color
                 is_pinned: true
               address: address
               description_en: description_en
+              description: description
+              display_name: display_name
+              version: version
+              license:
+              - additional_info: additional_info
+                additional_info_en: additional_info_en
+                id: 2
+                type: type
+                display_name: display_name
+                plan: plan
+                primary: true
+                billing:
+                  daily:
+                    price_month: 7
+                    price_day: 4.145608029883936
+                  monthly:
+                    price_month: 1
+              - additional_info: additional_info
+                additional_info_en: additional_info_en
+                id: 2
+                type: type
+                display_name: display_name
+                plan: plan
+                primary: true
+                billing:
+                  daily:
+                    price_month: 7
+                    price_day: 4.145608029883936
+                  monthly:
+                    price_month: 1
               name: name
               field_value:
               - label_ru: label_ru
@@ -1620,8 +1814,6 @@ components:
                 label_en: label_en
                 type: UNKNOWN
                 value: value
-              description: description
-              display_name: display_name
               category:
               - is_main: true
                 icon_svg: icon_svg
@@ -1634,11 +1826,11 @@ components:
                 sys_name: sys_name
                 name_en: name_en
               post_install_alert: true
-              version: version
               slug: slug
               status: PENDING
             vps_id: vps_id
             id: id
+            region: region
           date_create: date_create
           error_details:
             file_error:
@@ -1669,13 +1861,43 @@ components:
                 icon: icon
                 logo: logo
                 logo2x: logo2x
-                weight: 9.301444
+                weight: 3.6160767
                 secondary_color: secondary_color
                 icon2x: icon2x
                 primary_color: primary_color
                 is_pinned: true
               address: address
               description_en: description_en
+              description: description
+              display_name: display_name
+              version: version
+              license:
+              - additional_info: additional_info
+                additional_info_en: additional_info_en
+                id: 2
+                type: type
+                display_name: display_name
+                plan: plan
+                primary: true
+                billing:
+                  daily:
+                    price_month: 7
+                    price_day: 4.145608029883936
+                  monthly:
+                    price_month: 1
+              - additional_info: additional_info
+                additional_info_en: additional_info_en
+                id: 2
+                type: type
+                display_name: display_name
+                plan: plan
+                primary: true
+                billing:
+                  daily:
+                    price_month: 7
+                    price_day: 4.145608029883936
+                  monthly:
+                    price_month: 1
               name: name
               field_value:
               - label_ru: label_ru
@@ -1688,8 +1910,6 @@ components:
                 label_en: label_en
                 type: UNKNOWN
                 value: value
-              description: description
-              display_name: display_name
               category:
               - is_main: true
                 icon_svg: icon_svg
@@ -1702,11 +1922,11 @@ components:
                 sys_name: sys_name
                 name_en: name_en
               post_install_alert: true
-              version: version
               slug: slug
               status: PENDING
             vps_id: vps_id
             id: id
+            region: region
           date_create: date_create
           error_details:
             file_error:
@@ -1764,13 +1984,43 @@ components:
                 icon: icon
                 logo: logo
                 logo2x: logo2x
-                weight: 9.301444
+                weight: 3.6160767
                 secondary_color: secondary_color
                 icon2x: icon2x
                 primary_color: primary_color
                 is_pinned: true
               address: address
               description_en: description_en
+              description: description
+              display_name: display_name
+              version: version
+              license:
+              - additional_info: additional_info
+                additional_info_en: additional_info_en
+                id: 2
+                type: type
+                display_name: display_name
+                plan: plan
+                primary: true
+                billing:
+                  daily:
+                    price_month: 7
+                    price_day: 4.145608029883936
+                  monthly:
+                    price_month: 1
+              - additional_info: additional_info
+                additional_info_en: additional_info_en
+                id: 2
+                type: type
+                display_name: display_name
+                plan: plan
+                primary: true
+                billing:
+                  daily:
+                    price_month: 7
+                    price_day: 4.145608029883936
+                  monthly:
+                    price_month: 1
               name: name
               field_value:
               - label_ru: label_ru
@@ -1783,8 +2033,6 @@ components:
                 label_en: label_en
                 type: UNKNOWN
                 value: value
-              description: description
-              display_name: display_name
               category:
               - is_main: true
                 icon_svg: icon_svg
@@ -1797,11 +2045,11 @@ components:
                 sys_name: sys_name
                 name_en: name_en
               post_install_alert: true
-              version: version
               slug: slug
               status: PENDING
             vps_id: vps_id
             id: id
+            region: region
           date_create: date_create
           error_details:
             file_error:
@@ -1832,6 +2080,7 @@ components:
           - INVALID_PATH_LIST
           - ALREADY_RESTORING
           - INVALID_TARGET
+          - REGION_MISMATCH
           format: enum
           type: string
         message:
@@ -1868,13 +2117,43 @@ components:
                 icon: icon
                 logo: logo
                 logo2x: logo2x
-                weight: 9.301444
+                weight: 3.6160767
                 secondary_color: secondary_color
                 icon2x: icon2x
                 primary_color: primary_color
                 is_pinned: true
               address: address
               description_en: description_en
+              description: description
+              display_name: display_name
+              version: version
+              license:
+              - additional_info: additional_info
+                additional_info_en: additional_info_en
+                id: 2
+                type: type
+                display_name: display_name
+                plan: plan
+                primary: true
+                billing:
+                  daily:
+                    price_month: 7
+                    price_day: 4.145608029883936
+                  monthly:
+                    price_month: 1
+              - additional_info: additional_info
+                additional_info_en: additional_info_en
+                id: 2
+                type: type
+                display_name: display_name
+                plan: plan
+                primary: true
+                billing:
+                  daily:
+                    price_month: 7
+                    price_day: 4.145608029883936
+                  monthly:
+                    price_month: 1
               name: name
               field_value:
               - label_ru: label_ru
@@ -1887,8 +2166,6 @@ components:
                 label_en: label_en
                 type: UNKNOWN
                 value: value
-              description: description
-              display_name: display_name
               category:
               - is_main: true
                 icon_svg: icon_svg
@@ -1901,11 +2178,11 @@ components:
                 sys_name: sys_name
                 name_en: name_en
               post_install_alert: true
-              version: version
               slug: slug
               status: PENDING
             vps_id: vps_id
             id: id
+            region: region
           date_create: date_create
           error_details:
             file_error:
@@ -1934,6 +2211,7 @@ components:
           - INTERNAL_ERROR
           - ALREADY_RESTORING
           - CONFIGURATION_NOT_ENOUGH
+          - REGION_MISMATCH
           format: enum
           type: string
         message:
@@ -2190,13 +2468,43 @@ components:
               icon: icon
               logo: logo
               logo2x: logo2x
-              weight: 9.301444
+              weight: 3.6160767
               secondary_color: secondary_color
               icon2x: icon2x
               primary_color: primary_color
               is_pinned: true
             address: address
             description_en: description_en
+            description: description
+            display_name: display_name
+            version: version
+            license:
+            - additional_info: additional_info
+              additional_info_en: additional_info_en
+              id: 2
+              type: type
+              display_name: display_name
+              plan: plan
+              primary: true
+              billing:
+                daily:
+                  price_month: 7
+                  price_day: 4.145608029883936
+                monthly:
+                  price_month: 1
+            - additional_info: additional_info
+              additional_info_en: additional_info_en
+              id: 2
+              type: type
+              display_name: display_name
+              plan: plan
+              primary: true
+              billing:
+                daily:
+                  price_month: 7
+                  price_day: 4.145608029883936
+                monthly:
+                  price_month: 1
             name: name
             field_value:
             - label_ru: label_ru
@@ -2209,8 +2517,6 @@ components:
               label_en: label_en
               type: UNKNOWN
               value: value
-            description: description
-            display_name: display_name
             category:
             - is_main: true
               icon_svg: icon_svg
@@ -2223,18 +2529,19 @@ components:
               sys_name: sys_name
               name_en: name_en
             post_install_alert: true
-            version: version
             slug: slug
             status: PENDING
           configuration:
             memory: 1
-            price_month: 5.637376656633329
-            price_day: 5.962133916683182
+            price_month: 2.3021358869347655
+            price_day: 5.637376656633329
+            bandwidth_public: 5
             custom: true
             name: name
             available: true
             disk_size: 6
             id: id
+            region: region
             configurable: true
             cpu_count: 0
           description: description
@@ -2263,10 +2570,10 @@ components:
           ssh_keys:
           - name: name
             fingerprint: fingerprint
-            id: 2
+            id: 7
           - name: name
             fingerprint: fingerprint
-            id: 2
+            id: 7
           private_network:
           - ip:
             - ip
@@ -2274,15 +2581,18 @@ components:
             network:
               subnet: subnet
               id: id
-              mask: 7
+              region: region
+              mask: 9
           - ip:
             - ip
             - ip
             network:
               subnet: subnet
               id: id
-              mask: 7
+              region: region
+              mask: 9
           date_create: date_create
+          region: region
           link_slug: link_slug
           status: UNKNOWN
         error:
@@ -2303,6 +2613,7 @@ components:
           enum:
           - INTERNAL_ERROR
           - GUEST_OS_ADD_IP_ADDRESS_FAILED
+          - REGION_MISMATCH
           format: enum
           type: string
         message:
@@ -2317,13 +2628,43 @@ components:
               icon: icon
               logo: logo
               logo2x: logo2x
-              weight: 9.301444
+              weight: 3.6160767
               secondary_color: secondary_color
               icon2x: icon2x
               primary_color: primary_color
               is_pinned: true
             address: address
             description_en: description_en
+            description: description
+            display_name: display_name
+            version: version
+            license:
+            - additional_info: additional_info
+              additional_info_en: additional_info_en
+              id: 2
+              type: type
+              display_name: display_name
+              plan: plan
+              primary: true
+              billing:
+                daily:
+                  price_month: 7
+                  price_day: 4.145608029883936
+                monthly:
+                  price_month: 1
+            - additional_info: additional_info
+              additional_info_en: additional_info_en
+              id: 2
+              type: type
+              display_name: display_name
+              plan: plan
+              primary: true
+              billing:
+                daily:
+                  price_month: 7
+                  price_day: 4.145608029883936
+                monthly:
+                  price_month: 1
             name: name
             field_value:
             - label_ru: label_ru
@@ -2336,8 +2677,6 @@ components:
               label_en: label_en
               type: UNKNOWN
               value: value
-            description: description
-            display_name: display_name
             category:
             - is_main: true
               icon_svg: icon_svg
@@ -2350,18 +2689,19 @@ components:
               sys_name: sys_name
               name_en: name_en
             post_install_alert: true
-            version: version
             slug: slug
             status: PENDING
           configuration:
             memory: 1
-            price_month: 5.637376656633329
-            price_day: 5.962133916683182
+            price_month: 2.3021358869347655
+            price_day: 5.637376656633329
+            bandwidth_public: 5
             custom: true
             name: name
             available: true
             disk_size: 6
             id: id
+            region: region
             configurable: true
             cpu_count: 0
           description: description
@@ -2390,10 +2730,10 @@ components:
           ssh_keys:
           - name: name
             fingerprint: fingerprint
-            id: 2
+            id: 7
           - name: name
             fingerprint: fingerprint
-            id: 2
+            id: 7
           private_network:
           - ip:
             - ip
@@ -2401,15 +2741,18 @@ components:
             network:
               subnet: subnet
               id: id
-              mask: 7
+              region: region
+              mask: 9
           - ip:
             - ip
             - ip
             network:
               subnet: subnet
               id: id
-              mask: 7
+              region: region
+              mask: 9
           date_create: date_create
+          region: region
           link_slug: link_slug
           status: UNKNOWN
         error:
@@ -2453,13 +2796,43 @@ components:
               icon: icon
               logo: logo
               logo2x: logo2x
-              weight: 9.301444
+              weight: 3.6160767
               secondary_color: secondary_color
               icon2x: icon2x
               primary_color: primary_color
               is_pinned: true
             address: address
             description_en: description_en
+            description: description
+            display_name: display_name
+            version: version
+            license:
+            - additional_info: additional_info
+              additional_info_en: additional_info_en
+              id: 2
+              type: type
+              display_name: display_name
+              plan: plan
+              primary: true
+              billing:
+                daily:
+                  price_month: 7
+                  price_day: 4.145608029883936
+                monthly:
+                  price_month: 1
+            - additional_info: additional_info
+              additional_info_en: additional_info_en
+              id: 2
+              type: type
+              display_name: display_name
+              plan: plan
+              primary: true
+              billing:
+                daily:
+                  price_month: 7
+                  price_day: 4.145608029883936
+                monthly:
+                  price_month: 1
             name: name
             field_value:
             - label_ru: label_ru
@@ -2472,8 +2845,6 @@ components:
               label_en: label_en
               type: UNKNOWN
               value: value
-            description: description
-            display_name: display_name
             category:
             - is_main: true
               icon_svg: icon_svg
@@ -2486,18 +2857,19 @@ components:
               sys_name: sys_name
               name_en: name_en
             post_install_alert: true
-            version: version
             slug: slug
             status: PENDING
           configuration:
             memory: 1
-            price_month: 5.637376656633329
-            price_day: 5.962133916683182
+            price_month: 2.3021358869347655
+            price_day: 5.637376656633329
+            bandwidth_public: 5
             custom: true
             name: name
             available: true
             disk_size: 6
             id: id
+            region: region
             configurable: true
             cpu_count: 0
           description: description
@@ -2526,10 +2898,10 @@ components:
           ssh_keys:
           - name: name
             fingerprint: fingerprint
-            id: 2
+            id: 7
           - name: name
             fingerprint: fingerprint
-            id: 2
+            id: 7
           private_network:
           - ip:
             - ip
@@ -2537,15 +2909,18 @@ components:
             network:
               subnet: subnet
               id: id
-              mask: 7
+              region: region
+              mask: 9
           - ip:
             - ip
             - ip
             network:
               subnet: subnet
               id: id
-              mask: 7
+              region: region
+              mask: 9
           date_create: date_create
+          region: region
           link_slug: link_slug
           status: UNKNOWN
         error:
@@ -2594,13 +2969,43 @@ components:
               icon: icon
               logo: logo
               logo2x: logo2x
-              weight: 9.301444
+              weight: 3.6160767
               secondary_color: secondary_color
               icon2x: icon2x
               primary_color: primary_color
               is_pinned: true
             address: address
             description_en: description_en
+            description: description
+            display_name: display_name
+            version: version
+            license:
+            - additional_info: additional_info
+              additional_info_en: additional_info_en
+              id: 2
+              type: type
+              display_name: display_name
+              plan: plan
+              primary: true
+              billing:
+                daily:
+                  price_month: 7
+                  price_day: 4.145608029883936
+                monthly:
+                  price_month: 1
+            - additional_info: additional_info
+              additional_info_en: additional_info_en
+              id: 2
+              type: type
+              display_name: display_name
+              plan: plan
+              primary: true
+              billing:
+                daily:
+                  price_month: 7
+                  price_day: 4.145608029883936
+                monthly:
+                  price_month: 1
             name: name
             field_value:
             - label_ru: label_ru
@@ -2613,8 +3018,6 @@ components:
               label_en: label_en
               type: UNKNOWN
               value: value
-            description: description
-            display_name: display_name
             category:
             - is_main: true
               icon_svg: icon_svg
@@ -2627,18 +3030,19 @@ components:
               sys_name: sys_name
               name_en: name_en
             post_install_alert: true
-            version: version
             slug: slug
             status: PENDING
           configuration:
             memory: 1
-            price_month: 5.637376656633329
-            price_day: 5.962133916683182
+            price_month: 2.3021358869347655
+            price_day: 5.637376656633329
+            bandwidth_public: 5
             custom: true
             name: name
             available: true
             disk_size: 6
             id: id
+            region: region
             configurable: true
             cpu_count: 0
           description: description
@@ -2667,10 +3071,10 @@ components:
           ssh_keys:
           - name: name
             fingerprint: fingerprint
-            id: 2
+            id: 7
           - name: name
             fingerprint: fingerprint
-            id: 2
+            id: 7
           private_network:
           - ip:
             - ip
@@ -2678,15 +3082,18 @@ components:
             network:
               subnet: subnet
               id: id
-              mask: 7
+              region: region
+              mask: 9
           - ip:
             - ip
             - ip
             network:
               subnet: subnet
               id: id
-              mask: 7
+              region: region
+              mask: 9
           date_create: date_create
+          region: region
           link_slug: link_slug
           status: UNKNOWN
         error:
@@ -2732,13 +3139,43 @@ components:
               icon: icon
               logo: logo
               logo2x: logo2x
-              weight: 9.301444
+              weight: 3.6160767
               secondary_color: secondary_color
               icon2x: icon2x
               primary_color: primary_color
               is_pinned: true
             address: address
             description_en: description_en
+            description: description
+            display_name: display_name
+            version: version
+            license:
+            - additional_info: additional_info
+              additional_info_en: additional_info_en
+              id: 2
+              type: type
+              display_name: display_name
+              plan: plan
+              primary: true
+              billing:
+                daily:
+                  price_month: 7
+                  price_day: 4.145608029883936
+                monthly:
+                  price_month: 1
+            - additional_info: additional_info
+              additional_info_en: additional_info_en
+              id: 2
+              type: type
+              display_name: display_name
+              plan: plan
+              primary: true
+              billing:
+                daily:
+                  price_month: 7
+                  price_day: 4.145608029883936
+                monthly:
+                  price_month: 1
             name: name
             field_value:
             - label_ru: label_ru
@@ -2751,8 +3188,6 @@ components:
               label_en: label_en
               type: UNKNOWN
               value: value
-            description: description
-            display_name: display_name
             category:
             - is_main: true
               icon_svg: icon_svg
@@ -2765,18 +3200,19 @@ components:
               sys_name: sys_name
               name_en: name_en
             post_install_alert: true
-            version: version
             slug: slug
             status: PENDING
           configuration:
             memory: 1
-            price_month: 5.637376656633329
-            price_day: 5.962133916683182
+            price_month: 2.3021358869347655
+            price_day: 5.637376656633329
+            bandwidth_public: 5
             custom: true
             name: name
             available: true
             disk_size: 6
             id: id
+            region: region
             configurable: true
             cpu_count: 0
           description: description
@@ -2805,10 +3241,10 @@ components:
           ssh_keys:
           - name: name
             fingerprint: fingerprint
-            id: 2
+            id: 7
           - name: name
             fingerprint: fingerprint
-            id: 2
+            id: 7
           private_network:
           - ip:
             - ip
@@ -2816,15 +3252,18 @@ components:
             network:
               subnet: subnet
               id: id
-              mask: 7
+              region: region
+              mask: 9
           - ip:
             - ip
             - ip
             network:
               subnet: subnet
               id: id
-              mask: 7
+              region: region
+              mask: 9
           date_create: date_create
+          region: region
           link_slug: link_slug
           status: UNKNOWN
         error:
@@ -2913,6 +3352,11 @@ components:
           type: array
         link_slug:
           type: string
+        license_id:
+          format: uint32
+          type: integer
+        region:
+          type: string
       type: object
     Manage_CreateVpsResponse:
       example:
@@ -2923,13 +3367,43 @@ components:
               icon: icon
               logo: logo
               logo2x: logo2x
-              weight: 9.301444
+              weight: 3.6160767
               secondary_color: secondary_color
               icon2x: icon2x
               primary_color: primary_color
               is_pinned: true
             address: address
             description_en: description_en
+            description: description
+            display_name: display_name
+            version: version
+            license:
+            - additional_info: additional_info
+              additional_info_en: additional_info_en
+              id: 2
+              type: type
+              display_name: display_name
+              plan: plan
+              primary: true
+              billing:
+                daily:
+                  price_month: 7
+                  price_day: 4.145608029883936
+                monthly:
+                  price_month: 1
+            - additional_info: additional_info
+              additional_info_en: additional_info_en
+              id: 2
+              type: type
+              display_name: display_name
+              plan: plan
+              primary: true
+              billing:
+                daily:
+                  price_month: 7
+                  price_day: 4.145608029883936
+                monthly:
+                  price_month: 1
             name: name
             field_value:
             - label_ru: label_ru
@@ -2942,8 +3416,6 @@ components:
               label_en: label_en
               type: UNKNOWN
               value: value
-            description: description
-            display_name: display_name
             category:
             - is_main: true
               icon_svg: icon_svg
@@ -2956,18 +3428,19 @@ components:
               sys_name: sys_name
               name_en: name_en
             post_install_alert: true
-            version: version
             slug: slug
             status: PENDING
           configuration:
             memory: 1
-            price_month: 5.637376656633329
-            price_day: 5.962133916683182
+            price_month: 2.3021358869347655
+            price_day: 5.637376656633329
+            bandwidth_public: 5
             custom: true
             name: name
             available: true
             disk_size: 6
             id: id
+            region: region
             configurable: true
             cpu_count: 0
           description: description
@@ -2996,10 +3469,10 @@ components:
           ssh_keys:
           - name: name
             fingerprint: fingerprint
-            id: 2
+            id: 7
           - name: name
             fingerprint: fingerprint
-            id: 2
+            id: 7
           private_network:
           - ip:
             - ip
@@ -3007,15 +3480,18 @@ components:
             network:
               subnet: subnet
               id: id
-              mask: 7
+              region: region
+              mask: 9
           - ip:
             - ip
             - ip
             network:
               subnet: subnet
               id: id
-              mask: 7
+              region: region
+              mask: 9
           date_create: date_create
+          region: region
           link_slug: link_slug
           status: UNKNOWN
         error:
@@ -3147,13 +3623,43 @@ components:
               icon: icon
               logo: logo
               logo2x: logo2x
-              weight: 9.301444
+              weight: 3.6160767
               secondary_color: secondary_color
               icon2x: icon2x
               primary_color: primary_color
               is_pinned: true
             address: address
             description_en: description_en
+            description: description
+            display_name: display_name
+            version: version
+            license:
+            - additional_info: additional_info
+              additional_info_en: additional_info_en
+              id: 2
+              type: type
+              display_name: display_name
+              plan: plan
+              primary: true
+              billing:
+                daily:
+                  price_month: 7
+                  price_day: 4.145608029883936
+                monthly:
+                  price_month: 1
+            - additional_info: additional_info
+              additional_info_en: additional_info_en
+              id: 2
+              type: type
+              display_name: display_name
+              plan: plan
+              primary: true
+              billing:
+                daily:
+                  price_month: 7
+                  price_day: 4.145608029883936
+                monthly:
+                  price_month: 1
             name: name
             field_value:
             - label_ru: label_ru
@@ -3166,8 +3672,6 @@ components:
               label_en: label_en
               type: UNKNOWN
               value: value
-            description: description
-            display_name: display_name
             category:
             - is_main: true
               icon_svg: icon_svg
@@ -3180,18 +3684,19 @@ components:
               sys_name: sys_name
               name_en: name_en
             post_install_alert: true
-            version: version
             slug: slug
             status: PENDING
           configuration:
             memory: 1
-            price_month: 5.637376656633329
-            price_day: 5.962133916683182
+            price_month: 2.3021358869347655
+            price_day: 5.637376656633329
+            bandwidth_public: 5
             custom: true
             name: name
             available: true
             disk_size: 6
             id: id
+            region: region
             configurable: true
             cpu_count: 0
           description: description
@@ -3220,10 +3725,10 @@ components:
           ssh_keys:
           - name: name
             fingerprint: fingerprint
-            id: 2
+            id: 7
           - name: name
             fingerprint: fingerprint
-            id: 2
+            id: 7
           private_network:
           - ip:
             - ip
@@ -3231,15 +3736,18 @@ components:
             network:
               subnet: subnet
               id: id
-              mask: 7
+              region: region
+              mask: 9
           - ip:
             - ip
             - ip
             network:
               subnet: subnet
               id: id
-              mask: 7
+              region: region
+              mask: 9
           date_create: date_create
+          region: region
           link_slug: link_slug
           status: UNKNOWN
         error:
@@ -3274,13 +3782,43 @@ components:
               icon: icon
               logo: logo
               logo2x: logo2x
-              weight: 9.301444
+              weight: 3.6160767
               secondary_color: secondary_color
               icon2x: icon2x
               primary_color: primary_color
               is_pinned: true
             address: address
             description_en: description_en
+            description: description
+            display_name: display_name
+            version: version
+            license:
+            - additional_info: additional_info
+              additional_info_en: additional_info_en
+              id: 2
+              type: type
+              display_name: display_name
+              plan: plan
+              primary: true
+              billing:
+                daily:
+                  price_month: 7
+                  price_day: 4.145608029883936
+                monthly:
+                  price_month: 1
+            - additional_info: additional_info
+              additional_info_en: additional_info_en
+              id: 2
+              type: type
+              display_name: display_name
+              plan: plan
+              primary: true
+              billing:
+                daily:
+                  price_month: 7
+                  price_day: 4.145608029883936
+                monthly:
+                  price_month: 1
             name: name
             field_value:
             - label_ru: label_ru
@@ -3293,8 +3831,6 @@ components:
               label_en: label_en
               type: UNKNOWN
               value: value
-            description: description
-            display_name: display_name
             category:
             - is_main: true
               icon_svg: icon_svg
@@ -3307,18 +3843,19 @@ components:
               sys_name: sys_name
               name_en: name_en
             post_install_alert: true
-            version: version
             slug: slug
             status: PENDING
           configuration:
             memory: 1
-            price_month: 5.637376656633329
-            price_day: 5.962133916683182
+            price_month: 2.3021358869347655
+            price_day: 5.637376656633329
+            bandwidth_public: 5
             custom: true
             name: name
             available: true
             disk_size: 6
             id: id
+            region: region
             configurable: true
             cpu_count: 0
           description: description
@@ -3347,10 +3884,10 @@ components:
           ssh_keys:
           - name: name
             fingerprint: fingerprint
-            id: 2
+            id: 7
           - name: name
             fingerprint: fingerprint
-            id: 2
+            id: 7
           private_network:
           - ip:
             - ip
@@ -3358,15 +3895,18 @@ components:
             network:
               subnet: subnet
               id: id
-              mask: 7
+              region: region
+              mask: 9
           - ip:
             - ip
             - ip
             network:
               subnet: subnet
               id: id
-              mask: 7
+              region: region
+              mask: 9
           date_create: date_create
+          region: region
           link_slug: link_slug
           status: UNKNOWN
         error:
@@ -3401,13 +3941,43 @@ components:
               icon: icon
               logo: logo
               logo2x: logo2x
-              weight: 9.301444
+              weight: 3.6160767
               secondary_color: secondary_color
               icon2x: icon2x
               primary_color: primary_color
               is_pinned: true
             address: address
             description_en: description_en
+            description: description
+            display_name: display_name
+            version: version
+            license:
+            - additional_info: additional_info
+              additional_info_en: additional_info_en
+              id: 2
+              type: type
+              display_name: display_name
+              plan: plan
+              primary: true
+              billing:
+                daily:
+                  price_month: 7
+                  price_day: 4.145608029883936
+                monthly:
+                  price_month: 1
+            - additional_info: additional_info
+              additional_info_en: additional_info_en
+              id: 2
+              type: type
+              display_name: display_name
+              plan: plan
+              primary: true
+              billing:
+                daily:
+                  price_month: 7
+                  price_day: 4.145608029883936
+                monthly:
+                  price_month: 1
             name: name
             field_value:
             - label_ru: label_ru
@@ -3420,8 +3990,6 @@ components:
               label_en: label_en
               type: UNKNOWN
               value: value
-            description: description
-            display_name: display_name
             category:
             - is_main: true
               icon_svg: icon_svg
@@ -3434,18 +4002,19 @@ components:
               sys_name: sys_name
               name_en: name_en
             post_install_alert: true
-            version: version
             slug: slug
             status: PENDING
           configuration:
             memory: 1
-            price_month: 5.637376656633329
-            price_day: 5.962133916683182
+            price_month: 2.3021358869347655
+            price_day: 5.637376656633329
+            bandwidth_public: 5
             custom: true
             name: name
             available: true
             disk_size: 6
             id: id
+            region: region
             configurable: true
             cpu_count: 0
           description: description
@@ -3474,10 +4043,10 @@ components:
           ssh_keys:
           - name: name
             fingerprint: fingerprint
-            id: 2
+            id: 7
           - name: name
             fingerprint: fingerprint
-            id: 2
+            id: 7
           private_network:
           - ip:
             - ip
@@ -3485,15 +4054,18 @@ components:
             network:
               subnet: subnet
               id: id
-              mask: 7
+              region: region
+              mask: 9
           - ip:
             - ip
             - ip
             network:
               subnet: subnet
               id: id
-              mask: 7
+              region: region
+              mask: 9
           date_create: date_create
+          region: region
           link_slug: link_slug
           status: UNKNOWN
         error:
@@ -3528,13 +4100,43 @@ components:
               icon: icon
               logo: logo
               logo2x: logo2x
-              weight: 9.301444
+              weight: 3.6160767
               secondary_color: secondary_color
               icon2x: icon2x
               primary_color: primary_color
               is_pinned: true
             address: address
             description_en: description_en
+            description: description
+            display_name: display_name
+            version: version
+            license:
+            - additional_info: additional_info
+              additional_info_en: additional_info_en
+              id: 2
+              type: type
+              display_name: display_name
+              plan: plan
+              primary: true
+              billing:
+                daily:
+                  price_month: 7
+                  price_day: 4.145608029883936
+                monthly:
+                  price_month: 1
+            - additional_info: additional_info
+              additional_info_en: additional_info_en
+              id: 2
+              type: type
+              display_name: display_name
+              plan: plan
+              primary: true
+              billing:
+                daily:
+                  price_month: 7
+                  price_day: 4.145608029883936
+                monthly:
+                  price_month: 1
             name: name
             field_value:
             - label_ru: label_ru
@@ -3547,8 +4149,6 @@ components:
               label_en: label_en
               type: UNKNOWN
               value: value
-            description: description
-            display_name: display_name
             category:
             - is_main: true
               icon_svg: icon_svg
@@ -3561,18 +4161,19 @@ components:
               sys_name: sys_name
               name_en: name_en
             post_install_alert: true
-            version: version
             slug: slug
             status: PENDING
           configuration:
             memory: 1
-            price_month: 5.637376656633329
-            price_day: 5.962133916683182
+            price_month: 2.3021358869347655
+            price_day: 5.637376656633329
+            bandwidth_public: 5
             custom: true
             name: name
             available: true
             disk_size: 6
             id: id
+            region: region
             configurable: true
             cpu_count: 0
           description: description
@@ -3601,10 +4202,10 @@ components:
           ssh_keys:
           - name: name
             fingerprint: fingerprint
-            id: 2
+            id: 7
           - name: name
             fingerprint: fingerprint
-            id: 2
+            id: 7
           private_network:
           - ip:
             - ip
@@ -3612,15 +4213,18 @@ components:
             network:
               subnet: subnet
               id: id
-              mask: 7
+              region: region
+              mask: 9
           - ip:
             - ip
             - ip
             network:
               subnet: subnet
               id: id
-              mask: 7
+              region: region
+              mask: 9
           date_create: date_create
+          region: region
           link_slug: link_slug
           status: UNKNOWN
       properties:
@@ -3631,23 +4235,27 @@ components:
       example:
         configurations:
         - memory: 1
-          price_month: 5.637376656633329
-          price_day: 5.962133916683182
+          price_month: 2.3021358869347655
+          price_day: 5.637376656633329
+          bandwidth_public: 5
           custom: true
           name: name
           available: true
           disk_size: 6
           id: id
+          region: region
           configurable: true
           cpu_count: 0
         - memory: 1
-          price_month: 5.637376656633329
-          price_day: 5.962133916683182
+          price_month: 2.3021358869347655
+          price_day: 5.637376656633329
+          bandwidth_public: 5
           custom: true
           name: name
           available: true
           disk_size: 6
           id: id
+          region: region
           configurable: true
           cpu_count: 0
       properties:
@@ -3731,13 +4339,43 @@ components:
               icon: icon
               logo: logo
               logo2x: logo2x
-              weight: 9.301444
+              weight: 3.6160767
               secondary_color: secondary_color
               icon2x: icon2x
               primary_color: primary_color
               is_pinned: true
             address: address
             description_en: description_en
+            description: description
+            display_name: display_name
+            version: version
+            license:
+            - additional_info: additional_info
+              additional_info_en: additional_info_en
+              id: 2
+              type: type
+              display_name: display_name
+              plan: plan
+              primary: true
+              billing:
+                daily:
+                  price_month: 7
+                  price_day: 4.145608029883936
+                monthly:
+                  price_month: 1
+            - additional_info: additional_info
+              additional_info_en: additional_info_en
+              id: 2
+              type: type
+              display_name: display_name
+              plan: plan
+              primary: true
+              billing:
+                daily:
+                  price_month: 7
+                  price_day: 4.145608029883936
+                monthly:
+                  price_month: 1
             name: name
             field_value:
             - label_ru: label_ru
@@ -3750,8 +4388,6 @@ components:
               label_en: label_en
               type: UNKNOWN
               value: value
-            description: description
-            display_name: display_name
             category:
             - is_main: true
               icon_svg: icon_svg
@@ -3764,18 +4400,19 @@ components:
               sys_name: sys_name
               name_en: name_en
             post_install_alert: true
-            version: version
             slug: slug
             status: PENDING
           configuration:
             memory: 1
-            price_month: 5.637376656633329
-            price_day: 5.962133916683182
+            price_month: 2.3021358869347655
+            price_day: 5.637376656633329
+            bandwidth_public: 5
             custom: true
             name: name
             available: true
             disk_size: 6
             id: id
+            region: region
             configurable: true
             cpu_count: 0
           description: description
@@ -3804,10 +4441,10 @@ components:
           ssh_keys:
           - name: name
             fingerprint: fingerprint
-            id: 2
+            id: 7
           - name: name
             fingerprint: fingerprint
-            id: 2
+            id: 7
           private_network:
           - ip:
             - ip
@@ -3815,15 +4452,18 @@ components:
             network:
               subnet: subnet
               id: id
-              mask: 7
+              region: region
+              mask: 9
           - ip:
             - ip
             - ip
             network:
               subnet: subnet
               id: id
-              mask: 7
+              region: region
+              mask: 9
           date_create: date_create
+          region: region
           link_slug: link_slug
           status: UNKNOWN
       properties:
@@ -3838,13 +4478,43 @@ components:
             icon: icon
             logo: logo
             logo2x: logo2x
-            weight: 9.301444
+            weight: 3.6160767
             secondary_color: secondary_color
             icon2x: icon2x
             primary_color: primary_color
             is_pinned: true
           address: address
           description_en: description_en
+          description: description
+          display_name: display_name
+          version: version
+          license:
+          - additional_info: additional_info
+            additional_info_en: additional_info_en
+            id: 2
+            type: type
+            display_name: display_name
+            plan: plan
+            primary: true
+            billing:
+              daily:
+                price_month: 7
+                price_day: 4.145608029883936
+              monthly:
+                price_month: 1
+          - additional_info: additional_info
+            additional_info_en: additional_info_en
+            id: 2
+            type: type
+            display_name: display_name
+            plan: plan
+            primary: true
+            billing:
+              daily:
+                price_month: 7
+                price_day: 4.145608029883936
+              monthly:
+                price_month: 1
           name: name
           field_value:
           - label_ru: label_ru
@@ -3857,8 +4527,6 @@ components:
             label_en: label_en
             type: UNKNOWN
             value: value
-          description: description
-          display_name: display_name
           category:
           - is_main: true
             icon_svg: icon_svg
@@ -3871,7 +4539,6 @@ components:
             sys_name: sys_name
             name_en: name_en
           post_install_alert: true
-          version: version
           slug: slug
           status: PENDING
       properties:
@@ -3887,13 +4554,43 @@ components:
               icon: icon
               logo: logo
               logo2x: logo2x
-              weight: 9.301444
+              weight: 3.6160767
               secondary_color: secondary_color
               icon2x: icon2x
               primary_color: primary_color
               is_pinned: true
             address: address
             description_en: description_en
+            description: description
+            display_name: display_name
+            version: version
+            license:
+            - additional_info: additional_info
+              additional_info_en: additional_info_en
+              id: 2
+              type: type
+              display_name: display_name
+              plan: plan
+              primary: true
+              billing:
+                daily:
+                  price_month: 7
+                  price_day: 4.145608029883936
+                monthly:
+                  price_month: 1
+            - additional_info: additional_info
+              additional_info_en: additional_info_en
+              id: 2
+              type: type
+              display_name: display_name
+              plan: plan
+              primary: true
+              billing:
+                daily:
+                  price_month: 7
+                  price_day: 4.145608029883936
+                monthly:
+                  price_month: 1
             name: name
             field_value:
             - label_ru: label_ru
@@ -3906,8 +4603,6 @@ components:
               label_en: label_en
               type: UNKNOWN
               value: value
-            description: description
-            display_name: display_name
             category:
             - is_main: true
               icon_svg: icon_svg
@@ -3920,18 +4615,19 @@ components:
               sys_name: sys_name
               name_en: name_en
             post_install_alert: true
-            version: version
             slug: slug
             status: PENDING
           configuration:
             memory: 1
-            price_month: 5.637376656633329
-            price_day: 5.962133916683182
+            price_month: 2.3021358869347655
+            price_day: 5.637376656633329
+            bandwidth_public: 5
             custom: true
             name: name
             available: true
             disk_size: 6
             id: id
+            region: region
             configurable: true
             cpu_count: 0
           description: description
@@ -3960,10 +4656,10 @@ components:
           ssh_keys:
           - name: name
             fingerprint: fingerprint
-            id: 2
+            id: 7
           - name: name
             fingerprint: fingerprint
-            id: 2
+            id: 7
           private_network:
           - ip:
             - ip
@@ -3971,15 +4667,18 @@ components:
             network:
               subnet: subnet
               id: id
-              mask: 7
+              region: region
+              mask: 9
           - ip:
             - ip
             - ip
             network:
               subnet: subnet
               id: id
-              mask: 7
+              region: region
+              mask: 9
           date_create: date_create
+          region: region
           link_slug: link_slug
           status: UNKNOWN
         - software:
@@ -3988,13 +4687,43 @@ components:
               icon: icon
               logo: logo
               logo2x: logo2x
-              weight: 9.301444
+              weight: 3.6160767
               secondary_color: secondary_color
               icon2x: icon2x
               primary_color: primary_color
               is_pinned: true
             address: address
             description_en: description_en
+            description: description
+            display_name: display_name
+            version: version
+            license:
+            - additional_info: additional_info
+              additional_info_en: additional_info_en
+              id: 2
+              type: type
+              display_name: display_name
+              plan: plan
+              primary: true
+              billing:
+                daily:
+                  price_month: 7
+                  price_day: 4.145608029883936
+                monthly:
+                  price_month: 1
+            - additional_info: additional_info
+              additional_info_en: additional_info_en
+              id: 2
+              type: type
+              display_name: display_name
+              plan: plan
+              primary: true
+              billing:
+                daily:
+                  price_month: 7
+                  price_day: 4.145608029883936
+                monthly:
+                  price_month: 1
             name: name
             field_value:
             - label_ru: label_ru
@@ -4007,8 +4736,6 @@ components:
               label_en: label_en
               type: UNKNOWN
               value: value
-            description: description
-            display_name: display_name
             category:
             - is_main: true
               icon_svg: icon_svg
@@ -4021,18 +4748,19 @@ components:
               sys_name: sys_name
               name_en: name_en
             post_install_alert: true
-            version: version
             slug: slug
             status: PENDING
           configuration:
             memory: 1
-            price_month: 5.637376656633329
-            price_day: 5.962133916683182
+            price_month: 2.3021358869347655
+            price_day: 5.637376656633329
+            bandwidth_public: 5
             custom: true
             name: name
             available: true
             disk_size: 6
             id: id
+            region: region
             configurable: true
             cpu_count: 0
           description: description
@@ -4061,10 +4789,10 @@ components:
           ssh_keys:
           - name: name
             fingerprint: fingerprint
-            id: 2
+            id: 7
           - name: name
             fingerprint: fingerprint
-            id: 2
+            id: 7
           private_network:
           - ip:
             - ip
@@ -4072,21 +4800,45 @@ components:
             network:
               subnet: subnet
               id: id
-              mask: 7
+              region: region
+              mask: 9
           - ip:
             - ip
             - ip
             network:
               subnet: subnet
               id: id
-              mask: 7
+              region: region
+              mask: 9
           date_create: date_create
+          region: region
           link_slug: link_slug
           status: UNKNOWN
       properties:
         vps:
           items:
             $ref: '#/components/schemas/Manage_VpsInfo'
+          type: array
+      type: object
+    Manage_GetRegionListResponse:
+      example:
+        regions:
+        - country: country
+          name: name
+          available: true
+          id: id
+          priority: 0
+          name_en: name_en
+        - country: country
+          name: name
+          available: true
+          id: id
+          priority: 0
+          name_en: name_en
+      properties:
+        regions:
+          items:
+            $ref: '#/components/schemas/Structures_RegionInfo'
           type: array
       type: object
     Manage_GetStatusesResponse:
@@ -4199,13 +4951,43 @@ components:
               icon: icon
               logo: logo
               logo2x: logo2x
-              weight: 9.301444
+              weight: 3.6160767
               secondary_color: secondary_color
               icon2x: icon2x
               primary_color: primary_color
               is_pinned: true
             address: address
             description_en: description_en
+            description: description
+            display_name: display_name
+            version: version
+            license:
+            - additional_info: additional_info
+              additional_info_en: additional_info_en
+              id: 2
+              type: type
+              display_name: display_name
+              plan: plan
+              primary: true
+              billing:
+                daily:
+                  price_month: 7
+                  price_day: 4.145608029883936
+                monthly:
+                  price_month: 1
+            - additional_info: additional_info
+              additional_info_en: additional_info_en
+              id: 2
+              type: type
+              display_name: display_name
+              plan: plan
+              primary: true
+              billing:
+                daily:
+                  price_month: 7
+                  price_day: 4.145608029883936
+                monthly:
+                  price_month: 1
             name: name
             field_value:
             - label_ru: label_ru
@@ -4218,8 +5000,6 @@ components:
               label_en: label_en
               type: UNKNOWN
               value: value
-            description: description
-            display_name: display_name
             category:
             - is_main: true
               icon_svg: icon_svg
@@ -4232,18 +5012,19 @@ components:
               sys_name: sys_name
               name_en: name_en
             post_install_alert: true
-            version: version
             slug: slug
             status: PENDING
           configuration:
             memory: 1
-            price_month: 5.637376656633329
-            price_day: 5.962133916683182
+            price_month: 2.3021358869347655
+            price_day: 5.637376656633329
+            bandwidth_public: 5
             custom: true
             name: name
             available: true
             disk_size: 6
             id: id
+            region: region
             configurable: true
             cpu_count: 0
           description: description
@@ -4272,10 +5053,10 @@ components:
           ssh_keys:
           - name: name
             fingerprint: fingerprint
-            id: 2
+            id: 7
           - name: name
             fingerprint: fingerprint
-            id: 2
+            id: 7
           private_network:
           - ip:
             - ip
@@ -4283,15 +5064,18 @@ components:
             network:
               subnet: subnet
               id: id
-              mask: 7
+              region: region
+              mask: 9
           - ip:
             - ip
             - ip
             network:
               subnet: subnet
               id: id
-              mask: 7
+              region: region
+              mask: 9
           date_create: date_create
+          region: region
           link_slug: link_slug
           status: UNKNOWN
         error:
@@ -4331,6 +5115,9 @@ components:
           type: string
         software:
           $ref: '#/components/schemas/Manage_SoftwareInstallInfo'
+        license_id:
+          format: uint32
+          type: integer
       type: object
     Manage_ReinstallResponse:
       example:
@@ -4341,13 +5128,43 @@ components:
               icon: icon
               logo: logo
               logo2x: logo2x
-              weight: 9.301444
+              weight: 3.6160767
               secondary_color: secondary_color
               icon2x: icon2x
               primary_color: primary_color
               is_pinned: true
             address: address
             description_en: description_en
+            description: description
+            display_name: display_name
+            version: version
+            license:
+            - additional_info: additional_info
+              additional_info_en: additional_info_en
+              id: 2
+              type: type
+              display_name: display_name
+              plan: plan
+              primary: true
+              billing:
+                daily:
+                  price_month: 7
+                  price_day: 4.145608029883936
+                monthly:
+                  price_month: 1
+            - additional_info: additional_info
+              additional_info_en: additional_info_en
+              id: 2
+              type: type
+              display_name: display_name
+              plan: plan
+              primary: true
+              billing:
+                daily:
+                  price_month: 7
+                  price_day: 4.145608029883936
+                monthly:
+                  price_month: 1
             name: name
             field_value:
             - label_ru: label_ru
@@ -4360,8 +5177,6 @@ components:
               label_en: label_en
               type: UNKNOWN
               value: value
-            description: description
-            display_name: display_name
             category:
             - is_main: true
               icon_svg: icon_svg
@@ -4374,18 +5189,19 @@ components:
               sys_name: sys_name
               name_en: name_en
             post_install_alert: true
-            version: version
             slug: slug
             status: PENDING
           configuration:
             memory: 1
-            price_month: 5.637376656633329
-            price_day: 5.962133916683182
+            price_month: 2.3021358869347655
+            price_day: 5.637376656633329
+            bandwidth_public: 5
             custom: true
             name: name
             available: true
             disk_size: 6
             id: id
+            region: region
             configurable: true
             cpu_count: 0
           description: description
@@ -4414,10 +5230,10 @@ components:
           ssh_keys:
           - name: name
             fingerprint: fingerprint
-            id: 2
+            id: 7
           - name: name
             fingerprint: fingerprint
-            id: 2
+            id: 7
           private_network:
           - ip:
             - ip
@@ -4425,15 +5241,18 @@ components:
             network:
               subnet: subnet
               id: id
-              mask: 7
+              region: region
+              mask: 9
           - ip:
             - ip
             - ip
             network:
               subnet: subnet
               id: id
-              mask: 7
+              region: region
+              mask: 9
           date_create: date_create
+          region: region
           link_slug: link_slug
           status: UNKNOWN
         error:
@@ -4446,6 +5265,10 @@ components:
             - error_text_en: error_text_en
               variable: variable
               error_text_ru: error_text_ru
+          insufficient_funds_error:
+            needed_balance: 1.4658129805029452
+            current_balance: 6.027456183070403
+            charge_on_add: true
           code: INTERNAL_ERROR
           message: message
       properties:
@@ -4465,6 +5288,10 @@ components:
           - error_text_en: error_text_en
             variable: variable
             error_text_ru: error_text_ru
+        insufficient_funds_error:
+          needed_balance: 1.4658129805029452
+          current_balance: 6.027456183070403
+          charge_on_add: true
         code: INTERNAL_ERROR
         message: message
       properties:
@@ -4482,12 +5309,30 @@ components:
           - SOFTWARE_VARIABLE_REQUIRED
           - SOFTWARE_VARIABLE_INVALID
           - BLACKLISTED_PASSWORD
+          - INSUFFICIENT_FUNDS
           format: enum
           type: string
         message:
           type: string
         variable_error:
           $ref: '#/components/schemas/Manage_ReinstallResponse_Error_SoftwareVariableError'
+        insufficient_funds_error:
+          $ref: '#/components/schemas/Manage_ReinstallResponse_Error_InsufficientFundsError'
+      type: object
+    Manage_ReinstallResponse_Error_InsufficientFundsError:
+      example:
+        needed_balance: 1.4658129805029452
+        current_balance: 6.027456183070403
+        charge_on_add: true
+      properties:
+        current_balance:
+          format: double
+          type: number
+        needed_balance:
+          format: double
+          type: number
+        charge_on_add:
+          type: boolean
       type: object
     Manage_ReinstallResponse_Error_SoftwareVariableError:
       example:
@@ -4530,13 +5375,43 @@ components:
               icon: icon
               logo: logo
               logo2x: logo2x
-              weight: 9.301444
+              weight: 3.6160767
               secondary_color: secondary_color
               icon2x: icon2x
               primary_color: primary_color
               is_pinned: true
             address: address
             description_en: description_en
+            description: description
+            display_name: display_name
+            version: version
+            license:
+            - additional_info: additional_info
+              additional_info_en: additional_info_en
+              id: 2
+              type: type
+              display_name: display_name
+              plan: plan
+              primary: true
+              billing:
+                daily:
+                  price_month: 7
+                  price_day: 4.145608029883936
+                monthly:
+                  price_month: 1
+            - additional_info: additional_info
+              additional_info_en: additional_info_en
+              id: 2
+              type: type
+              display_name: display_name
+              plan: plan
+              primary: true
+              billing:
+                daily:
+                  price_month: 7
+                  price_day: 4.145608029883936
+                monthly:
+                  price_month: 1
             name: name
             field_value:
             - label_ru: label_ru
@@ -4549,8 +5424,6 @@ components:
               label_en: label_en
               type: UNKNOWN
               value: value
-            description: description
-            display_name: display_name
             category:
             - is_main: true
               icon_svg: icon_svg
@@ -4563,18 +5436,19 @@ components:
               sys_name: sys_name
               name_en: name_en
             post_install_alert: true
-            version: version
             slug: slug
             status: PENDING
           configuration:
             memory: 1
-            price_month: 5.637376656633329
-            price_day: 5.962133916683182
+            price_month: 2.3021358869347655
+            price_day: 5.637376656633329
+            bandwidth_public: 5
             custom: true
             name: name
             available: true
             disk_size: 6
             id: id
+            region: region
             configurable: true
             cpu_count: 0
           description: description
@@ -4603,10 +5477,10 @@ components:
           ssh_keys:
           - name: name
             fingerprint: fingerprint
-            id: 2
+            id: 7
           - name: name
             fingerprint: fingerprint
-            id: 2
+            id: 7
           private_network:
           - ip:
             - ip
@@ -4614,15 +5488,18 @@ components:
             network:
               subnet: subnet
               id: id
-              mask: 7
+              region: region
+              mask: 9
           - ip:
             - ip
             - ip
             network:
               subnet: subnet
               id: id
-              mask: 7
+              region: region
+              mask: 9
           date_create: date_create
+          region: region
           link_slug: link_slug
           status: UNKNOWN
         error:
@@ -4684,13 +5561,43 @@ components:
               icon: icon
               logo: logo
               logo2x: logo2x
-              weight: 9.301444
+              weight: 3.6160767
               secondary_color: secondary_color
               icon2x: icon2x
               primary_color: primary_color
               is_pinned: true
             address: address
             description_en: description_en
+            description: description
+            display_name: display_name
+            version: version
+            license:
+            - additional_info: additional_info
+              additional_info_en: additional_info_en
+              id: 2
+              type: type
+              display_name: display_name
+              plan: plan
+              primary: true
+              billing:
+                daily:
+                  price_month: 7
+                  price_day: 4.145608029883936
+                monthly:
+                  price_month: 1
+            - additional_info: additional_info
+              additional_info_en: additional_info_en
+              id: 2
+              type: type
+              display_name: display_name
+              plan: plan
+              primary: true
+              billing:
+                daily:
+                  price_month: 7
+                  price_day: 4.145608029883936
+                monthly:
+                  price_month: 1
             name: name
             field_value:
             - label_ru: label_ru
@@ -4703,8 +5610,6 @@ components:
               label_en: label_en
               type: UNKNOWN
               value: value
-            description: description
-            display_name: display_name
             category:
             - is_main: true
               icon_svg: icon_svg
@@ -4717,18 +5622,19 @@ components:
               sys_name: sys_name
               name_en: name_en
             post_install_alert: true
-            version: version
             slug: slug
             status: PENDING
           configuration:
             memory: 1
-            price_month: 5.637376656633329
-            price_day: 5.962133916683182
+            price_month: 2.3021358869347655
+            price_day: 5.637376656633329
+            bandwidth_public: 5
             custom: true
             name: name
             available: true
             disk_size: 6
             id: id
+            region: region
             configurable: true
             cpu_count: 0
           description: description
@@ -4757,10 +5663,10 @@ components:
           ssh_keys:
           - name: name
             fingerprint: fingerprint
-            id: 2
+            id: 7
           - name: name
             fingerprint: fingerprint
-            id: 2
+            id: 7
           private_network:
           - ip:
             - ip
@@ -4768,15 +5674,18 @@ components:
             network:
               subnet: subnet
               id: id
-              mask: 7
+              region: region
+              mask: 9
           - ip:
             - ip
             - ip
             network:
               subnet: subnet
               id: id
-              mask: 7
+              region: region
+              mask: 9
           date_create: date_create
+          region: region
           link_slug: link_slug
           status: UNKNOWN
         error:
@@ -4811,13 +5720,43 @@ components:
               icon: icon
               logo: logo
               logo2x: logo2x
-              weight: 9.301444
+              weight: 3.6160767
               secondary_color: secondary_color
               icon2x: icon2x
               primary_color: primary_color
               is_pinned: true
             address: address
             description_en: description_en
+            description: description
+            display_name: display_name
+            version: version
+            license:
+            - additional_info: additional_info
+              additional_info_en: additional_info_en
+              id: 2
+              type: type
+              display_name: display_name
+              plan: plan
+              primary: true
+              billing:
+                daily:
+                  price_month: 7
+                  price_day: 4.145608029883936
+                monthly:
+                  price_month: 1
+            - additional_info: additional_info
+              additional_info_en: additional_info_en
+              id: 2
+              type: type
+              display_name: display_name
+              plan: plan
+              primary: true
+              billing:
+                daily:
+                  price_month: 7
+                  price_day: 4.145608029883936
+                monthly:
+                  price_month: 1
             name: name
             field_value:
             - label_ru: label_ru
@@ -4830,8 +5769,6 @@ components:
               label_en: label_en
               type: UNKNOWN
               value: value
-            description: description
-            display_name: display_name
             category:
             - is_main: true
               icon_svg: icon_svg
@@ -4844,18 +5781,19 @@ components:
               sys_name: sys_name
               name_en: name_en
             post_install_alert: true
-            version: version
             slug: slug
             status: PENDING
           configuration:
             memory: 1
-            price_month: 5.637376656633329
-            price_day: 5.962133916683182
+            price_month: 2.3021358869347655
+            price_day: 5.637376656633329
+            bandwidth_public: 5
             custom: true
             name: name
             available: true
             disk_size: 6
             id: id
+            region: region
             configurable: true
             cpu_count: 0
           description: description
@@ -4884,10 +5822,10 @@ components:
           ssh_keys:
           - name: name
             fingerprint: fingerprint
-            id: 2
+            id: 7
           - name: name
             fingerprint: fingerprint
-            id: 2
+            id: 7
           private_network:
           - ip:
             - ip
@@ -4895,15 +5833,18 @@ components:
             network:
               subnet: subnet
               id: id
-              mask: 7
+              region: region
+              mask: 9
           - ip:
             - ip
             - ip
             network:
               subnet: subnet
               id: id
-              mask: 7
+              region: region
+              mask: 9
           date_create: date_create
+          region: region
           link_slug: link_slug
           status: UNKNOWN
         error:
@@ -4949,13 +5890,43 @@ components:
               icon: icon
               logo: logo
               logo2x: logo2x
-              weight: 9.301444
+              weight: 3.6160767
               secondary_color: secondary_color
               icon2x: icon2x
               primary_color: primary_color
               is_pinned: true
             address: address
             description_en: description_en
+            description: description
+            display_name: display_name
+            version: version
+            license:
+            - additional_info: additional_info
+              additional_info_en: additional_info_en
+              id: 2
+              type: type
+              display_name: display_name
+              plan: plan
+              primary: true
+              billing:
+                daily:
+                  price_month: 7
+                  price_day: 4.145608029883936
+                monthly:
+                  price_month: 1
+            - additional_info: additional_info
+              additional_info_en: additional_info_en
+              id: 2
+              type: type
+              display_name: display_name
+              plan: plan
+              primary: true
+              billing:
+                daily:
+                  price_month: 7
+                  price_day: 4.145608029883936
+                monthly:
+                  price_month: 1
             name: name
             field_value:
             - label_ru: label_ru
@@ -4968,8 +5939,6 @@ components:
               label_en: label_en
               type: UNKNOWN
               value: value
-            description: description
-            display_name: display_name
             category:
             - is_main: true
               icon_svg: icon_svg
@@ -4982,18 +5951,19 @@ components:
               sys_name: sys_name
               name_en: name_en
             post_install_alert: true
-            version: version
             slug: slug
             status: PENDING
           configuration:
             memory: 1
-            price_month: 5.637376656633329
-            price_day: 5.962133916683182
+            price_month: 2.3021358869347655
+            price_day: 5.637376656633329
+            bandwidth_public: 5
             custom: true
             name: name
             available: true
             disk_size: 6
             id: id
+            region: region
             configurable: true
             cpu_count: 0
           description: description
@@ -5022,10 +5992,10 @@ components:
           ssh_keys:
           - name: name
             fingerprint: fingerprint
-            id: 2
+            id: 7
           - name: name
             fingerprint: fingerprint
-            id: 2
+            id: 7
           private_network:
           - ip:
             - ip
@@ -5033,15 +6003,18 @@ components:
             network:
               subnet: subnet
               id: id
-              mask: 7
+              region: region
+              mask: 9
           - ip:
             - ip
             - ip
             network:
               subnet: subnet
               id: id
-              mask: 7
+              region: region
+              mask: 9
           date_create: date_create
+          region: region
           link_slug: link_slug
           status: UNKNOWN
         error:
@@ -5077,13 +6050,43 @@ components:
               icon: icon
               logo: logo
               logo2x: logo2x
-              weight: 9.301444
+              weight: 3.6160767
               secondary_color: secondary_color
               icon2x: icon2x
               primary_color: primary_color
               is_pinned: true
             address: address
             description_en: description_en
+            description: description
+            display_name: display_name
+            version: version
+            license:
+            - additional_info: additional_info
+              additional_info_en: additional_info_en
+              id: 2
+              type: type
+              display_name: display_name
+              plan: plan
+              primary: true
+              billing:
+                daily:
+                  price_month: 7
+                  price_day: 4.145608029883936
+                monthly:
+                  price_month: 1
+            - additional_info: additional_info
+              additional_info_en: additional_info_en
+              id: 2
+              type: type
+              display_name: display_name
+              plan: plan
+              primary: true
+              billing:
+                daily:
+                  price_month: 7
+                  price_day: 4.145608029883936
+                monthly:
+                  price_month: 1
             name: name
             field_value:
             - label_ru: label_ru
@@ -5096,8 +6099,6 @@ components:
               label_en: label_en
               type: UNKNOWN
               value: value
-            description: description
-            display_name: display_name
             category:
             - is_main: true
               icon_svg: icon_svg
@@ -5110,18 +6111,19 @@ components:
               sys_name: sys_name
               name_en: name_en
             post_install_alert: true
-            version: version
             slug: slug
             status: PENDING
           configuration:
             memory: 1
-            price_month: 5.637376656633329
-            price_day: 5.962133916683182
+            price_month: 2.3021358869347655
+            price_day: 5.637376656633329
+            bandwidth_public: 5
             custom: true
             name: name
             available: true
             disk_size: 6
             id: id
+            region: region
             configurable: true
             cpu_count: 0
           description: description
@@ -5150,10 +6152,10 @@ components:
           ssh_keys:
           - name: name
             fingerprint: fingerprint
-            id: 2
+            id: 7
           - name: name
             fingerprint: fingerprint
-            id: 2
+            id: 7
           private_network:
           - ip:
             - ip
@@ -5161,15 +6163,18 @@ components:
             network:
               subnet: subnet
               id: id
-              mask: 7
+              region: region
+              mask: 9
           - ip:
             - ip
             - ip
             network:
               subnet: subnet
               id: id
-              mask: 7
+              region: region
+              mask: 9
           date_create: date_create
+          region: region
           link_slug: link_slug
           status: UNKNOWN
         error:
@@ -5205,13 +6210,43 @@ components:
               icon: icon
               logo: logo
               logo2x: logo2x
-              weight: 9.301444
+              weight: 3.6160767
               secondary_color: secondary_color
               icon2x: icon2x
               primary_color: primary_color
               is_pinned: true
             address: address
             description_en: description_en
+            description: description
+            display_name: display_name
+            version: version
+            license:
+            - additional_info: additional_info
+              additional_info_en: additional_info_en
+              id: 2
+              type: type
+              display_name: display_name
+              plan: plan
+              primary: true
+              billing:
+                daily:
+                  price_month: 7
+                  price_day: 4.145608029883936
+                monthly:
+                  price_month: 1
+            - additional_info: additional_info
+              additional_info_en: additional_info_en
+              id: 2
+              type: type
+              display_name: display_name
+              plan: plan
+              primary: true
+              billing:
+                daily:
+                  price_month: 7
+                  price_day: 4.145608029883936
+                monthly:
+                  price_month: 1
             name: name
             field_value:
             - label_ru: label_ru
@@ -5224,8 +6259,6 @@ components:
               label_en: label_en
               type: UNKNOWN
               value: value
-            description: description
-            display_name: display_name
             category:
             - is_main: true
               icon_svg: icon_svg
@@ -5238,18 +6271,19 @@ components:
               sys_name: sys_name
               name_en: name_en
             post_install_alert: true
-            version: version
             slug: slug
             status: PENDING
           configuration:
             memory: 1
-            price_month: 5.637376656633329
-            price_day: 5.962133916683182
+            price_month: 2.3021358869347655
+            price_day: 5.637376656633329
+            bandwidth_public: 5
             custom: true
             name: name
             available: true
             disk_size: 6
             id: id
+            region: region
             configurable: true
             cpu_count: 0
           description: description
@@ -5278,10 +6312,10 @@ components:
           ssh_keys:
           - name: name
             fingerprint: fingerprint
-            id: 2
+            id: 7
           - name: name
             fingerprint: fingerprint
-            id: 2
+            id: 7
           private_network:
           - ip:
             - ip
@@ -5289,15 +6323,18 @@ components:
             network:
               subnet: subnet
               id: id
-              mask: 7
+              region: region
+              mask: 9
           - ip:
             - ip
             - ip
             network:
               subnet: subnet
               id: id
-              mask: 7
+              region: region
+              mask: 9
           date_create: date_create
+          region: region
           link_slug: link_slug
           status: UNKNOWN
         error:
@@ -5333,13 +6370,43 @@ components:
               icon: icon
               logo: logo
               logo2x: logo2x
-              weight: 9.301444
+              weight: 3.6160767
               secondary_color: secondary_color
               icon2x: icon2x
               primary_color: primary_color
               is_pinned: true
             address: address
             description_en: description_en
+            description: description
+            display_name: display_name
+            version: version
+            license:
+            - additional_info: additional_info
+              additional_info_en: additional_info_en
+              id: 2
+              type: type
+              display_name: display_name
+              plan: plan
+              primary: true
+              billing:
+                daily:
+                  price_month: 7
+                  price_day: 4.145608029883936
+                monthly:
+                  price_month: 1
+            - additional_info: additional_info
+              additional_info_en: additional_info_en
+              id: 2
+              type: type
+              display_name: display_name
+              plan: plan
+              primary: true
+              billing:
+                daily:
+                  price_month: 7
+                  price_day: 4.145608029883936
+                monthly:
+                  price_month: 1
             name: name
             field_value:
             - label_ru: label_ru
@@ -5352,8 +6419,6 @@ components:
               label_en: label_en
               type: UNKNOWN
               value: value
-            description: description
-            display_name: display_name
             category:
             - is_main: true
               icon_svg: icon_svg
@@ -5366,18 +6431,19 @@ components:
               sys_name: sys_name
               name_en: name_en
             post_install_alert: true
-            version: version
             slug: slug
             status: PENDING
           configuration:
             memory: 1
-            price_month: 5.637376656633329
-            price_day: 5.962133916683182
+            price_month: 2.3021358869347655
+            price_day: 5.637376656633329
+            bandwidth_public: 5
             custom: true
             name: name
             available: true
             disk_size: 6
             id: id
+            region: region
             configurable: true
             cpu_count: 0
           description: description
@@ -5406,10 +6472,10 @@ components:
           ssh_keys:
           - name: name
             fingerprint: fingerprint
-            id: 2
+            id: 7
           - name: name
             fingerprint: fingerprint
-            id: 2
+            id: 7
           private_network:
           - ip:
             - ip
@@ -5417,15 +6483,18 @@ components:
             network:
               subnet: subnet
               id: id
-              mask: 7
+              region: region
+              mask: 9
           - ip:
             - ip
             - ip
             network:
               subnet: subnet
               id: id
-              mask: 7
+              region: region
+              mask: 9
           date_create: date_create
+          region: region
           link_slug: link_slug
           status: UNKNOWN
         error:
@@ -5461,13 +6530,43 @@ components:
               icon: icon
               logo: logo
               logo2x: logo2x
-              weight: 9.301444
+              weight: 3.6160767
               secondary_color: secondary_color
               icon2x: icon2x
               primary_color: primary_color
               is_pinned: true
             address: address
             description_en: description_en
+            description: description
+            display_name: display_name
+            version: version
+            license:
+            - additional_info: additional_info
+              additional_info_en: additional_info_en
+              id: 2
+              type: type
+              display_name: display_name
+              plan: plan
+              primary: true
+              billing:
+                daily:
+                  price_month: 7
+                  price_day: 4.145608029883936
+                monthly:
+                  price_month: 1
+            - additional_info: additional_info
+              additional_info_en: additional_info_en
+              id: 2
+              type: type
+              display_name: display_name
+              plan: plan
+              primary: true
+              billing:
+                daily:
+                  price_month: 7
+                  price_day: 4.145608029883936
+                monthly:
+                  price_month: 1
             name: name
             field_value:
             - label_ru: label_ru
@@ -5480,8 +6579,6 @@ components:
               label_en: label_en
               type: UNKNOWN
               value: value
-            description: description
-            display_name: display_name
             category:
             - is_main: true
               icon_svg: icon_svg
@@ -5494,18 +6591,19 @@ components:
               sys_name: sys_name
               name_en: name_en
             post_install_alert: true
-            version: version
             slug: slug
             status: PENDING
           configuration:
             memory: 1
-            price_month: 5.637376656633329
-            price_day: 5.962133916683182
+            price_month: 2.3021358869347655
+            price_day: 5.637376656633329
+            bandwidth_public: 5
             custom: true
             name: name
             available: true
             disk_size: 6
             id: id
+            region: region
             configurable: true
             cpu_count: 0
           description: description
@@ -5534,10 +6632,10 @@ components:
           ssh_keys:
           - name: name
             fingerprint: fingerprint
-            id: 2
+            id: 7
           - name: name
             fingerprint: fingerprint
-            id: 2
+            id: 7
           private_network:
           - ip:
             - ip
@@ -5545,15 +6643,18 @@ components:
             network:
               subnet: subnet
               id: id
-              mask: 7
+              region: region
+              mask: 9
           - ip:
             - ip
             - ip
             network:
               subnet: subnet
               id: id
-              mask: 7
+              region: region
+              mask: 9
           date_create: date_create
+          region: region
           link_slug: link_slug
           status: UNKNOWN
       properties:
@@ -5580,13 +6681,43 @@ components:
               icon: icon
               logo: logo
               logo2x: logo2x
-              weight: 9.301444
+              weight: 3.6160767
               secondary_color: secondary_color
               icon2x: icon2x
               primary_color: primary_color
               is_pinned: true
             address: address
             description_en: description_en
+            description: description
+            display_name: display_name
+            version: version
+            license:
+            - additional_info: additional_info
+              additional_info_en: additional_info_en
+              id: 2
+              type: type
+              display_name: display_name
+              plan: plan
+              primary: true
+              billing:
+                daily:
+                  price_month: 7
+                  price_day: 4.145608029883936
+                monthly:
+                  price_month: 1
+            - additional_info: additional_info
+              additional_info_en: additional_info_en
+              id: 2
+              type: type
+              display_name: display_name
+              plan: plan
+              primary: true
+              billing:
+                daily:
+                  price_month: 7
+                  price_day: 4.145608029883936
+                monthly:
+                  price_month: 1
             name: name
             field_value:
             - label_ru: label_ru
@@ -5599,8 +6730,6 @@ components:
               label_en: label_en
               type: UNKNOWN
               value: value
-            description: description
-            display_name: display_name
             category:
             - is_main: true
               icon_svg: icon_svg
@@ -5613,18 +6742,19 @@ components:
               sys_name: sys_name
               name_en: name_en
             post_install_alert: true
-            version: version
             slug: slug
             status: PENDING
           configuration:
             memory: 1
-            price_month: 5.637376656633329
-            price_day: 5.962133916683182
+            price_month: 2.3021358869347655
+            price_day: 5.637376656633329
+            bandwidth_public: 5
             custom: true
             name: name
             available: true
             disk_size: 6
             id: id
+            region: region
             configurable: true
             cpu_count: 0
           description: description
@@ -5653,10 +6783,10 @@ components:
           ssh_keys:
           - name: name
             fingerprint: fingerprint
-            id: 2
+            id: 7
           - name: name
             fingerprint: fingerprint
-            id: 2
+            id: 7
           private_network:
           - ip:
             - ip
@@ -5664,15 +6794,18 @@ components:
             network:
               subnet: subnet
               id: id
-              mask: 7
+              region: region
+              mask: 9
           - ip:
             - ip
             - ip
             network:
               subnet: subnet
               id: id
-              mask: 7
+              region: region
+              mask: 9
           date_create: date_create
+          region: region
           link_slug: link_slug
           status: UNKNOWN
         error:
@@ -5703,13 +6836,15 @@ components:
     Manage_VpsConfiguration:
       example:
         memory: 1
-        price_month: 5.637376656633329
-        price_day: 5.962133916683182
+        price_month: 2.3021358869347655
+        price_day: 5.637376656633329
+        bandwidth_public: 5
         custom: true
         name: name
         available: true
         disk_size: 6
         id: id
+        region: region
         configurable: true
         cpu_count: 0
       properties:
@@ -5726,6 +6861,9 @@ components:
         memory:
           format: uint32
           type: integer
+        bandwidth_public:
+          format: uint32
+          type: integer
         price_day:
           format: double
           type: number
@@ -5738,6 +6876,8 @@ components:
           type: boolean
         configurable:
           type: boolean
+        region:
+          type: string
       type: object
     Manage_VpsInfo:
       example:
@@ -5747,13 +6887,43 @@ components:
             icon: icon
             logo: logo
             logo2x: logo2x
-            weight: 9.301444
+            weight: 3.6160767
             secondary_color: secondary_color
             icon2x: icon2x
             primary_color: primary_color
             is_pinned: true
           address: address
           description_en: description_en
+          description: description
+          display_name: display_name
+          version: version
+          license:
+          - additional_info: additional_info
+            additional_info_en: additional_info_en
+            id: 2
+            type: type
+            display_name: display_name
+            plan: plan
+            primary: true
+            billing:
+              daily:
+                price_month: 7
+                price_day: 4.145608029883936
+              monthly:
+                price_month: 1
+          - additional_info: additional_info
+            additional_info_en: additional_info_en
+            id: 2
+            type: type
+            display_name: display_name
+            plan: plan
+            primary: true
+            billing:
+              daily:
+                price_month: 7
+                price_day: 4.145608029883936
+              monthly:
+                price_month: 1
           name: name
           field_value:
           - label_ru: label_ru
@@ -5766,8 +6936,6 @@ components:
             label_en: label_en
             type: UNKNOWN
             value: value
-          description: description
-          display_name: display_name
           category:
           - is_main: true
             icon_svg: icon_svg
@@ -5780,18 +6948,19 @@ components:
             sys_name: sys_name
             name_en: name_en
           post_install_alert: true
-          version: version
           slug: slug
           status: PENDING
         configuration:
           memory: 1
-          price_month: 5.637376656633329
-          price_day: 5.962133916683182
+          price_month: 2.3021358869347655
+          price_day: 5.637376656633329
+          bandwidth_public: 5
           custom: true
           name: name
           available: true
           disk_size: 6
           id: id
+          region: region
           configurable: true
           cpu_count: 0
         description: description
@@ -5820,10 +6989,10 @@ components:
         ssh_keys:
         - name: name
           fingerprint: fingerprint
-          id: 2
+          id: 7
         - name: name
           fingerprint: fingerprint
-          id: 2
+          id: 7
         private_network:
         - ip:
           - ip
@@ -5831,15 +7000,18 @@ components:
           network:
             subnet: subnet
             id: id
-            mask: 7
+            region: region
+            mask: 9
         - ip:
           - ip
           - ip
           network:
             subnet: subnet
             id: id
-            mask: 7
+            region: region
+            mask: 9
         date_create: date_create
+        region: region
         link_slug: link_slug
         status: UNKNOWN
       properties:
@@ -5917,6 +7089,8 @@ components:
         software:
           $ref: '#/components/schemas/Structures_InstalledSoftwareInfo'
         link_slug:
+          type: string
+        region:
           type: string
       type: object
     Marketplace_DomainField:
@@ -6071,15 +7245,15 @@ components:
         email_field:
           $ref: '#/components/schemas/Marketplace_EmailField'
       type: object
-    Marketplace_GetSoftwareListResponse:
+    Marketplace_GetSoftwareInfoResponse:
       example:
         software:
-        - metadata:
+          metadata:
             is_new: true
             icon: icon
             logo: logo
             logo2x: logo2x
-            weight: 9.301444
+            weight: 3.6160767
             secondary_color: secondary_color
             icon2x: icon2x
             primary_color: primary_color
@@ -6094,6 +7268,220 @@ components:
           description: description
           display_name: display_name
           version: version
+          license:
+          - additional_info: additional_info
+            additional_info_en: additional_info_en
+            id: 5
+            type: type
+            display_name: display_name
+            plan: plan
+            primary: true
+            billing:
+              daily:
+                price_month: 7
+                price_day: 4.145608029883936
+              monthly:
+                price_month: 1
+          - additional_info: additional_info
+            additional_info_en: additional_info_en
+            id: 5
+            type: type
+            display_name: display_name
+            plan: plan
+            primary: true
+            billing:
+              daily:
+                price_month: 7
+                price_day: 4.145608029883936
+              monthly:
+                price_month: 1
+          field_data:
+          - password_field:
+              auto_generated: true
+              common:
+                validation_error_text_en: validation_error_text_en
+                validation_regex: validation_regex
+                is_required: true
+                is_additional: true
+                description_en: description_en
+                variable: variable
+                description: description
+                is_custom: true
+                default_value: default_value
+                label: label
+                label_en: label_en
+                validation_error_text: validation_error_text
+            email_field:
+              common:
+                validation_error_text_en: validation_error_text_en
+                validation_regex: validation_regex
+                is_required: true
+                is_additional: true
+                description_en: description_en
+                variable: variable
+                description: description
+                is_custom: true
+                default_value: default_value
+                label: label
+                label_en: label_en
+                validation_error_text: validation_error_text
+            text_field:
+              common:
+                validation_error_text_en: validation_error_text_en
+                validation_regex: validation_regex
+                is_required: true
+                is_additional: true
+                description_en: description_en
+                variable: variable
+                description: description
+                is_custom: true
+                default_value: default_value
+                label: label
+                label_en: label_en
+                validation_error_text: validation_error_text
+              is_editable: true
+            domain_field:
+              allow_tech_domain: true
+              common:
+                validation_error_text_en: validation_error_text_en
+                validation_regex: validation_regex
+                is_required: true
+                is_additional: true
+                description_en: description_en
+                variable: variable
+                description: description
+                is_custom: true
+                default_value: default_value
+                label: label
+                label_en: label_en
+                validation_error_text: validation_error_text
+          - password_field:
+              auto_generated: true
+              common:
+                validation_error_text_en: validation_error_text_en
+                validation_regex: validation_regex
+                is_required: true
+                is_additional: true
+                description_en: description_en
+                variable: variable
+                description: description
+                is_custom: true
+                default_value: default_value
+                label: label
+                label_en: label_en
+                validation_error_text: validation_error_text
+            email_field:
+              common:
+                validation_error_text_en: validation_error_text_en
+                validation_regex: validation_regex
+                is_required: true
+                is_additional: true
+                description_en: description_en
+                variable: variable
+                description: description
+                is_custom: true
+                default_value: default_value
+                label: label
+                label_en: label_en
+                validation_error_text: validation_error_text
+            text_field:
+              common:
+                validation_error_text_en: validation_error_text_en
+                validation_regex: validation_regex
+                is_required: true
+                is_additional: true
+                description_en: description_en
+                variable: variable
+                description: description
+                is_custom: true
+                default_value: default_value
+                label: label
+                label_en: label_en
+                validation_error_text: validation_error_text
+              is_editable: true
+            domain_field:
+              allow_tech_domain: true
+              common:
+                validation_error_text_en: validation_error_text_en
+                validation_regex: validation_regex
+                is_required: true
+                is_additional: true
+                description_en: description_en
+                variable: variable
+                description: description
+                is_custom: true
+                default_value: default_value
+                label: label
+                label_en: label_en
+                validation_error_text: validation_error_text
+          name: name
+          id: 0
+          category:
+          - is_main: true
+            icon_svg: icon_svg
+            name: name
+            sys_name: sys_name
+            name_en: name_en
+          - is_main: true
+            icon_svg: icon_svg
+            name: name
+            sys_name: sys_name
+            name_en: name_en
+          slug: slug
+      properties:
+        software:
+          $ref: '#/components/schemas/Marketplace_SoftwareInfo'
+      type: object
+    Marketplace_GetSoftwareListResponse:
+      example:
+        software:
+        - metadata:
+            is_new: true
+            icon: icon
+            logo: logo
+            logo2x: logo2x
+            weight: 3.6160767
+            secondary_color: secondary_color
+            icon2x: icon2x
+            primary_color: primary_color
+            is_pinned: true
+          requirements:
+            memory: 5
+            disk_size: 1
+            cpu_count: 6
+          documentation_slug: documentation_slug
+          unattended_install_available: true
+          description_en: description_en
+          description: description
+          display_name: display_name
+          version: version
+          license:
+          - additional_info: additional_info
+            additional_info_en: additional_info_en
+            id: 5
+            type: type
+            display_name: display_name
+            plan: plan
+            primary: true
+            billing:
+              daily:
+                price_month: 7
+                price_day: 4.145608029883936
+              monthly:
+                price_month: 1
+          - additional_info: additional_info
+            additional_info_en: additional_info_en
+            id: 5
+            type: type
+            display_name: display_name
+            plan: plan
+            primary: true
+            billing:
+              daily:
+                price_month: 7
+                price_day: 4.145608029883936
+              monthly:
+                price_month: 1
           field_data:
           - password_field:
               auto_generated: true
@@ -6232,7 +7620,7 @@ components:
             icon: icon
             logo: logo
             logo2x: logo2x
-            weight: 9.301444
+            weight: 3.6160767
             secondary_color: secondary_color
             icon2x: icon2x
             primary_color: primary_color
@@ -6247,6 +7635,33 @@ components:
           description: description
           display_name: display_name
           version: version
+          license:
+          - additional_info: additional_info
+            additional_info_en: additional_info_en
+            id: 5
+            type: type
+            display_name: display_name
+            plan: plan
+            primary: true
+            billing:
+              daily:
+                price_month: 7
+                price_day: 4.145608029883936
+              monthly:
+                price_month: 1
+          - additional_info: additional_info
+            additional_info_en: additional_info_en
+            id: 5
+            type: type
+            display_name: display_name
+            plan: plan
+            primary: true
+            billing:
+              daily:
+                price_month: 7
+                price_day: 4.145608029883936
+              monthly:
+                price_month: 1
           field_data:
           - password_field:
               auto_generated: true
@@ -6383,17 +7798,39 @@ components:
       properties:
         software:
           items:
-            $ref: '#/components/schemas/Marketplace_GetSoftwareListResponse_SoftwareInfo'
+            $ref: '#/components/schemas/Marketplace_SoftwareInfo'
           type: array
       type: object
-    Marketplace_GetSoftwareListResponse_SoftwareInfo:
+    Marketplace_PasswordField:
+      example:
+        auto_generated: true
+        common:
+          validation_error_text_en: validation_error_text_en
+          validation_regex: validation_regex
+          is_required: true
+          is_additional: true
+          description_en: description_en
+          variable: variable
+          description: description
+          is_custom: true
+          default_value: default_value
+          label: label
+          label_en: label_en
+          validation_error_text: validation_error_text
+      properties:
+        common:
+          $ref: '#/components/schemas/Marketplace_FieldCommon'
+        auto_generated:
+          type: boolean
+      type: object
+    Marketplace_SoftwareInfo:
       example:
         metadata:
           is_new: true
           icon: icon
           logo: logo
           logo2x: logo2x
-          weight: 9.301444
+          weight: 3.6160767
           secondary_color: secondary_color
           icon2x: icon2x
           primary_color: primary_color
@@ -6408,6 +7845,33 @@ components:
         description: description
         display_name: display_name
         version: version
+        license:
+        - additional_info: additional_info
+          additional_info_en: additional_info_en
+          id: 5
+          type: type
+          display_name: display_name
+          plan: plan
+          primary: true
+          billing:
+            daily:
+              price_month: 7
+              price_day: 4.145608029883936
+            monthly:
+              price_month: 1
+        - additional_info: additional_info
+          additional_info_en: additional_info_en
+          id: 5
+          type: type
+          display_name: display_name
+          plan: plan
+          primary: true
+          billing:
+            daily:
+              price_month: 7
+              price_day: 4.145608029883936
+            monthly:
+              price_month: 1
         field_data:
         - password_field:
             auto_generated: true
@@ -6562,7 +8026,7 @@ components:
             $ref: '#/components/schemas/Marketplace_FieldDesc'
           type: array
         requirements:
-          $ref: '#/components/schemas/Marketplace_GetSoftwareListResponse_SoftwareInfo_Requirements'
+          $ref: '#/components/schemas/Marketplace_SoftwareInfo_Requirements'
         category:
           items:
             $ref: '#/components/schemas/Structures_SoftwareCategory'
@@ -6573,8 +8037,12 @@ components:
           type: string
         unattended_install_available:
           type: boolean
+        license:
+          items:
+            $ref: '#/components/schemas/Structures_SoftwareLicense'
+          type: array
       type: object
-    Marketplace_GetSoftwareListResponse_SoftwareInfo_Requirements:
+    Marketplace_SoftwareInfo_Requirements:
       example:
         memory: 5
         disk_size: 1
@@ -6589,28 +8057,6 @@ components:
         memory:
           format: uint32
           type: integer
-      type: object
-    Marketplace_PasswordField:
-      example:
-        auto_generated: true
-        common:
-          validation_error_text_en: validation_error_text_en
-          validation_regex: validation_regex
-          is_required: true
-          is_additional: true
-          description_en: description_en
-          variable: variable
-          description: description
-          is_custom: true
-          default_value: default_value
-          label: label
-          label_en: label_en
-          validation_error_text: validation_error_text
-      properties:
-        common:
-          $ref: '#/components/schemas/Marketplace_FieldCommon'
-        auto_generated:
-          type: boolean
       type: object
     Marketplace_TextField:
       example:
@@ -6634,6 +8080,11 @@ components:
         is_editable:
           type: boolean
       type: object
+    Network_CreatePrivateNetworkRequest:
+      properties:
+        region:
+          type: string
+      type: object
     Network_CreatePrivateNetworkResponse:
       example:
         error:
@@ -6642,7 +8093,8 @@ components:
         network:
           subnet: subnet
           id: id
-          mask: 7
+          region: region
+          mask: 9
       properties:
         network:
           $ref: '#/components/schemas/Structures_PrivateNetwork'
@@ -6668,15 +8120,19 @@ components:
         additional_ip:
         - ip: ip
           vps_id: vps_id
+          region: region
         - ip: ip
           vps_id: vps_id
+          region: region
         private_network:
         - subnet: subnet
           id: id
-          mask: 7
+          region: region
+          mask: 9
         - subnet: subnet
           id: id
-          mask: 7
+          region: region
+          mask: 9
         ip:
         - ip: ip
           vps_id: vps_id
@@ -6705,6 +8161,13 @@ components:
       type: object
     Network_OrderIpAddressResponse:
       example:
+        additional_ip:
+          ip: ip
+          vps_id: vps_id
+          region: region
+        error_v2:
+          code: INTERNAL_ERROR
+          message: message
         ip_address: ip_address
         error:
           code: INTERNAL_ERROR
@@ -6713,6 +8176,10 @@ components:
         ip_address:
           type: string
         error:
+          $ref: '#/components/schemas/Network_OrderIpAddressResponse_Error'
+        additional_ip:
+          $ref: '#/components/schemas/Structures_AdditionalIpInfo'
+        error_v2:
           $ref: '#/components/schemas/Network_OrderIpAddressResponse_Error'
       type: object
     Network_OrderIpAddressResponse_Error:
@@ -6821,13 +8288,43 @@ components:
               icon: icon
               logo: logo
               logo2x: logo2x
-              weight: 9.301444
+              weight: 3.6160767
               secondary_color: secondary_color
               icon2x: icon2x
               primary_color: primary_color
               is_pinned: true
             address: address
             description_en: description_en
+            description: description
+            display_name: display_name
+            version: version
+            license:
+            - additional_info: additional_info
+              additional_info_en: additional_info_en
+              id: 2
+              type: type
+              display_name: display_name
+              plan: plan
+              primary: true
+              billing:
+                daily:
+                  price_month: 7
+                  price_day: 4.145608029883936
+                monthly:
+                  price_month: 1
+            - additional_info: additional_info
+              additional_info_en: additional_info_en
+              id: 2
+              type: type
+              display_name: display_name
+              plan: plan
+              primary: true
+              billing:
+                daily:
+                  price_month: 7
+                  price_day: 4.145608029883936
+                monthly:
+                  price_month: 1
             name: name
             field_value:
             - label_ru: label_ru
@@ -6840,8 +8337,6 @@ components:
               label_en: label_en
               type: UNKNOWN
               value: value
-            description: description
-            display_name: display_name
             category:
             - is_main: true
               icon_svg: icon_svg
@@ -6854,12 +8349,12 @@ components:
               sys_name: sys_name
               name_en: name_en
             post_install_alert: true
-            version: version
             slug: slug
             status: PENDING
           description: description
           vps_id: vps_id
           id: id
+          region: region
           status: CREATING
       properties:
         snapshot:
@@ -6907,13 +8402,43 @@ components:
               icon: icon
               logo: logo
               logo2x: logo2x
-              weight: 9.301444
+              weight: 3.6160767
               secondary_color: secondary_color
               icon2x: icon2x
               primary_color: primary_color
               is_pinned: true
             address: address
             description_en: description_en
+            description: description
+            display_name: display_name
+            version: version
+            license:
+            - additional_info: additional_info
+              additional_info_en: additional_info_en
+              id: 2
+              type: type
+              display_name: display_name
+              plan: plan
+              primary: true
+              billing:
+                daily:
+                  price_month: 7
+                  price_day: 4.145608029883936
+                monthly:
+                  price_month: 1
+            - additional_info: additional_info
+              additional_info_en: additional_info_en
+              id: 2
+              type: type
+              display_name: display_name
+              plan: plan
+              primary: true
+              billing:
+                daily:
+                  price_month: 7
+                  price_day: 4.145608029883936
+                monthly:
+                  price_month: 1
             name: name
             field_value:
             - label_ru: label_ru
@@ -6926,8 +8451,6 @@ components:
               label_en: label_en
               type: UNKNOWN
               value: value
-            description: description
-            display_name: display_name
             category:
             - is_main: true
               icon_svg: icon_svg
@@ -6940,12 +8463,12 @@ components:
               sys_name: sys_name
               name_en: name_en
             post_install_alert: true
-            version: version
             slug: slug
             status: PENDING
           description: description
           vps_id: vps_id
           id: id
+          region: region
           status: CREATING
       properties:
         snapshot:
@@ -6968,13 +8491,43 @@ components:
               icon: icon
               logo: logo
               logo2x: logo2x
-              weight: 9.301444
+              weight: 3.6160767
               secondary_color: secondary_color
               icon2x: icon2x
               primary_color: primary_color
               is_pinned: true
             address: address
             description_en: description_en
+            description: description
+            display_name: display_name
+            version: version
+            license:
+            - additional_info: additional_info
+              additional_info_en: additional_info_en
+              id: 2
+              type: type
+              display_name: display_name
+              plan: plan
+              primary: true
+              billing:
+                daily:
+                  price_month: 7
+                  price_day: 4.145608029883936
+                monthly:
+                  price_month: 1
+            - additional_info: additional_info
+              additional_info_en: additional_info_en
+              id: 2
+              type: type
+              display_name: display_name
+              plan: plan
+              primary: true
+              billing:
+                daily:
+                  price_month: 7
+                  price_day: 4.145608029883936
+                monthly:
+                  price_month: 1
             name: name
             field_value:
             - label_ru: label_ru
@@ -6987,8 +8540,6 @@ components:
               label_en: label_en
               type: UNKNOWN
               value: value
-            description: description
-            display_name: display_name
             category:
             - is_main: true
               icon_svg: icon_svg
@@ -7001,12 +8552,12 @@ components:
               sys_name: sys_name
               name_en: name_en
             post_install_alert: true
-            version: version
             slug: slug
             status: PENDING
           description: description
           vps_id: vps_id
           id: id
+          region: region
           status: CREATING
         - vps_name: vps_name
           size: size
@@ -7022,13 +8573,43 @@ components:
               icon: icon
               logo: logo
               logo2x: logo2x
-              weight: 9.301444
+              weight: 3.6160767
               secondary_color: secondary_color
               icon2x: icon2x
               primary_color: primary_color
               is_pinned: true
             address: address
             description_en: description_en
+            description: description
+            display_name: display_name
+            version: version
+            license:
+            - additional_info: additional_info
+              additional_info_en: additional_info_en
+              id: 2
+              type: type
+              display_name: display_name
+              plan: plan
+              primary: true
+              billing:
+                daily:
+                  price_month: 7
+                  price_day: 4.145608029883936
+                monthly:
+                  price_month: 1
+            - additional_info: additional_info
+              additional_info_en: additional_info_en
+              id: 2
+              type: type
+              display_name: display_name
+              plan: plan
+              primary: true
+              billing:
+                daily:
+                  price_month: 7
+                  price_day: 4.145608029883936
+                monthly:
+                  price_month: 1
             name: name
             field_value:
             - label_ru: label_ru
@@ -7041,8 +8622,6 @@ components:
               label_en: label_en
               type: UNKNOWN
               value: value
-            description: description
-            display_name: display_name
             category:
             - is_main: true
               icon_svg: icon_svg
@@ -7055,12 +8634,12 @@ components:
               sys_name: sys_name
               name_en: name_en
             post_install_alert: true
-            version: version
             slug: slug
             status: PENDING
           description: description
           vps_id: vps_id
           id: id
+          region: region
           status: CREATING
       properties:
         snapshot:
@@ -7092,13 +8671,43 @@ components:
                 icon: icon
                 logo: logo
                 logo2x: logo2x
-                weight: 9.301444
+                weight: 3.6160767
                 secondary_color: secondary_color
                 icon2x: icon2x
                 primary_color: primary_color
                 is_pinned: true
               address: address
               description_en: description_en
+              description: description
+              display_name: display_name
+              version: version
+              license:
+              - additional_info: additional_info
+                additional_info_en: additional_info_en
+                id: 2
+                type: type
+                display_name: display_name
+                plan: plan
+                primary: true
+                billing:
+                  daily:
+                    price_month: 7
+                    price_day: 4.145608029883936
+                  monthly:
+                    price_month: 1
+              - additional_info: additional_info
+                additional_info_en: additional_info_en
+                id: 2
+                type: type
+                display_name: display_name
+                plan: plan
+                primary: true
+                billing:
+                  daily:
+                    price_month: 7
+                    price_day: 4.145608029883936
+                  monthly:
+                    price_month: 1
               name: name
               field_value:
               - label_ru: label_ru
@@ -7111,8 +8720,6 @@ components:
                 label_en: label_en
                 type: UNKNOWN
                 value: value
-              description: description
-              display_name: display_name
               category:
               - is_main: true
                 icon_svg: icon_svg
@@ -7125,12 +8732,12 @@ components:
                 sys_name: sys_name
                 name_en: name_en
               post_install_alert: true
-              version: version
               slug: slug
               status: PENDING
             description: description
             vps_id: vps_id
             id: id
+            region: region
             status: CREATING
           status: PROCESSING
         - vps_name: vps_name
@@ -7154,13 +8761,43 @@ components:
                 icon: icon
                 logo: logo
                 logo2x: logo2x
-                weight: 9.301444
+                weight: 3.6160767
                 secondary_color: secondary_color
                 icon2x: icon2x
                 primary_color: primary_color
                 is_pinned: true
               address: address
               description_en: description_en
+              description: description
+              display_name: display_name
+              version: version
+              license:
+              - additional_info: additional_info
+                additional_info_en: additional_info_en
+                id: 2
+                type: type
+                display_name: display_name
+                plan: plan
+                primary: true
+                billing:
+                  daily:
+                    price_month: 7
+                    price_day: 4.145608029883936
+                  monthly:
+                    price_month: 1
+              - additional_info: additional_info
+                additional_info_en: additional_info_en
+                id: 2
+                type: type
+                display_name: display_name
+                plan: plan
+                primary: true
+                billing:
+                  daily:
+                    price_month: 7
+                    price_day: 4.145608029883936
+                  monthly:
+                    price_month: 1
               name: name
               field_value:
               - label_ru: label_ru
@@ -7173,8 +8810,6 @@ components:
                 label_en: label_en
                 type: UNKNOWN
                 value: value
-              description: description
-              display_name: display_name
               category:
               - is_main: true
                 icon_svg: icon_svg
@@ -7187,12 +8822,12 @@ components:
                 sys_name: sys_name
                 name_en: name_en
               post_install_alert: true
-              version: version
               slug: slug
               status: PENDING
             description: description
             vps_id: vps_id
             id: id
+            region: region
             status: CREATING
           status: PROCESSING
       properties:
@@ -7221,13 +8856,43 @@ components:
               icon: icon
               logo: logo
               logo2x: logo2x
-              weight: 9.301444
+              weight: 3.6160767
               secondary_color: secondary_color
               icon2x: icon2x
               primary_color: primary_color
               is_pinned: true
             address: address
             description_en: description_en
+            description: description
+            display_name: display_name
+            version: version
+            license:
+            - additional_info: additional_info
+              additional_info_en: additional_info_en
+              id: 2
+              type: type
+              display_name: display_name
+              plan: plan
+              primary: true
+              billing:
+                daily:
+                  price_month: 7
+                  price_day: 4.145608029883936
+                monthly:
+                  price_month: 1
+            - additional_info: additional_info
+              additional_info_en: additional_info_en
+              id: 2
+              type: type
+              display_name: display_name
+              plan: plan
+              primary: true
+              billing:
+                daily:
+                  price_month: 7
+                  price_day: 4.145608029883936
+                monthly:
+                  price_month: 1
             name: name
             field_value:
             - label_ru: label_ru
@@ -7240,8 +8905,6 @@ components:
               label_en: label_en
               type: UNKNOWN
               value: value
-            description: description
-            display_name: display_name
             category:
             - is_main: true
               icon_svg: icon_svg
@@ -7254,12 +8917,12 @@ components:
               sys_name: sys_name
               name_en: name_en
             post_install_alert: true
-            version: version
             slug: slug
             status: PENDING
           description: description
           vps_id: vps_id
           id: id
+          region: region
           status: CREATING
       properties:
         snapshot:
@@ -7321,13 +8984,43 @@ components:
               icon: icon
               logo: logo
               logo2x: logo2x
-              weight: 9.301444
+              weight: 3.6160767
               secondary_color: secondary_color
               icon2x: icon2x
               primary_color: primary_color
               is_pinned: true
             address: address
             description_en: description_en
+            description: description
+            display_name: display_name
+            version: version
+            license:
+            - additional_info: additional_info
+              additional_info_en: additional_info_en
+              id: 2
+              type: type
+              display_name: display_name
+              plan: plan
+              primary: true
+              billing:
+                daily:
+                  price_month: 7
+                  price_day: 4.145608029883936
+                monthly:
+                  price_month: 1
+            - additional_info: additional_info
+              additional_info_en: additional_info_en
+              id: 2
+              type: type
+              display_name: display_name
+              plan: plan
+              primary: true
+              billing:
+                daily:
+                  price_month: 7
+                  price_day: 4.145608029883936
+                monthly:
+                  price_month: 1
             name: name
             field_value:
             - label_ru: label_ru
@@ -7340,8 +9033,6 @@ components:
               label_en: label_en
               type: UNKNOWN
               value: value
-            description: description
-            display_name: display_name
             category:
             - is_main: true
               icon_svg: icon_svg
@@ -7354,12 +9045,12 @@ components:
               sys_name: sys_name
               name_en: name_en
             post_install_alert: true
-            version: version
             slug: slug
             status: PENDING
           description: description
           vps_id: vps_id
           id: id
+          region: region
           status: CREATING
         status: PROCESSING
       properties:
@@ -7419,13 +9110,43 @@ components:
                 icon: icon
                 logo: logo
                 logo2x: logo2x
-                weight: 9.301444
+                weight: 3.6160767
                 secondary_color: secondary_color
                 icon2x: icon2x
                 primary_color: primary_color
                 is_pinned: true
               address: address
               description_en: description_en
+              description: description
+              display_name: display_name
+              version: version
+              license:
+              - additional_info: additional_info
+                additional_info_en: additional_info_en
+                id: 2
+                type: type
+                display_name: display_name
+                plan: plan
+                primary: true
+                billing:
+                  daily:
+                    price_month: 7
+                    price_day: 4.145608029883936
+                  monthly:
+                    price_month: 1
+              - additional_info: additional_info
+                additional_info_en: additional_info_en
+                id: 2
+                type: type
+                display_name: display_name
+                plan: plan
+                primary: true
+                billing:
+                  daily:
+                    price_month: 7
+                    price_day: 4.145608029883936
+                  monthly:
+                    price_month: 1
               name: name
               field_value:
               - label_ru: label_ru
@@ -7438,8 +9159,6 @@ components:
                 label_en: label_en
                 type: UNKNOWN
                 value: value
-              description: description
-              display_name: display_name
               category:
               - is_main: true
                 icon_svg: icon_svg
@@ -7452,12 +9171,12 @@ components:
                 sys_name: sys_name
                 name_en: name_en
               post_install_alert: true
-              version: version
               slug: slug
               status: PENDING
             description: description
             vps_id: vps_id
             id: id
+            region: region
             status: CREATING
           status: PROCESSING
         error:
@@ -7482,6 +9201,7 @@ components:
           - SNAPSHOT_NOT_DONE
           - CONFIGURATION_NOT_ENOUGH
           - UNSUITABLE_VPS_STATUS
+          - REGION_MISMATCH
           format: enum
           type: string
       type: object
@@ -7501,13 +9221,43 @@ components:
             icon: icon
             logo: logo
             logo2x: logo2x
-            weight: 9.301444
+            weight: 3.6160767
             secondary_color: secondary_color
             icon2x: icon2x
             primary_color: primary_color
             is_pinned: true
           address: address
           description_en: description_en
+          description: description
+          display_name: display_name
+          version: version
+          license:
+          - additional_info: additional_info
+            additional_info_en: additional_info_en
+            id: 2
+            type: type
+            display_name: display_name
+            plan: plan
+            primary: true
+            billing:
+              daily:
+                price_month: 7
+                price_day: 4.145608029883936
+              monthly:
+                price_month: 1
+          - additional_info: additional_info
+            additional_info_en: additional_info_en
+            id: 2
+            type: type
+            display_name: display_name
+            plan: plan
+            primary: true
+            billing:
+              daily:
+                price_month: 7
+                price_day: 4.145608029883936
+              monthly:
+                price_month: 1
           name: name
           field_value:
           - label_ru: label_ru
@@ -7520,8 +9270,6 @@ components:
             label_en: label_en
             type: UNKNOWN
             value: value
-          description: description
-          display_name: display_name
           category:
           - is_main: true
             icon_svg: icon_svg
@@ -7534,12 +9282,12 @@ components:
             sys_name: sys_name
             name_en: name_en
           post_install_alert: true
-          version: version
           slug: slug
           status: PENDING
         description: description
         vps_id: vps_id
         id: id
+        region: region
         status: CREATING
       properties:
         id:
@@ -7567,8 +9315,106 @@ components:
         price_day:
           format: double
           type: number
+        region:
+          type: string
         installed_software:
           $ref: '#/components/schemas/Structures_InstalledSoftwareInfo'
+      type: object
+    SoftwareLicense_ChangeLicensePlanRequest:
+      properties:
+        vps_id:
+          type: string
+        license_id:
+          format: uint32
+          type: integer
+        new_license_id:
+          format: uint32
+          type: integer
+      type: object
+    SoftwareLicense_ChangeLicensePlanResponse:
+      example:
+        license:
+          additional_info: additional_info
+          additional_info_en: additional_info_en
+          id: 2
+          type: type
+          display_name: display_name
+          plan: plan
+          primary: true
+          billing:
+            daily:
+              price_month: 7
+              price_day: 4.145608029883936
+            monthly:
+              price_month: 1
+        error:
+          insufficient_funds_error:
+            needed_balance: 6.027456183070403
+            current_balance: 0.8008281904610115
+            charge_on_add: true
+          code: INTERNAL_ERROR
+          message: message
+      properties:
+        license:
+          $ref: '#/components/schemas/Structures_IssuedSoftwareLicense'
+        error:
+          $ref: '#/components/schemas/SoftwareLicense_ChangeLicensePlanResponse_Error'
+      type: object
+    SoftwareLicense_ChangeLicensePlanResponse_Error:
+      example:
+        insufficient_funds_error:
+          needed_balance: 6.027456183070403
+          current_balance: 0.8008281904610115
+          charge_on_add: true
+        code: INTERNAL_ERROR
+        message: message
+      properties:
+        code:
+          enum:
+          - INTERNAL_ERROR
+          - INSUFFICIENT_FUNDS
+          - SERVICE_DISABLED
+          format: enum
+          type: string
+        message:
+          type: string
+        insufficient_funds_error:
+          $ref: '#/components/schemas/SoftwareLicense_ChangeLicensePlanResponse_Error_InsufficientFundsError'
+      type: object
+    SoftwareLicense_ChangeLicensePlanResponse_Error_InsufficientFundsError:
+      example:
+        needed_balance: 6.027456183070403
+        current_balance: 0.8008281904610115
+        charge_on_add: true
+      properties:
+        current_balance:
+          format: double
+          type: number
+        needed_balance:
+          format: double
+          type: number
+        charge_on_add:
+          type: boolean
+      type: object
+    SoftwareLicense_GetLicenseInfoResponse:
+      example:
+        license:
+          additional_info: additional_info
+          additional_info_en: additional_info_en
+          id: 5
+          type: type
+          display_name: display_name
+          plan: plan
+          primary: true
+          billing:
+            daily:
+              price_month: 7
+              price_day: 4.145608029883936
+            monthly:
+              price_month: 1
+      properties:
+        license:
+          $ref: '#/components/schemas/Structures_SoftwareLicense'
       type: object
     SshKey_AddRequest:
       properties:
@@ -7585,7 +9431,7 @@ components:
         key:
           name: name
           fingerprint: fingerprint
-          id: 2
+          id: 7
       properties:
         key:
           $ref: '#/components/schemas/Structures_SshKeyInfo'
@@ -7613,10 +9459,10 @@ components:
         keys:
         - name: name
           fingerprint: fingerprint
-          id: 2
+          id: 7
         - name: name
           fingerprint: fingerprint
-          id: 2
+          id: 7
       properties:
         keys:
           items:
@@ -7631,7 +9477,7 @@ components:
         key:
           name: name
           fingerprint: fingerprint
-          id: 2
+          id: 7
       properties:
         key:
           $ref: '#/components/schemas/Structures_SshKeyInfo'
@@ -7993,10 +9839,13 @@ components:
       example:
         ip: ip
         vps_id: vps_id
+        region: region
       properties:
         ip:
           type: string
         vps_id:
+          type: string
+        region:
           type: string
       type: object
     Structures_AttachedPrivateNetwork:
@@ -8007,7 +9856,8 @@ components:
         network:
           subnet: subnet
           id: id
-          mask: 7
+          region: region
+          mask: 9
       properties:
         network:
           $ref: '#/components/schemas/Structures_PrivateNetwork'
@@ -8047,13 +9897,43 @@ components:
             icon: icon
             logo: logo
             logo2x: logo2x
-            weight: 9.301444
+            weight: 3.6160767
             secondary_color: secondary_color
             icon2x: icon2x
             primary_color: primary_color
             is_pinned: true
           address: address
           description_en: description_en
+          description: description
+          display_name: display_name
+          version: version
+          license:
+          - additional_info: additional_info
+            additional_info_en: additional_info_en
+            id: 2
+            type: type
+            display_name: display_name
+            plan: plan
+            primary: true
+            billing:
+              daily:
+                price_month: 7
+                price_day: 4.145608029883936
+              monthly:
+                price_month: 1
+          - additional_info: additional_info
+            additional_info_en: additional_info_en
+            id: 2
+            type: type
+            display_name: display_name
+            plan: plan
+            primary: true
+            billing:
+              daily:
+                price_month: 7
+                price_day: 4.145608029883936
+              monthly:
+                price_month: 1
           name: name
           field_value:
           - label_ru: label_ru
@@ -8066,8 +9946,6 @@ components:
             label_en: label_en
             type: UNKNOWN
             value: value
-          description: description
-          display_name: display_name
           category:
           - is_main: true
             icon_svg: icon_svg
@@ -8080,11 +9958,11 @@ components:
             sys_name: sys_name
             name_en: name_en
           post_install_alert: true
-          version: version
           slug: slug
           status: PENDING
         vps_id: vps_id
         id: id
+        region: region
       properties:
         id:
           type: string
@@ -8095,6 +9973,8 @@ components:
         date:
           type: string
         size:
+          type: string
+        region:
           type: string
         configuration:
           $ref: '#/components/schemas/Structures_CopyInfo_Configuration'
@@ -8165,13 +10045,43 @@ components:
           icon: icon
           logo: logo
           logo2x: logo2x
-          weight: 9.301444
+          weight: 3.6160767
           secondary_color: secondary_color
           icon2x: icon2x
           primary_color: primary_color
           is_pinned: true
         address: address
         description_en: description_en
+        description: description
+        display_name: display_name
+        version: version
+        license:
+        - additional_info: additional_info
+          additional_info_en: additional_info_en
+          id: 2
+          type: type
+          display_name: display_name
+          plan: plan
+          primary: true
+          billing:
+            daily:
+              price_month: 7
+              price_day: 4.145608029883936
+            monthly:
+              price_month: 1
+        - additional_info: additional_info
+          additional_info_en: additional_info_en
+          id: 2
+          type: type
+          display_name: display_name
+          plan: plan
+          primary: true
+          billing:
+            daily:
+              price_month: 7
+              price_day: 4.145608029883936
+            monthly:
+              price_month: 1
         name: name
         field_value:
         - label_ru: label_ru
@@ -8184,8 +10094,6 @@ components:
           label_en: label_en
           type: UNKNOWN
           value: value
-        description: description
-        display_name: display_name
         category:
         - is_main: true
           icon_svg: icon_svg
@@ -8198,7 +10106,6 @@ components:
           sys_name: sys_name
           name_en: name_en
         post_install_alert: true
-        version: version
         slug: slug
         status: PENDING
       properties:
@@ -8237,6 +10144,10 @@ components:
           type: string
         post_install_alert:
           type: boolean
+        license:
+          items:
+            $ref: '#/components/schemas/Structures_IssuedSoftwareLicense'
+          type: array
       type: object
     Structures_InstalledSoftwareInfo_FieldValue:
       example:
@@ -8277,6 +10188,40 @@ components:
         vps_id:
           type: string
       type: object
+    Structures_IssuedSoftwareLicense:
+      example:
+        additional_info: additional_info
+        additional_info_en: additional_info_en
+        id: 2
+        type: type
+        display_name: display_name
+        plan: plan
+        primary: true
+        billing:
+          daily:
+            price_month: 7
+            price_day: 4.145608029883936
+          monthly:
+            price_month: 1
+      properties:
+        id:
+          format: uint32
+          type: integer
+        type:
+          type: string
+        display_name:
+          type: string
+        plan:
+          type: string
+        additional_info:
+          type: string
+        additional_info_en:
+          type: string
+        primary:
+          type: boolean
+        billing:
+          $ref: '#/components/schemas/Structures_SoftwareLicenseBillingType'
+      type: object
     Structures_OrderInfo:
       example:
         vps_name: vps_name
@@ -8297,13 +10242,43 @@ components:
               icon: icon
               logo: logo
               logo2x: logo2x
-              weight: 9.301444
+              weight: 3.6160767
               secondary_color: secondary_color
               icon2x: icon2x
               primary_color: primary_color
               is_pinned: true
             address: address
             description_en: description_en
+            description: description
+            display_name: display_name
+            version: version
+            license:
+            - additional_info: additional_info
+              additional_info_en: additional_info_en
+              id: 2
+              type: type
+              display_name: display_name
+              plan: plan
+              primary: true
+              billing:
+                daily:
+                  price_month: 7
+                  price_day: 4.145608029883936
+                monthly:
+                  price_month: 1
+            - additional_info: additional_info
+              additional_info_en: additional_info_en
+              id: 2
+              type: type
+              display_name: display_name
+              plan: plan
+              primary: true
+              billing:
+                daily:
+                  price_month: 7
+                  price_day: 4.145608029883936
+                monthly:
+                  price_month: 1
             name: name
             field_value:
             - label_ru: label_ru
@@ -8316,8 +10291,6 @@ components:
               label_en: label_en
               type: UNKNOWN
               value: value
-            description: description
-            display_name: display_name
             category:
             - is_main: true
               icon_svg: icon_svg
@@ -8330,11 +10303,11 @@ components:
               sys_name: sys_name
               name_en: name_en
             post_install_alert: true
-            version: version
             slug: slug
             status: PENDING
           vps_id: vps_id
           id: id
+          region: region
         date_create: date_create
         error_details:
           file_error:
@@ -8414,13 +10387,39 @@ components:
       example:
         subnet: subnet
         id: id
-        mask: 7
+        region: region
+        mask: 9
       properties:
         id:
           type: string
         subnet:
           type: string
         mask:
+          format: uint32
+          type: integer
+        region:
+          type: string
+      type: object
+    Structures_RegionInfo:
+      example:
+        country: country
+        name: name
+        available: true
+        id: id
+        priority: 0
+        name_en: name_en
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        name_en:
+          type: string
+        country:
+          type: string
+        available:
+          type: boolean
+        priority:
           format: uint32
           type: integer
       type: object
@@ -8443,13 +10442,80 @@ components:
         icon_svg:
           type: string
       type: object
+    Structures_SoftwareLicense:
+      example:
+        additional_info: additional_info
+        additional_info_en: additional_info_en
+        id: 5
+        type: type
+        display_name: display_name
+        plan: plan
+        primary: true
+        billing:
+          daily:
+            price_month: 7
+            price_day: 4.145608029883936
+          monthly:
+            price_month: 1
+      properties:
+        id:
+          format: uint32
+          type: integer
+        type:
+          type: string
+        display_name:
+          type: string
+        plan:
+          type: string
+        additional_info:
+          type: string
+        additional_info_en:
+          type: string
+        primary:
+          type: boolean
+        billing:
+          $ref: '#/components/schemas/Structures_SoftwareLicenseBillingType'
+      type: object
+    Structures_SoftwareLicenseBillingType:
+      example:
+        daily:
+          price_month: 7
+          price_day: 4.145608029883936
+        monthly:
+          price_month: 1
+      properties:
+        daily:
+          $ref: '#/components/schemas/Structures_SoftwareLicenseBillingType_Daily'
+        monthly:
+          $ref: '#/components/schemas/Structures_SoftwareLicenseBillingType_Monthly'
+      type: object
+    Structures_SoftwareLicenseBillingType_Daily:
+      example:
+        price_month: 7
+        price_day: 4.145608029883936
+      properties:
+        price_day:
+          format: double
+          type: number
+        price_month:
+          format: uint32
+          type: integer
+      type: object
+    Structures_SoftwareLicenseBillingType_Monthly:
+      example:
+        price_month: 1
+      properties:
+        price_month:
+          format: uint32
+          type: integer
+      type: object
     Structures_SoftwareMetadata:
       example:
         is_new: true
         icon: icon
         logo: logo
         logo2x: logo2x
-        weight: 9.301444
+        weight: 3.6160767
         secondary_color: secondary_color
         icon2x: icon2x
         primary_color: primary_color
@@ -8479,7 +10545,7 @@ components:
       example:
         name: name
         fingerprint: fingerprint
-        id: 2
+        id: 7
       properties:
         id:
           format: uint32

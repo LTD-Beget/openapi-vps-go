@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **VpsName** | Pointer to **string** |  | [optional] 
 **Date** | Pointer to **string** |  | [optional] 
 **Size** | Pointer to **string** |  | [optional] 
+**Region** | Pointer to **string** |  | [optional] 
 **Configuration** | Pointer to [**StructuresCopyInfoConfiguration**](StructuresCopyInfoConfiguration.md) |  | [optional] 
 **InstalledSoftware** | Pointer to [**StructuresInstalledSoftwareInfo**](StructuresInstalledSoftwareInfo.md) |  | [optional] 
 
@@ -155,6 +156,31 @@ SetSize sets Size field to given value.
 `func (o *StructuresCopyInfo) HasSize() bool`
 
 HasSize returns a boolean if a field has been set.
+
+### GetRegion
+
+`func (o *StructuresCopyInfo) GetRegion() string`
+
+GetRegion returns the Region field if non-nil, zero value otherwise.
+
+### GetRegionOk
+
+`func (o *StructuresCopyInfo) GetRegionOk() (*string, bool)`
+
+GetRegionOk returns a tuple with the Region field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRegion
+
+`func (o *StructuresCopyInfo) SetRegion(v string)`
+
+SetRegion sets Region field to given value.
+
+### HasRegion
+
+`func (o *StructuresCopyInfo) HasRegion() bool`
+
+HasRegion returns a boolean if a field has been set.
 
 ### GetConfiguration
 

@@ -16,6 +16,8 @@ Name | Type | Description | Notes
 **BegetSshAccessAllowed** | Pointer to **bool** |  | [optional] 
 **PrivateNetworks** | Pointer to [**[]ManagePrivateNetworkInfo**](ManagePrivateNetworkInfo.md) |  | [optional] 
 **LinkSlug** | Pointer to **string** |  | [optional] 
+**LicenseId** | Pointer to **int32** |  | [optional] 
+**Region** | Pointer to **string** |  | [optional] 
 
 ## Methods
 
@@ -335,6 +337,56 @@ SetLinkSlug sets LinkSlug field to given value.
 `func (o *ManageCreateVpsRequest) HasLinkSlug() bool`
 
 HasLinkSlug returns a boolean if a field has been set.
+
+### GetLicenseId
+
+`func (o *ManageCreateVpsRequest) GetLicenseId() int32`
+
+GetLicenseId returns the LicenseId field if non-nil, zero value otherwise.
+
+### GetLicenseIdOk
+
+`func (o *ManageCreateVpsRequest) GetLicenseIdOk() (*int32, bool)`
+
+GetLicenseIdOk returns a tuple with the LicenseId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetLicenseId
+
+`func (o *ManageCreateVpsRequest) SetLicenseId(v int32)`
+
+SetLicenseId sets LicenseId field to given value.
+
+### HasLicenseId
+
+`func (o *ManageCreateVpsRequest) HasLicenseId() bool`
+
+HasLicenseId returns a boolean if a field has been set.
+
+### GetRegion
+
+`func (o *ManageCreateVpsRequest) GetRegion() string`
+
+GetRegion returns the Region field if non-nil, zero value otherwise.
+
+### GetRegionOk
+
+`func (o *ManageCreateVpsRequest) GetRegionOk() (*string, bool)`
+
+GetRegionOk returns a tuple with the Region field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRegion
+
+`func (o *ManageCreateVpsRequest) SetRegion(v string)`
+
+SetRegion sets Region field to given value.
+
+### HasRegion
+
+`func (o *ManageCreateVpsRequest) HasRegion() bool`
+
+HasRegion returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

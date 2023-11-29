@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Software** | Pointer to [**[]MarketplaceGetSoftwareListResponseSoftwareInfo**](MarketplaceGetSoftwareListResponseSoftwareInfo.md) |  | [optional] 
+**Software** | Pointer to [**[]MarketplaceSoftwareInfo**](MarketplaceSoftwareInfo.md) |  | [optional] 
 
 ## Methods
 
@@ -27,20 +27,20 @@ but it doesn't guarantee that properties required by API are set
 
 ### GetSoftware
 
-`func (o *MarketplaceGetSoftwareListResponse) GetSoftware() []MarketplaceGetSoftwareListResponseSoftwareInfo`
+`func (o *MarketplaceGetSoftwareListResponse) GetSoftware() []MarketplaceSoftwareInfo`
 
 GetSoftware returns the Software field if non-nil, zero value otherwise.
 
 ### GetSoftwareOk
 
-`func (o *MarketplaceGetSoftwareListResponse) GetSoftwareOk() (*[]MarketplaceGetSoftwareListResponseSoftwareInfo, bool)`
+`func (o *MarketplaceGetSoftwareListResponse) GetSoftwareOk() (*[]MarketplaceSoftwareInfo, bool)`
 
 GetSoftwareOk returns a tuple with the Software field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetSoftware
 
-`func (o *MarketplaceGetSoftwareListResponse) SetSoftware(v []MarketplaceGetSoftwareListResponseSoftwareInfo)`
+`func (o *MarketplaceGetSoftwareListResponse) SetSoftware(v []MarketplaceSoftwareInfo)`
 
 SetSoftware sets Software field to given value.
 

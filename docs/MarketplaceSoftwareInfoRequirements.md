@@ -1,4 +1,4 @@
-# MarketplaceGetSoftwareListResponseSoftwareInfoRequirements
+# MarketplaceSoftwareInfoRequirements
 
 ## Properties
 
@@ -10,95 +10,95 @@ Name | Type | Description | Notes
 
 ## Methods
 
-### NewMarketplaceGetSoftwareListResponseSoftwareInfoRequirements
+### NewMarketplaceSoftwareInfoRequirements
 
-`func NewMarketplaceGetSoftwareListResponseSoftwareInfoRequirements() *MarketplaceGetSoftwareListResponseSoftwareInfoRequirements`
+`func NewMarketplaceSoftwareInfoRequirements() *MarketplaceSoftwareInfoRequirements`
 
-NewMarketplaceGetSoftwareListResponseSoftwareInfoRequirements instantiates a new MarketplaceGetSoftwareListResponseSoftwareInfoRequirements object
+NewMarketplaceSoftwareInfoRequirements instantiates a new MarketplaceSoftwareInfoRequirements object
 This constructor will assign default values to properties that have it defined,
 and makes sure properties required by API are set, but the set of arguments
 will change when the set of required properties is changed
 
-### NewMarketplaceGetSoftwareListResponseSoftwareInfoRequirementsWithDefaults
+### NewMarketplaceSoftwareInfoRequirementsWithDefaults
 
-`func NewMarketplaceGetSoftwareListResponseSoftwareInfoRequirementsWithDefaults() *MarketplaceGetSoftwareListResponseSoftwareInfoRequirements`
+`func NewMarketplaceSoftwareInfoRequirementsWithDefaults() *MarketplaceSoftwareInfoRequirements`
 
-NewMarketplaceGetSoftwareListResponseSoftwareInfoRequirementsWithDefaults instantiates a new MarketplaceGetSoftwareListResponseSoftwareInfoRequirements object
+NewMarketplaceSoftwareInfoRequirementsWithDefaults instantiates a new MarketplaceSoftwareInfoRequirements object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
 ### GetCpuCount
 
-`func (o *MarketplaceGetSoftwareListResponseSoftwareInfoRequirements) GetCpuCount() int32`
+`func (o *MarketplaceSoftwareInfoRequirements) GetCpuCount() int32`
 
 GetCpuCount returns the CpuCount field if non-nil, zero value otherwise.
 
 ### GetCpuCountOk
 
-`func (o *MarketplaceGetSoftwareListResponseSoftwareInfoRequirements) GetCpuCountOk() (*int32, bool)`
+`func (o *MarketplaceSoftwareInfoRequirements) GetCpuCountOk() (*int32, bool)`
 
 GetCpuCountOk returns a tuple with the CpuCount field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetCpuCount
 
-`func (o *MarketplaceGetSoftwareListResponseSoftwareInfoRequirements) SetCpuCount(v int32)`
+`func (o *MarketplaceSoftwareInfoRequirements) SetCpuCount(v int32)`
 
 SetCpuCount sets CpuCount field to given value.
 
 ### HasCpuCount
 
-`func (o *MarketplaceGetSoftwareListResponseSoftwareInfoRequirements) HasCpuCount() bool`
+`func (o *MarketplaceSoftwareInfoRequirements) HasCpuCount() bool`
 
 HasCpuCount returns a boolean if a field has been set.
 
 ### GetDiskSize
 
-`func (o *MarketplaceGetSoftwareListResponseSoftwareInfoRequirements) GetDiskSize() int32`
+`func (o *MarketplaceSoftwareInfoRequirements) GetDiskSize() int32`
 
 GetDiskSize returns the DiskSize field if non-nil, zero value otherwise.
 
 ### GetDiskSizeOk
 
-`func (o *MarketplaceGetSoftwareListResponseSoftwareInfoRequirements) GetDiskSizeOk() (*int32, bool)`
+`func (o *MarketplaceSoftwareInfoRequirements) GetDiskSizeOk() (*int32, bool)`
 
 GetDiskSizeOk returns a tuple with the DiskSize field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetDiskSize
 
-`func (o *MarketplaceGetSoftwareListResponseSoftwareInfoRequirements) SetDiskSize(v int32)`
+`func (o *MarketplaceSoftwareInfoRequirements) SetDiskSize(v int32)`
 
 SetDiskSize sets DiskSize field to given value.
 
 ### HasDiskSize
 
-`func (o *MarketplaceGetSoftwareListResponseSoftwareInfoRequirements) HasDiskSize() bool`
+`func (o *MarketplaceSoftwareInfoRequirements) HasDiskSize() bool`
 
 HasDiskSize returns a boolean if a field has been set.
 
 ### GetMemory
 
-`func (o *MarketplaceGetSoftwareListResponseSoftwareInfoRequirements) GetMemory() int32`
+`func (o *MarketplaceSoftwareInfoRequirements) GetMemory() int32`
 
 GetMemory returns the Memory field if non-nil, zero value otherwise.
 
 ### GetMemoryOk
 
-`func (o *MarketplaceGetSoftwareListResponseSoftwareInfoRequirements) GetMemoryOk() (*int32, bool)`
+`func (o *MarketplaceSoftwareInfoRequirements) GetMemoryOk() (*int32, bool)`
 
 GetMemoryOk returns a tuple with the Memory field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetMemory
 
-`func (o *MarketplaceGetSoftwareListResponseSoftwareInfoRequirements) SetMemory(v int32)`
+`func (o *MarketplaceSoftwareInfoRequirements) SetMemory(v int32)`
 
 SetMemory sets Memory field to given value.
 
 ### HasMemory
 
-`func (o *MarketplaceGetSoftwareListResponseSoftwareInfoRequirements) HasMemory() bool`
+`func (o *MarketplaceSoftwareInfoRequirements) HasMemory() bool`
 
 HasMemory returns a boolean if a field has been set.
 

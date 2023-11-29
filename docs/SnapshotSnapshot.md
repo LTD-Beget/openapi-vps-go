@@ -13,6 +13,7 @@ Name | Type | Description | Notes
 **Description** | Pointer to **string** |  | [optional] 
 **Configuration** | Pointer to [**SnapshotRequiredConfiguration**](SnapshotRequiredConfiguration.md) |  | [optional] 
 **PriceDay** | Pointer to **float64** |  | [optional] 
+**Region** | Pointer to **string** |  | [optional] 
 **InstalledSoftware** | Pointer to [**StructuresInstalledSoftwareInfo**](StructuresInstalledSoftwareInfo.md) |  | [optional] 
 
 ## Methods
@@ -258,6 +259,31 @@ SetPriceDay sets PriceDay field to given value.
 `func (o *SnapshotSnapshot) HasPriceDay() bool`
 
 HasPriceDay returns a boolean if a field has been set.
+
+### GetRegion
+
+`func (o *SnapshotSnapshot) GetRegion() string`
+
+GetRegion returns the Region field if non-nil, zero value otherwise.
+
+### GetRegionOk
+
+`func (o *SnapshotSnapshot) GetRegionOk() (*string, bool)`
+
+GetRegionOk returns a tuple with the Region field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRegion
+
+`func (o *SnapshotSnapshot) SetRegion(v string)`
+
+SetRegion sets Region field to given value.
+
+### HasRegion
+
+`func (o *SnapshotSnapshot) HasRegion() bool`
+
+HasRegion returns a boolean if a field has been set.
 
 ### GetInstalledSoftware
 

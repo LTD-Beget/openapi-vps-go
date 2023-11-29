@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **SshKeys** | Pointer to **[]int32** |  | [optional] 
 **Password** | Pointer to **string** |  | [optional] 
 **Software** | Pointer to [**ManageSoftwareInstallInfo**](ManageSoftwareInstallInfo.md) |  | [optional] 
+**LicenseId** | Pointer to **int32** |  | [optional] 
 
 ## Methods
 
@@ -127,6 +128,31 @@ SetSoftware sets Software field to given value.
 `func (o *ManageReinstallRequest) HasSoftware() bool`
 
 HasSoftware returns a boolean if a field has been set.
+
+### GetLicenseId
+
+`func (o *ManageReinstallRequest) GetLicenseId() int32`
+
+GetLicenseId returns the LicenseId field if non-nil, zero value otherwise.
+
+### GetLicenseIdOk
+
+`func (o *ManageReinstallRequest) GetLicenseIdOk() (*int32, bool)`
+
+GetLicenseIdOk returns a tuple with the LicenseId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetLicenseId
+
+`func (o *ManageReinstallRequest) SetLicenseId(v int32)`
+
+SetLicenseId sets LicenseId field to given value.
+
+### HasLicenseId
+
+`func (o *ManageReinstallRequest) HasLicenseId() bool`
+
+HasLicenseId returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

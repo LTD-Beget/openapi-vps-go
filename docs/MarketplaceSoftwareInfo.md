@@ -1,4 +1,4 @@
-# MarketplaceGetSoftwareListResponseSoftwareInfo
+# MarketplaceSoftwareInfo
 
 ## Properties
 
@@ -12,355 +12,381 @@ Name | Type | Description | Notes
 **DescriptionEn** | Pointer to **string** |  | [optional] 
 **Metadata** | Pointer to [**StructuresSoftwareMetadata**](StructuresSoftwareMetadata.md) |  | [optional] 
 **FieldData** | Pointer to [**[]MarketplaceFieldDesc**](MarketplaceFieldDesc.md) |  | [optional] 
-**Requirements** | Pointer to [**MarketplaceGetSoftwareListResponseSoftwareInfoRequirements**](MarketplaceGetSoftwareListResponseSoftwareInfoRequirements.md) |  | [optional] 
+**Requirements** | Pointer to [**MarketplaceSoftwareInfoRequirements**](MarketplaceSoftwareInfoRequirements.md) |  | [optional] 
 **Category** | Pointer to [**[]StructuresSoftwareCategory**](StructuresSoftwareCategory.md) |  | [optional] 
 **Slug** | Pointer to **string** |  | [optional] 
 **DocumentationSlug** | Pointer to **string** |  | [optional] 
 **UnattendedInstallAvailable** | Pointer to **bool** |  | [optional] 
+**License** | Pointer to [**[]StructuresSoftwareLicense**](StructuresSoftwareLicense.md) |  | [optional] 
 
 ## Methods
 
-### NewMarketplaceGetSoftwareListResponseSoftwareInfo
+### NewMarketplaceSoftwareInfo
 
-`func NewMarketplaceGetSoftwareListResponseSoftwareInfo() *MarketplaceGetSoftwareListResponseSoftwareInfo`
+`func NewMarketplaceSoftwareInfo() *MarketplaceSoftwareInfo`
 
-NewMarketplaceGetSoftwareListResponseSoftwareInfo instantiates a new MarketplaceGetSoftwareListResponseSoftwareInfo object
+NewMarketplaceSoftwareInfo instantiates a new MarketplaceSoftwareInfo object
 This constructor will assign default values to properties that have it defined,
 and makes sure properties required by API are set, but the set of arguments
 will change when the set of required properties is changed
 
-### NewMarketplaceGetSoftwareListResponseSoftwareInfoWithDefaults
+### NewMarketplaceSoftwareInfoWithDefaults
 
-`func NewMarketplaceGetSoftwareListResponseSoftwareInfoWithDefaults() *MarketplaceGetSoftwareListResponseSoftwareInfo`
+`func NewMarketplaceSoftwareInfoWithDefaults() *MarketplaceSoftwareInfo`
 
-NewMarketplaceGetSoftwareListResponseSoftwareInfoWithDefaults instantiates a new MarketplaceGetSoftwareListResponseSoftwareInfo object
+NewMarketplaceSoftwareInfoWithDefaults instantiates a new MarketplaceSoftwareInfo object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
 ### GetId
 
-`func (o *MarketplaceGetSoftwareListResponseSoftwareInfo) GetId() int32`
+`func (o *MarketplaceSoftwareInfo) GetId() int32`
 
 GetId returns the Id field if non-nil, zero value otherwise.
 
 ### GetIdOk
 
-`func (o *MarketplaceGetSoftwareListResponseSoftwareInfo) GetIdOk() (*int32, bool)`
+`func (o *MarketplaceSoftwareInfo) GetIdOk() (*int32, bool)`
 
 GetIdOk returns a tuple with the Id field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetId
 
-`func (o *MarketplaceGetSoftwareListResponseSoftwareInfo) SetId(v int32)`
+`func (o *MarketplaceSoftwareInfo) SetId(v int32)`
 
 SetId sets Id field to given value.
 
 ### HasId
 
-`func (o *MarketplaceGetSoftwareListResponseSoftwareInfo) HasId() bool`
+`func (o *MarketplaceSoftwareInfo) HasId() bool`
 
 HasId returns a boolean if a field has been set.
 
 ### GetName
 
-`func (o *MarketplaceGetSoftwareListResponseSoftwareInfo) GetName() string`
+`func (o *MarketplaceSoftwareInfo) GetName() string`
 
 GetName returns the Name field if non-nil, zero value otherwise.
 
 ### GetNameOk
 
-`func (o *MarketplaceGetSoftwareListResponseSoftwareInfo) GetNameOk() (*string, bool)`
+`func (o *MarketplaceSoftwareInfo) GetNameOk() (*string, bool)`
 
 GetNameOk returns a tuple with the Name field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetName
 
-`func (o *MarketplaceGetSoftwareListResponseSoftwareInfo) SetName(v string)`
+`func (o *MarketplaceSoftwareInfo) SetName(v string)`
 
 SetName sets Name field to given value.
 
 ### HasName
 
-`func (o *MarketplaceGetSoftwareListResponseSoftwareInfo) HasName() bool`
+`func (o *MarketplaceSoftwareInfo) HasName() bool`
 
 HasName returns a boolean if a field has been set.
 
 ### GetDisplayName
 
-`func (o *MarketplaceGetSoftwareListResponseSoftwareInfo) GetDisplayName() string`
+`func (o *MarketplaceSoftwareInfo) GetDisplayName() string`
 
 GetDisplayName returns the DisplayName field if non-nil, zero value otherwise.
 
 ### GetDisplayNameOk
 
-`func (o *MarketplaceGetSoftwareListResponseSoftwareInfo) GetDisplayNameOk() (*string, bool)`
+`func (o *MarketplaceSoftwareInfo) GetDisplayNameOk() (*string, bool)`
 
 GetDisplayNameOk returns a tuple with the DisplayName field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetDisplayName
 
-`func (o *MarketplaceGetSoftwareListResponseSoftwareInfo) SetDisplayName(v string)`
+`func (o *MarketplaceSoftwareInfo) SetDisplayName(v string)`
 
 SetDisplayName sets DisplayName field to given value.
 
 ### HasDisplayName
 
-`func (o *MarketplaceGetSoftwareListResponseSoftwareInfo) HasDisplayName() bool`
+`func (o *MarketplaceSoftwareInfo) HasDisplayName() bool`
 
 HasDisplayName returns a boolean if a field has been set.
 
 ### GetVersion
 
-`func (o *MarketplaceGetSoftwareListResponseSoftwareInfo) GetVersion() string`
+`func (o *MarketplaceSoftwareInfo) GetVersion() string`
 
 GetVersion returns the Version field if non-nil, zero value otherwise.
 
 ### GetVersionOk
 
-`func (o *MarketplaceGetSoftwareListResponseSoftwareInfo) GetVersionOk() (*string, bool)`
+`func (o *MarketplaceSoftwareInfo) GetVersionOk() (*string, bool)`
 
 GetVersionOk returns a tuple with the Version field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetVersion
 
-`func (o *MarketplaceGetSoftwareListResponseSoftwareInfo) SetVersion(v string)`
+`func (o *MarketplaceSoftwareInfo) SetVersion(v string)`
 
 SetVersion sets Version field to given value.
 
 ### HasVersion
 
-`func (o *MarketplaceGetSoftwareListResponseSoftwareInfo) HasVersion() bool`
+`func (o *MarketplaceSoftwareInfo) HasVersion() bool`
 
 HasVersion returns a boolean if a field has been set.
 
 ### GetDescription
 
-`func (o *MarketplaceGetSoftwareListResponseSoftwareInfo) GetDescription() string`
+`func (o *MarketplaceSoftwareInfo) GetDescription() string`
 
 GetDescription returns the Description field if non-nil, zero value otherwise.
 
 ### GetDescriptionOk
 
-`func (o *MarketplaceGetSoftwareListResponseSoftwareInfo) GetDescriptionOk() (*string, bool)`
+`func (o *MarketplaceSoftwareInfo) GetDescriptionOk() (*string, bool)`
 
 GetDescriptionOk returns a tuple with the Description field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetDescription
 
-`func (o *MarketplaceGetSoftwareListResponseSoftwareInfo) SetDescription(v string)`
+`func (o *MarketplaceSoftwareInfo) SetDescription(v string)`
 
 SetDescription sets Description field to given value.
 
 ### HasDescription
 
-`func (o *MarketplaceGetSoftwareListResponseSoftwareInfo) HasDescription() bool`
+`func (o *MarketplaceSoftwareInfo) HasDescription() bool`
 
 HasDescription returns a boolean if a field has been set.
 
 ### GetDescriptionEn
 
-`func (o *MarketplaceGetSoftwareListResponseSoftwareInfo) GetDescriptionEn() string`
+`func (o *MarketplaceSoftwareInfo) GetDescriptionEn() string`
 
 GetDescriptionEn returns the DescriptionEn field if non-nil, zero value otherwise.
 
 ### GetDescriptionEnOk
 
-`func (o *MarketplaceGetSoftwareListResponseSoftwareInfo) GetDescriptionEnOk() (*string, bool)`
+`func (o *MarketplaceSoftwareInfo) GetDescriptionEnOk() (*string, bool)`
 
 GetDescriptionEnOk returns a tuple with the DescriptionEn field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetDescriptionEn
 
-`func (o *MarketplaceGetSoftwareListResponseSoftwareInfo) SetDescriptionEn(v string)`
+`func (o *MarketplaceSoftwareInfo) SetDescriptionEn(v string)`
 
 SetDescriptionEn sets DescriptionEn field to given value.
 
 ### HasDescriptionEn
 
-`func (o *MarketplaceGetSoftwareListResponseSoftwareInfo) HasDescriptionEn() bool`
+`func (o *MarketplaceSoftwareInfo) HasDescriptionEn() bool`
 
 HasDescriptionEn returns a boolean if a field has been set.
 
 ### GetMetadata
 
-`func (o *MarketplaceGetSoftwareListResponseSoftwareInfo) GetMetadata() StructuresSoftwareMetadata`
+`func (o *MarketplaceSoftwareInfo) GetMetadata() StructuresSoftwareMetadata`
 
 GetMetadata returns the Metadata field if non-nil, zero value otherwise.
 
 ### GetMetadataOk
 
-`func (o *MarketplaceGetSoftwareListResponseSoftwareInfo) GetMetadataOk() (*StructuresSoftwareMetadata, bool)`
+`func (o *MarketplaceSoftwareInfo) GetMetadataOk() (*StructuresSoftwareMetadata, bool)`
 
 GetMetadataOk returns a tuple with the Metadata field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetMetadata
 
-`func (o *MarketplaceGetSoftwareListResponseSoftwareInfo) SetMetadata(v StructuresSoftwareMetadata)`
+`func (o *MarketplaceSoftwareInfo) SetMetadata(v StructuresSoftwareMetadata)`
 
 SetMetadata sets Metadata field to given value.
 
 ### HasMetadata
 
-`func (o *MarketplaceGetSoftwareListResponseSoftwareInfo) HasMetadata() bool`
+`func (o *MarketplaceSoftwareInfo) HasMetadata() bool`
 
 HasMetadata returns a boolean if a field has been set.
 
 ### GetFieldData
 
-`func (o *MarketplaceGetSoftwareListResponseSoftwareInfo) GetFieldData() []MarketplaceFieldDesc`
+`func (o *MarketplaceSoftwareInfo) GetFieldData() []MarketplaceFieldDesc`
 
 GetFieldData returns the FieldData field if non-nil, zero value otherwise.
 
 ### GetFieldDataOk
 
-`func (o *MarketplaceGetSoftwareListResponseSoftwareInfo) GetFieldDataOk() (*[]MarketplaceFieldDesc, bool)`
+`func (o *MarketplaceSoftwareInfo) GetFieldDataOk() (*[]MarketplaceFieldDesc, bool)`
 
 GetFieldDataOk returns a tuple with the FieldData field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetFieldData
 
-`func (o *MarketplaceGetSoftwareListResponseSoftwareInfo) SetFieldData(v []MarketplaceFieldDesc)`
+`func (o *MarketplaceSoftwareInfo) SetFieldData(v []MarketplaceFieldDesc)`
 
 SetFieldData sets FieldData field to given value.
 
 ### HasFieldData
 
-`func (o *MarketplaceGetSoftwareListResponseSoftwareInfo) HasFieldData() bool`
+`func (o *MarketplaceSoftwareInfo) HasFieldData() bool`
 
 HasFieldData returns a boolean if a field has been set.
 
 ### GetRequirements
 
-`func (o *MarketplaceGetSoftwareListResponseSoftwareInfo) GetRequirements() MarketplaceGetSoftwareListResponseSoftwareInfoRequirements`
+`func (o *MarketplaceSoftwareInfo) GetRequirements() MarketplaceSoftwareInfoRequirements`
 
 GetRequirements returns the Requirements field if non-nil, zero value otherwise.
 
 ### GetRequirementsOk
 
-`func (o *MarketplaceGetSoftwareListResponseSoftwareInfo) GetRequirementsOk() (*MarketplaceGetSoftwareListResponseSoftwareInfoRequirements, bool)`
+`func (o *MarketplaceSoftwareInfo) GetRequirementsOk() (*MarketplaceSoftwareInfoRequirements, bool)`
 
 GetRequirementsOk returns a tuple with the Requirements field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetRequirements
 
-`func (o *MarketplaceGetSoftwareListResponseSoftwareInfo) SetRequirements(v MarketplaceGetSoftwareListResponseSoftwareInfoRequirements)`
+`func (o *MarketplaceSoftwareInfo) SetRequirements(v MarketplaceSoftwareInfoRequirements)`
 
 SetRequirements sets Requirements field to given value.
 
 ### HasRequirements
 
-`func (o *MarketplaceGetSoftwareListResponseSoftwareInfo) HasRequirements() bool`
+`func (o *MarketplaceSoftwareInfo) HasRequirements() bool`
 
 HasRequirements returns a boolean if a field has been set.
 
 ### GetCategory
 
-`func (o *MarketplaceGetSoftwareListResponseSoftwareInfo) GetCategory() []StructuresSoftwareCategory`
+`func (o *MarketplaceSoftwareInfo) GetCategory() []StructuresSoftwareCategory`
 
 GetCategory returns the Category field if non-nil, zero value otherwise.
 
 ### GetCategoryOk
 
-`func (o *MarketplaceGetSoftwareListResponseSoftwareInfo) GetCategoryOk() (*[]StructuresSoftwareCategory, bool)`
+`func (o *MarketplaceSoftwareInfo) GetCategoryOk() (*[]StructuresSoftwareCategory, bool)`
 
 GetCategoryOk returns a tuple with the Category field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetCategory
 
-`func (o *MarketplaceGetSoftwareListResponseSoftwareInfo) SetCategory(v []StructuresSoftwareCategory)`
+`func (o *MarketplaceSoftwareInfo) SetCategory(v []StructuresSoftwareCategory)`
 
 SetCategory sets Category field to given value.
 
 ### HasCategory
 
-`func (o *MarketplaceGetSoftwareListResponseSoftwareInfo) HasCategory() bool`
+`func (o *MarketplaceSoftwareInfo) HasCategory() bool`
 
 HasCategory returns a boolean if a field has been set.
 
 ### GetSlug
 
-`func (o *MarketplaceGetSoftwareListResponseSoftwareInfo) GetSlug() string`
+`func (o *MarketplaceSoftwareInfo) GetSlug() string`
 
 GetSlug returns the Slug field if non-nil, zero value otherwise.
 
 ### GetSlugOk
 
-`func (o *MarketplaceGetSoftwareListResponseSoftwareInfo) GetSlugOk() (*string, bool)`
+`func (o *MarketplaceSoftwareInfo) GetSlugOk() (*string, bool)`
 
 GetSlugOk returns a tuple with the Slug field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetSlug
 
-`func (o *MarketplaceGetSoftwareListResponseSoftwareInfo) SetSlug(v string)`
+`func (o *MarketplaceSoftwareInfo) SetSlug(v string)`
 
 SetSlug sets Slug field to given value.
 
 ### HasSlug
 
-`func (o *MarketplaceGetSoftwareListResponseSoftwareInfo) HasSlug() bool`
+`func (o *MarketplaceSoftwareInfo) HasSlug() bool`
 
 HasSlug returns a boolean if a field has been set.
 
 ### GetDocumentationSlug
 
-`func (o *MarketplaceGetSoftwareListResponseSoftwareInfo) GetDocumentationSlug() string`
+`func (o *MarketplaceSoftwareInfo) GetDocumentationSlug() string`
 
 GetDocumentationSlug returns the DocumentationSlug field if non-nil, zero value otherwise.
 
 ### GetDocumentationSlugOk
 
-`func (o *MarketplaceGetSoftwareListResponseSoftwareInfo) GetDocumentationSlugOk() (*string, bool)`
+`func (o *MarketplaceSoftwareInfo) GetDocumentationSlugOk() (*string, bool)`
 
 GetDocumentationSlugOk returns a tuple with the DocumentationSlug field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetDocumentationSlug
 
-`func (o *MarketplaceGetSoftwareListResponseSoftwareInfo) SetDocumentationSlug(v string)`
+`func (o *MarketplaceSoftwareInfo) SetDocumentationSlug(v string)`
 
 SetDocumentationSlug sets DocumentationSlug field to given value.
 
 ### HasDocumentationSlug
 
-`func (o *MarketplaceGetSoftwareListResponseSoftwareInfo) HasDocumentationSlug() bool`
+`func (o *MarketplaceSoftwareInfo) HasDocumentationSlug() bool`
 
 HasDocumentationSlug returns a boolean if a field has been set.
 
 ### GetUnattendedInstallAvailable
 
-`func (o *MarketplaceGetSoftwareListResponseSoftwareInfo) GetUnattendedInstallAvailable() bool`
+`func (o *MarketplaceSoftwareInfo) GetUnattendedInstallAvailable() bool`
 
 GetUnattendedInstallAvailable returns the UnattendedInstallAvailable field if non-nil, zero value otherwise.
 
 ### GetUnattendedInstallAvailableOk
 
-`func (o *MarketplaceGetSoftwareListResponseSoftwareInfo) GetUnattendedInstallAvailableOk() (*bool, bool)`
+`func (o *MarketplaceSoftwareInfo) GetUnattendedInstallAvailableOk() (*bool, bool)`
 
 GetUnattendedInstallAvailableOk returns a tuple with the UnattendedInstallAvailable field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetUnattendedInstallAvailable
 
-`func (o *MarketplaceGetSoftwareListResponseSoftwareInfo) SetUnattendedInstallAvailable(v bool)`
+`func (o *MarketplaceSoftwareInfo) SetUnattendedInstallAvailable(v bool)`
 
 SetUnattendedInstallAvailable sets UnattendedInstallAvailable field to given value.
 
 ### HasUnattendedInstallAvailable
 
-`func (o *MarketplaceGetSoftwareListResponseSoftwareInfo) HasUnattendedInstallAvailable() bool`
+`func (o *MarketplaceSoftwareInfo) HasUnattendedInstallAvailable() bool`
 
 HasUnattendedInstallAvailable returns a boolean if a field has been set.
+
+### GetLicense
+
+`func (o *MarketplaceSoftwareInfo) GetLicense() []StructuresSoftwareLicense`
+
+GetLicense returns the License field if non-nil, zero value otherwise.
+
+### GetLicenseOk
+
+`func (o *MarketplaceSoftwareInfo) GetLicenseOk() (*[]StructuresSoftwareLicense, bool)`
+
+GetLicenseOk returns a tuple with the License field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetLicense
+
+`func (o *MarketplaceSoftwareInfo) SetLicense(v []StructuresSoftwareLicense)`
+
+SetLicense sets License field to given value.
+
+### HasLicense
+
+`func (o *MarketplaceSoftwareInfo) HasLicense() bool`
+
+HasLicense returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

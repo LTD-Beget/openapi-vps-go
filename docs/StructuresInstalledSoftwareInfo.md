@@ -16,6 +16,7 @@ Name | Type | Description | Notes
 **Category** | Pointer to [**[]StructuresSoftwareCategory**](StructuresSoftwareCategory.md) |  | [optional] 
 **Slug** | Pointer to **string** |  | [optional] 
 **PostInstallAlert** | Pointer to **bool** |  | [optional] 
+**License** | Pointer to [**[]StructuresIssuedSoftwareLicense**](StructuresIssuedSoftwareLicense.md) |  | [optional] 
 
 ## Methods
 
@@ -335,6 +336,31 @@ SetPostInstallAlert sets PostInstallAlert field to given value.
 `func (o *StructuresInstalledSoftwareInfo) HasPostInstallAlert() bool`
 
 HasPostInstallAlert returns a boolean if a field has been set.
+
+### GetLicense
+
+`func (o *StructuresInstalledSoftwareInfo) GetLicense() []StructuresIssuedSoftwareLicense`
+
+GetLicense returns the License field if non-nil, zero value otherwise.
+
+### GetLicenseOk
+
+`func (o *StructuresInstalledSoftwareInfo) GetLicenseOk() (*[]StructuresIssuedSoftwareLicense, bool)`
+
+GetLicenseOk returns a tuple with the License field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetLicense
+
+`func (o *StructuresInstalledSoftwareInfo) SetLicense(v []StructuresIssuedSoftwareLicense)`
+
+SetLicense sets License field to given value.
+
+### HasLicense
+
+`func (o *StructuresInstalledSoftwareInfo) HasLicense() bool`
+
+HasLicense returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

@@ -14,7 +14,7 @@ Method | HTTP request | Description
 
 ## NetworkServiceCreatePrivateNetwork
 
-> NetworkCreatePrivateNetworkResponse NetworkServiceCreatePrivateNetwork(ctx).Execute()
+> NetworkCreatePrivateNetworkResponse NetworkServiceCreatePrivateNetwork(ctx).NetworkCreatePrivateNetworkRequest(networkCreatePrivateNetworkRequest).Execute()
 
 
 
@@ -31,10 +31,11 @@ import (
 )
 
 func main() {
+    networkCreatePrivateNetworkRequest := *openapiclient.NewNetworkCreatePrivateNetworkRequest() // NetworkCreatePrivateNetworkRequest | 
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.NetworkServiceApi.NetworkServiceCreatePrivateNetwork(context.Background()).Execute()
+    resp, r, err := apiClient.NetworkServiceApi.NetworkServiceCreatePrivateNetwork(context.Background()).NetworkCreatePrivateNetworkRequest(networkCreatePrivateNetworkRequest).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `NetworkServiceApi.NetworkServiceCreatePrivateNetwork``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -46,12 +47,16 @@ func main() {
 
 ### Path Parameters
 
-This endpoint does not need any parameter.
+
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiNetworkServiceCreatePrivateNetworkRequest struct via the builder pattern
 
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **networkCreatePrivateNetworkRequest** | [**NetworkCreatePrivateNetworkRequest**](NetworkCreatePrivateNetworkRequest.md) |  | 
 
 ### Return type
 
@@ -63,7 +68,7 @@ Other parameters are passed through a pointer to a apiNetworkServiceCreatePrivat
 
 ### HTTP request headers
 
-- **Content-Type**: Not defined
+- **Content-Type**: application/json
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)

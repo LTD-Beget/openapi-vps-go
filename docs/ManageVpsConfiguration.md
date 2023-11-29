@@ -9,11 +9,13 @@ Name | Type | Description | Notes
 **CpuCount** | Pointer to **int32** |  | [optional] 
 **DiskSize** | Pointer to **int32** |  | [optional] 
 **Memory** | Pointer to **int32** |  | [optional] 
+**BandwidthPublic** | Pointer to **int32** |  | [optional] 
 **PriceDay** | Pointer to **float64** |  | [optional] 
 **PriceMonth** | Pointer to **float64** |  | [optional] 
 **Available** | Pointer to **bool** |  | [optional] 
 **Custom** | Pointer to **bool** |  | [optional] 
 **Configurable** | Pointer to **bool** |  | [optional] 
+**Region** | Pointer to **string** |  | [optional] 
 
 ## Methods
 
@@ -159,6 +161,31 @@ SetMemory sets Memory field to given value.
 
 HasMemory returns a boolean if a field has been set.
 
+### GetBandwidthPublic
+
+`func (o *ManageVpsConfiguration) GetBandwidthPublic() int32`
+
+GetBandwidthPublic returns the BandwidthPublic field if non-nil, zero value otherwise.
+
+### GetBandwidthPublicOk
+
+`func (o *ManageVpsConfiguration) GetBandwidthPublicOk() (*int32, bool)`
+
+GetBandwidthPublicOk returns a tuple with the BandwidthPublic field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetBandwidthPublic
+
+`func (o *ManageVpsConfiguration) SetBandwidthPublic(v int32)`
+
+SetBandwidthPublic sets BandwidthPublic field to given value.
+
+### HasBandwidthPublic
+
+`func (o *ManageVpsConfiguration) HasBandwidthPublic() bool`
+
+HasBandwidthPublic returns a boolean if a field has been set.
+
 ### GetPriceDay
 
 `func (o *ManageVpsConfiguration) GetPriceDay() float64`
@@ -283,6 +310,31 @@ SetConfigurable sets Configurable field to given value.
 `func (o *ManageVpsConfiguration) HasConfigurable() bool`
 
 HasConfigurable returns a boolean if a field has been set.
+
+### GetRegion
+
+`func (o *ManageVpsConfiguration) GetRegion() string`
+
+GetRegion returns the Region field if non-nil, zero value otherwise.
+
+### GetRegionOk
+
+`func (o *ManageVpsConfiguration) GetRegionOk() (*string, bool)`
+
+GetRegionOk returns a tuple with the Region field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRegion
+
+`func (o *ManageVpsConfiguration) SetRegion(v string)`
+
+SetRegion sets Region field to given value.
+
+### HasRegion
+
+`func (o *ManageVpsConfiguration) HasRegion() bool`
+
+HasRegion returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

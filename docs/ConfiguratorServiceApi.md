@@ -11,7 +11,7 @@ Method | HTTP request | Description
 
 ## ConfiguratorServiceGetCalculation
 
-> ConfiguratorGetCalculationResponse ConfiguratorServiceGetCalculation(ctx).ParamsCpuCount(paramsCpuCount).ParamsDiskSize(paramsDiskSize).ParamsMemory(paramsMemory).VpsId(vpsId).SoftwareId(softwareId).SnapshotId(snapshotId).Execute()
+> ConfiguratorGetCalculationResponse ConfiguratorServiceGetCalculation(ctx).ParamsCpuCount(paramsCpuCount).ParamsDiskSize(paramsDiskSize).ParamsMemory(paramsMemory).Region(region).VpsId(vpsId).SoftwareId(softwareId).SnapshotId(snapshotId).Execute()
 
 
 
@@ -31,13 +31,14 @@ func main() {
     paramsCpuCount := int32(56) // int32 |  (optional)
     paramsDiskSize := int32(56) // int32 |  (optional)
     paramsMemory := int32(56) // int32 |  (optional)
+    region := "region_example" // string |  (optional)
     vpsId := "vpsId_example" // string |  (optional)
     softwareId := int32(56) // int32 |  (optional)
     snapshotId := "snapshotId_example" // string |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.ConfiguratorServiceApi.ConfiguratorServiceGetCalculation(context.Background()).ParamsCpuCount(paramsCpuCount).ParamsDiskSize(paramsDiskSize).ParamsMemory(paramsMemory).VpsId(vpsId).SoftwareId(softwareId).SnapshotId(snapshotId).Execute()
+    resp, r, err := apiClient.ConfiguratorServiceApi.ConfiguratorServiceGetCalculation(context.Background()).ParamsCpuCount(paramsCpuCount).ParamsDiskSize(paramsDiskSize).ParamsMemory(paramsMemory).Region(region).VpsId(vpsId).SoftwareId(softwareId).SnapshotId(snapshotId).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `ConfiguratorServiceApi.ConfiguratorServiceGetCalculation``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -61,6 +62,7 @@ Name | Type | Description  | Notes
  **paramsCpuCount** | **int32** |  | 
  **paramsDiskSize** | **int32** |  | 
  **paramsMemory** | **int32** |  | 
+ **region** | **string** |  | 
  **vpsId** | **string** |  | 
  **softwareId** | **int32** |  | 
  **snapshotId** | **string** |  | 
@@ -85,7 +87,7 @@ Name | Type | Description  | Notes
 
 ## ConfiguratorServiceGetConfiguratorInfo
 
-> ConfiguratorGetConfiguratorInfoResponse ConfiguratorServiceGetConfiguratorInfo(ctx).Execute()
+> ConfiguratorGetConfiguratorInfoResponse ConfiguratorServiceGetConfiguratorInfo(ctx).Region(region).Execute()
 
 
 
@@ -102,10 +104,11 @@ import (
 )
 
 func main() {
+    region := "region_example" // string |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.ConfiguratorServiceApi.ConfiguratorServiceGetConfiguratorInfo(context.Background()).Execute()
+    resp, r, err := apiClient.ConfiguratorServiceApi.ConfiguratorServiceGetConfiguratorInfo(context.Background()).Region(region).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `ConfiguratorServiceApi.ConfiguratorServiceGetConfiguratorInfo``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -117,12 +120,16 @@ func main() {
 
 ### Path Parameters
 
-This endpoint does not need any parameter.
+
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiConfiguratorServiceGetConfiguratorInfoRequest struct via the builder pattern
 
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **region** | **string** |  | 
 
 ### Return type
 
