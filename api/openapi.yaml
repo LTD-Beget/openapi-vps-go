@@ -1,7 +1,7 @@
 openapi: 3.0.3
 info:
   title: API Облачных серверов
-  version: v1.6.0
+  version: v1.6.1
 servers:
 - url: https://api.beget.com
 security:
@@ -2534,16 +2534,17 @@ components:
           configuration:
             memory: 1
             price_month: 2.3021358869347655
-            price_day: 5.637376656633329
             bandwidth_public: 5
             custom: true
-            name: name
             available: true
             disk_size: 6
+            cpu_count: 0
+            price_day: 5.637376656633329
+            name: name
             id: id
             region: region
             configurable: true
-            cpu_count: 0
+            group: group
           description: description
           restoring: true
           additional_ip_address:
@@ -2694,16 +2695,17 @@ components:
           configuration:
             memory: 1
             price_month: 2.3021358869347655
-            price_day: 5.637376656633329
             bandwidth_public: 5
             custom: true
-            name: name
             available: true
             disk_size: 6
+            cpu_count: 0
+            price_day: 5.637376656633329
+            name: name
             id: id
             region: region
             configurable: true
-            cpu_count: 0
+            group: group
           description: description
           restoring: true
           additional_ip_address:
@@ -2862,16 +2864,17 @@ components:
           configuration:
             memory: 1
             price_month: 2.3021358869347655
-            price_day: 5.637376656633329
             bandwidth_public: 5
             custom: true
-            name: name
             available: true
             disk_size: 6
+            cpu_count: 0
+            price_day: 5.637376656633329
+            name: name
             id: id
             region: region
             configurable: true
-            cpu_count: 0
+            group: group
           description: description
           restoring: true
           additional_ip_address:
@@ -3035,16 +3038,17 @@ components:
           configuration:
             memory: 1
             price_month: 2.3021358869347655
-            price_day: 5.637376656633329
             bandwidth_public: 5
             custom: true
-            name: name
             available: true
             disk_size: 6
+            cpu_count: 0
+            price_day: 5.637376656633329
+            name: name
             id: id
             region: region
             configurable: true
-            cpu_count: 0
+            group: group
           description: description
           restoring: true
           additional_ip_address:
@@ -3205,16 +3209,17 @@ components:
           configuration:
             memory: 1
             price_month: 2.3021358869347655
-            price_day: 5.637376656633329
             bandwidth_public: 5
             custom: true
-            name: name
             available: true
             disk_size: 6
+            cpu_count: 0
+            price_day: 5.637376656633329
+            name: name
             id: id
             region: region
             configurable: true
-            cpu_count: 0
+            group: group
           description: description
           restoring: true
           additional_ip_address:
@@ -3319,6 +3324,16 @@ components:
           - INVALID_DOMAIN
           - DOMAIN_IS_NEW
           format: enum
+          type: string
+      type: object
+    Manage_ConfigurationGroup:
+      example:
+        name: name
+        group: group
+      properties:
+        name:
+          type: string
+        group:
           type: string
       type: object
     Manage_CreateVpsRequest:
@@ -3433,16 +3448,17 @@ components:
           configuration:
             memory: 1
             price_month: 2.3021358869347655
-            price_day: 5.637376656633329
             bandwidth_public: 5
             custom: true
-            name: name
             available: true
             disk_size: 6
+            cpu_count: 0
+            price_day: 5.637376656633329
+            name: name
             id: id
             region: region
             configurable: true
-            cpu_count: 0
+            group: group
           description: description
           restoring: true
           additional_ip_address:
@@ -3689,16 +3705,17 @@ components:
           configuration:
             memory: 1
             price_month: 2.3021358869347655
-            price_day: 5.637376656633329
             bandwidth_public: 5
             custom: true
-            name: name
             available: true
             disk_size: 6
+            cpu_count: 0
+            price_day: 5.637376656633329
+            name: name
             id: id
             region: region
             configurable: true
-            cpu_count: 0
+            group: group
           description: description
           restoring: true
           additional_ip_address:
@@ -3848,16 +3865,17 @@ components:
           configuration:
             memory: 1
             price_month: 2.3021358869347655
-            price_day: 5.637376656633329
             bandwidth_public: 5
             custom: true
-            name: name
             available: true
             disk_size: 6
+            cpu_count: 0
+            price_day: 5.637376656633329
+            name: name
             id: id
             region: region
             configurable: true
-            cpu_count: 0
+            group: group
           description: description
           restoring: true
           additional_ip_address:
@@ -4007,16 +4025,17 @@ components:
           configuration:
             memory: 1
             price_month: 2.3021358869347655
-            price_day: 5.637376656633329
             bandwidth_public: 5
             custom: true
-            name: name
             available: true
             disk_size: 6
+            cpu_count: 0
+            price_day: 5.637376656633329
+            name: name
             id: id
             region: region
             configurable: true
-            cpu_count: 0
+            group: group
           description: description
           restoring: true
           additional_ip_address:
@@ -4166,16 +4185,17 @@ components:
           configuration:
             memory: 1
             price_month: 2.3021358869347655
-            price_day: 5.637376656633329
             bandwidth_public: 5
             custom: true
-            name: name
             available: true
             disk_size: 6
+            cpu_count: 0
+            price_day: 5.637376656633329
+            name: name
             id: id
             region: region
             configurable: true
-            cpu_count: 0
+            group: group
           description: description
           restoring: true
           additional_ip_address:
@@ -4236,32 +4256,43 @@ components:
         configurations:
         - memory: 1
           price_month: 2.3021358869347655
-          price_day: 5.637376656633329
           bandwidth_public: 5
           custom: true
-          name: name
           available: true
           disk_size: 6
+          cpu_count: 0
+          price_day: 5.637376656633329
+          name: name
           id: id
           region: region
           configurable: true
-          cpu_count: 0
+          group: group
         - memory: 1
           price_month: 2.3021358869347655
-          price_day: 5.637376656633329
           bandwidth_public: 5
           custom: true
-          name: name
           available: true
           disk_size: 6
+          cpu_count: 0
+          price_day: 5.637376656633329
+          name: name
           id: id
           region: region
           configurable: true
-          cpu_count: 0
+          group: group
+        configuration_groups:
+        - name: name
+          group: group
+        - name: name
+          group: group
       properties:
         configurations:
           items:
             $ref: '#/components/schemas/Manage_VpsConfiguration'
+          type: array
+        configuration_groups:
+          items:
+            $ref: '#/components/schemas/Manage_ConfigurationGroup'
           type: array
       type: object
     Manage_GetFileManagerSettingsResponse:
@@ -4405,16 +4436,17 @@ components:
           configuration:
             memory: 1
             price_month: 2.3021358869347655
-            price_day: 5.637376656633329
             bandwidth_public: 5
             custom: true
-            name: name
             available: true
             disk_size: 6
+            cpu_count: 0
+            price_day: 5.637376656633329
+            name: name
             id: id
             region: region
             configurable: true
-            cpu_count: 0
+            group: group
           description: description
           restoring: true
           additional_ip_address:
@@ -4620,16 +4652,17 @@ components:
           configuration:
             memory: 1
             price_month: 2.3021358869347655
-            price_day: 5.637376656633329
             bandwidth_public: 5
             custom: true
-            name: name
             available: true
             disk_size: 6
+            cpu_count: 0
+            price_day: 5.637376656633329
+            name: name
             id: id
             region: region
             configurable: true
-            cpu_count: 0
+            group: group
           description: description
           restoring: true
           additional_ip_address:
@@ -4753,16 +4786,17 @@ components:
           configuration:
             memory: 1
             price_month: 2.3021358869347655
-            price_day: 5.637376656633329
             bandwidth_public: 5
             custom: true
-            name: name
             available: true
             disk_size: 6
+            cpu_count: 0
+            price_day: 5.637376656633329
+            name: name
             id: id
             region: region
             configurable: true
-            cpu_count: 0
+            group: group
           description: description
           restoring: true
           additional_ip_address:
@@ -5017,16 +5051,17 @@ components:
           configuration:
             memory: 1
             price_month: 2.3021358869347655
-            price_day: 5.637376656633329
             bandwidth_public: 5
             custom: true
-            name: name
             available: true
             disk_size: 6
+            cpu_count: 0
+            price_day: 5.637376656633329
+            name: name
             id: id
             region: region
             configurable: true
-            cpu_count: 0
+            group: group
           description: description
           restoring: true
           additional_ip_address:
@@ -5194,16 +5229,17 @@ components:
           configuration:
             memory: 1
             price_month: 2.3021358869347655
-            price_day: 5.637376656633329
             bandwidth_public: 5
             custom: true
-            name: name
             available: true
             disk_size: 6
+            cpu_count: 0
+            price_day: 5.637376656633329
+            name: name
             id: id
             region: region
             configurable: true
-            cpu_count: 0
+            group: group
           description: description
           restoring: true
           additional_ip_address:
@@ -5441,16 +5477,17 @@ components:
           configuration:
             memory: 1
             price_month: 2.3021358869347655
-            price_day: 5.637376656633329
             bandwidth_public: 5
             custom: true
-            name: name
             available: true
             disk_size: 6
+            cpu_count: 0
+            price_day: 5.637376656633329
+            name: name
             id: id
             region: region
             configurable: true
-            cpu_count: 0
+            group: group
           description: description
           restoring: true
           additional_ip_address:
@@ -5627,16 +5664,17 @@ components:
           configuration:
             memory: 1
             price_month: 2.3021358869347655
-            price_day: 5.637376656633329
             bandwidth_public: 5
             custom: true
-            name: name
             available: true
             disk_size: 6
+            cpu_count: 0
+            price_day: 5.637376656633329
+            name: name
             id: id
             region: region
             configurable: true
-            cpu_count: 0
+            group: group
           description: description
           restoring: true
           additional_ip_address:
@@ -5786,16 +5824,17 @@ components:
           configuration:
             memory: 1
             price_month: 2.3021358869347655
-            price_day: 5.637376656633329
             bandwidth_public: 5
             custom: true
-            name: name
             available: true
             disk_size: 6
+            cpu_count: 0
+            price_day: 5.637376656633329
+            name: name
             id: id
             region: region
             configurable: true
-            cpu_count: 0
+            group: group
           description: description
           restoring: true
           additional_ip_address:
@@ -5956,16 +5995,17 @@ components:
           configuration:
             memory: 1
             price_month: 2.3021358869347655
-            price_day: 5.637376656633329
             bandwidth_public: 5
             custom: true
-            name: name
             available: true
             disk_size: 6
+            cpu_count: 0
+            price_day: 5.637376656633329
+            name: name
             id: id
             region: region
             configurable: true
-            cpu_count: 0
+            group: group
           description: description
           restoring: true
           additional_ip_address:
@@ -6116,16 +6156,17 @@ components:
           configuration:
             memory: 1
             price_month: 2.3021358869347655
-            price_day: 5.637376656633329
             bandwidth_public: 5
             custom: true
-            name: name
             available: true
             disk_size: 6
+            cpu_count: 0
+            price_day: 5.637376656633329
+            name: name
             id: id
             region: region
             configurable: true
-            cpu_count: 0
+            group: group
           description: description
           restoring: true
           additional_ip_address:
@@ -6276,16 +6317,17 @@ components:
           configuration:
             memory: 1
             price_month: 2.3021358869347655
-            price_day: 5.637376656633329
             bandwidth_public: 5
             custom: true
-            name: name
             available: true
             disk_size: 6
+            cpu_count: 0
+            price_day: 5.637376656633329
+            name: name
             id: id
             region: region
             configurable: true
-            cpu_count: 0
+            group: group
           description: description
           restoring: true
           additional_ip_address:
@@ -6436,16 +6478,17 @@ components:
           configuration:
             memory: 1
             price_month: 2.3021358869347655
-            price_day: 5.637376656633329
             bandwidth_public: 5
             custom: true
-            name: name
             available: true
             disk_size: 6
+            cpu_count: 0
+            price_day: 5.637376656633329
+            name: name
             id: id
             region: region
             configurable: true
-            cpu_count: 0
+            group: group
           description: description
           restoring: true
           additional_ip_address:
@@ -6596,16 +6639,17 @@ components:
           configuration:
             memory: 1
             price_month: 2.3021358869347655
-            price_day: 5.637376656633329
             bandwidth_public: 5
             custom: true
-            name: name
             available: true
             disk_size: 6
+            cpu_count: 0
+            price_day: 5.637376656633329
+            name: name
             id: id
             region: region
             configurable: true
-            cpu_count: 0
+            group: group
           description: description
           restoring: true
           additional_ip_address:
@@ -6747,16 +6791,17 @@ components:
           configuration:
             memory: 1
             price_month: 2.3021358869347655
-            price_day: 5.637376656633329
             bandwidth_public: 5
             custom: true
-            name: name
             available: true
             disk_size: 6
+            cpu_count: 0
+            price_day: 5.637376656633329
+            name: name
             id: id
             region: region
             configurable: true
-            cpu_count: 0
+            group: group
           description: description
           restoring: true
           additional_ip_address:
@@ -6837,16 +6882,17 @@ components:
       example:
         memory: 1
         price_month: 2.3021358869347655
-        price_day: 5.637376656633329
         bandwidth_public: 5
         custom: true
-        name: name
         available: true
         disk_size: 6
+        cpu_count: 0
+        price_day: 5.637376656633329
+        name: name
         id: id
         region: region
         configurable: true
-        cpu_count: 0
+        group: group
       properties:
         id:
           type: string
@@ -6877,6 +6923,8 @@ components:
         configurable:
           type: boolean
         region:
+          type: string
+        group:
           type: string
       type: object
     Manage_VpsInfo:
@@ -6953,16 +7001,17 @@ components:
         configuration:
           memory: 1
           price_month: 2.3021358869347655
-          price_day: 5.637376656633329
           bandwidth_public: 5
           custom: true
-          name: name
           available: true
           disk_size: 6
+          cpu_count: 0
+          price_day: 5.637376656633329
+          name: name
           id: id
           region: region
           configurable: true
-          cpu_count: 0
+          group: group
         description: description
         restoring: true
         additional_ip_address:
