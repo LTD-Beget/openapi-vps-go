@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **ConfigurationParams** | Pointer to [**StructuresConfigurationParams**](StructuresConfigurationParams.md) |  | [optional] 
 **Software** | Pointer to [**ManageSoftwareInstallInfo**](ManageSoftwareInstallInfo.md) |  | [optional] 
 **SnapshotId** | Pointer to **string** |  | [optional] 
+**ImageId** | Pointer to **string** |  | [optional] 
 **SshKeys** | Pointer to **[]int32** |  | [optional] 
 **Password** | Pointer to **string** |  | [optional] 
 **BegetSshAccessAllowed** | Pointer to **bool** |  | [optional] 
@@ -18,6 +19,7 @@ Name | Type | Description | Notes
 **LinkSlug** | Pointer to **string** |  | [optional] 
 **LicenseId** | Pointer to **int32** |  | [optional] 
 **Region** | Pointer to **string** |  | [optional] 
+**ConfigurationGroup** | Pointer to **string** |  | [optional] 
 
 ## Methods
 
@@ -213,6 +215,31 @@ SetSnapshotId sets SnapshotId field to given value.
 
 HasSnapshotId returns a boolean if a field has been set.
 
+### GetImageId
+
+`func (o *ManageCreateVpsRequest) GetImageId() string`
+
+GetImageId returns the ImageId field if non-nil, zero value otherwise.
+
+### GetImageIdOk
+
+`func (o *ManageCreateVpsRequest) GetImageIdOk() (*string, bool)`
+
+GetImageIdOk returns a tuple with the ImageId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetImageId
+
+`func (o *ManageCreateVpsRequest) SetImageId(v string)`
+
+SetImageId sets ImageId field to given value.
+
+### HasImageId
+
+`func (o *ManageCreateVpsRequest) HasImageId() bool`
+
+HasImageId returns a boolean if a field has been set.
+
 ### GetSshKeys
 
 `func (o *ManageCreateVpsRequest) GetSshKeys() []int32`
@@ -387,6 +414,31 @@ SetRegion sets Region field to given value.
 `func (o *ManageCreateVpsRequest) HasRegion() bool`
 
 HasRegion returns a boolean if a field has been set.
+
+### GetConfigurationGroup
+
+`func (o *ManageCreateVpsRequest) GetConfigurationGroup() string`
+
+GetConfigurationGroup returns the ConfigurationGroup field if non-nil, zero value otherwise.
+
+### GetConfigurationGroupOk
+
+`func (o *ManageCreateVpsRequest) GetConfigurationGroupOk() (*string, bool)`
+
+GetConfigurationGroupOk returns a tuple with the ConfigurationGroup field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetConfigurationGroup
+
+`func (o *ManageCreateVpsRequest) SetConfigurationGroup(v string)`
+
+SetConfigurationGroup sets ConfigurationGroup field to given value.
+
+### HasConfigurationGroup
+
+`func (o *ManageCreateVpsRequest) HasConfigurationGroup() bool`
+
+HasConfigurationGroup returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

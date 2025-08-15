@@ -1,7 +1,7 @@
 openapi: 3.0.3
 info:
   title: API Облачных серверов
-  version: v1.6.1
+  version: v1.7.0
 servers:
 - url: https://api.beget.com
 security:
@@ -147,6 +147,20 @@ paths:
         schema:
           type: string
         style: form
+      - explode: true
+        in: query
+        name: image_id
+        required: false
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: configuration_group
+        required: false
+        schema:
+          type: string
+        style: form
       responses:
         "200":
           content:
@@ -163,6 +177,13 @@ paths:
       - explode: true
         in: query
         name: region
+        required: false
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: configuration_group
         required: false
         schema:
           type: string
@@ -3352,6 +3373,8 @@ components:
           $ref: '#/components/schemas/Manage_SoftwareInstallInfo'
         snapshot_id:
           type: string
+        image_id:
+          type: string
         ssh_keys:
           items:
             format: uint32
@@ -3371,6 +3394,8 @@ components:
           format: uint32
           type: integer
         region:
+          type: string
+        configuration_group:
           type: string
       type: object
     Manage_CreateVpsResponse:
@@ -3574,6 +3599,7 @@ components:
           - ADDRESS_UNAVAILABLE
           - BLACKLISTED_PASSWORD
           - INVALID_LINK_SLUG
+          - NOT_ENOUGH_SPACE
           format: enum
           type: string
         message:
@@ -5346,6 +5372,7 @@ components:
           - SOFTWARE_VARIABLE_INVALID
           - BLACKLISTED_PASSWORD
           - INSUFFICIENT_FUNDS
+          - NOT_ENOUGH_SPACE
           format: enum
           type: string
         message:
