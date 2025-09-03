@@ -1,7 +1,7 @@
 openapi: 3.0.3
 info:
   title: API Облачных серверов
-  version: v1.7.0
+  version: v1.7.1
 servers:
 - url: https://api.beget.com
 security:
@@ -4886,12 +4886,14 @@ components:
         - country: country
           name: name
           available: true
+          short_name: short_name
           id: id
           priority: 0
           name_en: name_en
         - country: country
           name: name
           available: true
+          short_name: short_name
           id: id
           priority: 0
           name_en: name_en
@@ -10481,6 +10483,7 @@ components:
         country: country
         name: name
         available: true
+        short_name: short_name
         id: id
         priority: 0
         name_en: name_en
@@ -10498,6 +10501,8 @@ components:
         priority:
           format: uint32
           type: integer
+        short_name:
+          type: string
       type: object
     Structures_SoftwareCategory:
       example:

@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **Country** | Pointer to **string** |  | [optional] 
 **Available** | Pointer to **bool** |  | [optional] 
 **Priority** | Pointer to **int32** |  | [optional] 
+**ShortName** | Pointer to **string** |  | [optional] 
 
 ## Methods
 
@@ -179,6 +180,31 @@ SetPriority sets Priority field to given value.
 `func (o *StructuresRegionInfo) HasPriority() bool`
 
 HasPriority returns a boolean if a field has been set.
+
+### GetShortName
+
+`func (o *StructuresRegionInfo) GetShortName() string`
+
+GetShortName returns the ShortName field if non-nil, zero value otherwise.
+
+### GetShortNameOk
+
+`func (o *StructuresRegionInfo) GetShortNameOk() (*string, bool)`
+
+GetShortNameOk returns a tuple with the ShortName field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetShortName
+
+`func (o *StructuresRegionInfo) SetShortName(v string)`
+
+SetShortName sets ShortName field to given value.
+
+### HasShortName
+
+`func (o *StructuresRegionInfo) HasShortName() bool`
+
+HasShortName returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
