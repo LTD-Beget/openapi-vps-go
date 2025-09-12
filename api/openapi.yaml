@@ -1,7 +1,7 @@
 openapi: 3.0.3
 info:
   title: API Облачных серверов
-  version: v1.7.1
+  version: v1.7.2
 servers:
 - url: https://api.beget.com
 security:
@@ -8236,6 +8236,8 @@ components:
       properties:
         id:
           type: string
+        region:
+          type: string
       type: object
     Network_OrderIpAddressResponse:
       example:
@@ -8271,6 +8273,7 @@ components:
           - INSUFFICIENT_FUNDS
           - CUSTOMER_IP_LIMIT_REACHED
           - GUEST_OS_ADD_IP_ADDRESS_FAILED
+          - REGION_MISMATCH
           format: enum
           type: string
         message:
