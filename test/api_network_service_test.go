@@ -72,6 +72,20 @@ func Test_begetOpenapiVps_NetworkServiceApiService(t *testing.T) {
 
     })
 
+    t.Run("Test NetworkServiceApiService NetworkServiceRemovePrivateNetwork", func(t *testing.T) {
+
+        t.Skip("skip test")  // remove to run test
+
+        var networkId string
+
+        resp, httpRes, err := apiClient.NetworkServiceApi.NetworkServiceRemovePrivateNetwork(context.Background(), networkId).Execute()
+
+        require.Nil(t, err)
+        require.NotNil(t, resp)
+        assert.Equal(t, 200, httpRes.StatusCode)
+
+    })
+
     t.Run("Test NetworkServiceApiService NetworkServiceSuggestPrivateAddress", func(t *testing.T) {
 
         t.Skip("skip test")  // remove to run test

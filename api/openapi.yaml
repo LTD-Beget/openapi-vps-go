@@ -1,7 +1,7 @@
 openapi: 3.0.3
 info:
   title: API Облачных серверов
-  version: v1.7.2
+  version: v1.7.3
 servers:
 - url: https://api.beget.com
 security:
@@ -40,6 +40,14 @@ paths:
   /v1/vps/backup:
     get:
       operationId: BackupService_GetAvailableCopies
+      parameters:
+      - explode: true
+        in: query
+        name: filter
+        required: false
+        schema:
+          type: string
+        style: form
       responses:
         "200":
           content:
@@ -261,6 +269,14 @@ paths:
   /v1/vps/network:
     get:
       operationId: NetworkService_GetNetworkInfo
+      parameters:
+      - explode: true
+        in: query
+        name: filter
+        required: false
+        schema:
+          type: string
+        style: form
       responses:
         "200":
           content:
@@ -345,6 +361,26 @@ paths:
           description: OK
       tags:
       - NetworkService
+  /v1/vps/private-network/{network_id}:
+    delete:
+      operationId: NetworkService_RemovePrivateNetwork
+      parameters:
+      - explode: false
+        in: path
+        name: network_id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Network_RemovePrivateNetworkResponse'
+          description: OK
+      tags:
+      - NetworkService
   /v1/vps/private-network/{network_id}/suggested-address:
     post:
       operationId: NetworkService_SuggestPrivateAddress
@@ -404,6 +440,37 @@ paths:
   /v1/vps/server/list:
     get:
       operationId: ManageService_GetList
+      parameters:
+      - explode: true
+        in: query
+        name: offset
+        required: false
+        schema:
+          format: uint32
+          type: integer
+        style: form
+      - explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          format: uint32
+          type: integer
+        style: form
+      - explode: true
+        in: query
+        name: filter
+        required: false
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: sort
+        required: false
+        schema:
+          type: string
+        style: form
       responses:
         "200":
           content:
@@ -494,6 +561,58 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Manage_UpdateInfoResponse'
+          description: OK
+      tags:
+      - ManageService
+  /v1/vps/server/{id}/pin:
+    put:
+      operationId: ManageService_ChangePinned
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Manage_ChangePinnedRequest'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Manage_ChangePinnedResponse'
+          description: OK
+      tags:
+      - ManageService
+  /v1/vps/server/{id}/project:
+    put:
+      operationId: ManageService_BindProject
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Manage_BindProjectRequest'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Manage_BindProjectResponse'
           description: OK
       tags:
       - ManageService
@@ -653,6 +772,13 @@ paths:
         schema:
           type: string
         style: simple
+      - explode: true
+        in: query
+        name: force
+        required: false
+        schema:
+          type: boolean
+        style: form
       responses:
         "200":
           content:
@@ -919,6 +1045,32 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/SshKey_RemoveResponse'
+          description: OK
+      tags:
+      - SshKeyService
+    put:
+      operationId: SshKeyService_Update
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          format: uint32
+          type: integer
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SshKey_UpdateRequest'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SshKey_UpdateResponse'
           description: OK
       tags:
       - SshKeyService
@@ -2483,6 +2635,7 @@ components:
     Manage_AttachIpAddressResponse:
       example:
         vps:
+          ui_pin_changed_at: ui_pin_changed_at
           software:
             metadata:
               is_new: true
@@ -2572,10 +2725,12 @@ components:
           - additional_ip_address
           - additional_ip_address
           unarchiving: true
+          ui_pinned: true
           archived: true
           hostname: hostname
           disk_used: disk_used
           unblocking: true
+          project_id: project_id
           software_domain: software_domain
           id: id
           manage_enabled: true
@@ -2592,9 +2747,15 @@ components:
           ssh_keys:
           - name: name
             fingerprint: fingerprint
+            vps_id:
+            - vps_id
+            - vps_id
             id: 7
           - name: name
             fingerprint: fingerprint
+            vps_id:
+            - vps_id
+            - vps_id
             id: 7
           private_network:
           - ip:
@@ -2644,6 +2805,7 @@ components:
     Manage_AttachSshKeyResponse:
       example:
         vps:
+          ui_pin_changed_at: ui_pin_changed_at
           software:
             metadata:
               is_new: true
@@ -2733,10 +2895,12 @@ components:
           - additional_ip_address
           - additional_ip_address
           unarchiving: true
+          ui_pinned: true
           archived: true
           hostname: hostname
           disk_used: disk_used
           unblocking: true
+          project_id: project_id
           software_domain: software_domain
           id: id
           manage_enabled: true
@@ -2753,9 +2917,15 @@ components:
           ssh_keys:
           - name: name
             fingerprint: fingerprint
+            vps_id:
+            - vps_id
+            - vps_id
             id: 7
           - name: name
             fingerprint: fingerprint
+            vps_id:
+            - vps_id
+            - vps_id
             id: 7
           private_network:
           - ip:
@@ -2796,6 +2966,7 @@ components:
           enum:
           - INTERNAL_ERROR
           - SERVICE_DISABLED
+          - GUEST_OS_KEY_MANAGE_FAILED
           format: enum
           type: string
         message:
@@ -2813,6 +2984,7 @@ components:
     Manage_AttachToPrivateNetworkResponse:
       example:
         vps:
+          ui_pin_changed_at: ui_pin_changed_at
           software:
             metadata:
               is_new: true
@@ -2902,10 +3074,12 @@ components:
           - additional_ip_address
           - additional_ip_address
           unarchiving: true
+          ui_pinned: true
           archived: true
           hostname: hostname
           disk_used: disk_used
           unblocking: true
+          project_id: project_id
           software_domain: software_domain
           id: id
           manage_enabled: true
@@ -2922,9 +3096,15 @@ components:
           ssh_keys:
           - name: name
             fingerprint: fingerprint
+            vps_id:
+            - vps_id
+            - vps_id
             id: 7
           - name: name
             fingerprint: fingerprint
+            vps_id:
+            - vps_id
+            - vps_id
             id: 7
           private_network:
           - ip:
@@ -2975,18 +3155,17 @@ components:
         message:
           type: string
       type: object
-    Manage_ChangeConfigurationRequest:
+    Manage_BindProjectRequest:
       properties:
         id:
           type: string
-        configuration_id:
+        project_id:
           type: string
-        configuration_params:
-          $ref: '#/components/schemas/Structures_ConfigurationParams'
       type: object
-    Manage_ChangeConfigurationResponse:
+    Manage_BindProjectResponse:
       example:
         vps:
+          ui_pin_changed_at: ui_pin_changed_at
           software:
             metadata:
               is_new: true
@@ -3076,10 +3255,12 @@ components:
           - additional_ip_address
           - additional_ip_address
           unarchiving: true
+          ui_pinned: true
           archived: true
           hostname: hostname
           disk_used: disk_used
           unblocking: true
+          project_id: project_id
           software_domain: software_domain
           id: id
           manage_enabled: true
@@ -3096,9 +3277,194 @@ components:
           ssh_keys:
           - name: name
             fingerprint: fingerprint
+            vps_id:
+            - vps_id
+            - vps_id
             id: 7
           - name: name
             fingerprint: fingerprint
+            vps_id:
+            - vps_id
+            - vps_id
+            id: 7
+          private_network:
+          - ip:
+            - ip
+            - ip
+            network:
+              subnet: subnet
+              id: id
+              region: region
+              mask: 9
+          - ip:
+            - ip
+            - ip
+            network:
+              subnet: subnet
+              id: id
+              region: region
+              mask: 9
+          date_create: date_create
+          region: region
+          link_slug: link_slug
+          status: UNKNOWN
+        error:
+          code: INTERNAL_ERROR
+          message: message
+      properties:
+        vps:
+          $ref: '#/components/schemas/Manage_VpsInfo'
+        error:
+          $ref: '#/components/schemas/Manage_BindProjectResponse_Error'
+      type: object
+    Manage_BindProjectResponse_Error:
+      example:
+        code: INTERNAL_ERROR
+        message: message
+      properties:
+        code:
+          enum:
+          - INTERNAL_ERROR
+          - SERVICE_DISABLED
+          - PROJECT_NOT_FOUND
+          format: enum
+          type: string
+        message:
+          type: string
+      type: object
+    Manage_ChangeConfigurationRequest:
+      properties:
+        id:
+          type: string
+        configuration_id:
+          type: string
+        configuration_params:
+          $ref: '#/components/schemas/Structures_ConfigurationParams'
+      type: object
+    Manage_ChangeConfigurationResponse:
+      example:
+        vps:
+          ui_pin_changed_at: ui_pin_changed_at
+          software:
+            metadata:
+              is_new: true
+              icon: icon
+              logo: logo
+              logo2x: logo2x
+              weight: 3.6160767
+              secondary_color: secondary_color
+              icon2x: icon2x
+              primary_color: primary_color
+              is_pinned: true
+            address: address
+            description_en: description_en
+            description: description
+            display_name: display_name
+            version: version
+            license:
+            - additional_info: additional_info
+              additional_info_en: additional_info_en
+              id: 2
+              type: type
+              display_name: display_name
+              plan: plan
+              primary: true
+              billing:
+                daily:
+                  price_month: 7
+                  price_day: 4.145608029883936
+                monthly:
+                  price_month: 1
+            - additional_info: additional_info
+              additional_info_en: additional_info_en
+              id: 2
+              type: type
+              display_name: display_name
+              plan: plan
+              primary: true
+              billing:
+                daily:
+                  price_month: 7
+                  price_day: 4.145608029883936
+                monthly:
+                  price_month: 1
+            name: name
+            field_value:
+            - label_ru: label_ru
+              variable: variable
+              label_en: label_en
+              type: UNKNOWN
+              value: value
+            - label_ru: label_ru
+              variable: variable
+              label_en: label_en
+              type: UNKNOWN
+              value: value
+            category:
+            - is_main: true
+              icon_svg: icon_svg
+              name: name
+              sys_name: sys_name
+              name_en: name_en
+            - is_main: true
+              icon_svg: icon_svg
+              name: name
+              sys_name: sys_name
+              name_en: name_en
+            post_install_alert: true
+            slug: slug
+            status: PENDING
+          configuration:
+            memory: 1
+            price_month: 2.3021358869347655
+            bandwidth_public: 5
+            custom: true
+            available: true
+            disk_size: 6
+            cpu_count: 0
+            price_day: 5.637376656633329
+            name: name
+            id: id
+            region: region
+            configurable: true
+            group: group
+          description: description
+          restoring: true
+          additional_ip_address:
+          - additional_ip_address
+          - additional_ip_address
+          unarchiving: true
+          ui_pinned: true
+          archived: true
+          hostname: hostname
+          disk_used: disk_used
+          unblocking: true
+          project_id: project_id
+          software_domain: software_domain
+          id: id
+          manage_enabled: true
+          slug: slug
+          migrating: true
+          host_unavailable: true
+          has_password: true
+          technical_domain: technical_domain
+          ip_address: ip_address
+          display_name: display_name
+          rescue_mode: true
+          disk_left: disk_left
+          beget_ssh_access_allowed: true
+          ssh_keys:
+          - name: name
+            fingerprint: fingerprint
+            vps_id:
+            - vps_id
+            - vps_id
+            id: 7
+          - name: name
+            fingerprint: fingerprint
+            vps_id:
+            - vps_id
+            - vps_id
             id: 7
           private_network:
           - ip:
@@ -3148,16 +3514,17 @@ components:
         message:
           type: string
       type: object
-    Manage_ChangeSshAccessRequest:
+    Manage_ChangePinnedRequest:
       properties:
         id:
           type: string
-        beget_ssh_access_allowed:
+        ui_pinned:
           type: boolean
       type: object
-    Manage_ChangeSshAccessResponse:
+    Manage_ChangePinnedResponse:
       example:
         vps:
+          ui_pin_changed_at: ui_pin_changed_at
           software:
             metadata:
               is_new: true
@@ -3247,10 +3614,12 @@ components:
           - additional_ip_address
           - additional_ip_address
           unarchiving: true
+          ui_pinned: true
           archived: true
           hostname: hostname
           disk_used: disk_used
           unblocking: true
+          project_id: project_id
           software_domain: software_domain
           id: id
           manage_enabled: true
@@ -3267,9 +3636,190 @@ components:
           ssh_keys:
           - name: name
             fingerprint: fingerprint
+            vps_id:
+            - vps_id
+            - vps_id
             id: 7
           - name: name
             fingerprint: fingerprint
+            vps_id:
+            - vps_id
+            - vps_id
+            id: 7
+          private_network:
+          - ip:
+            - ip
+            - ip
+            network:
+              subnet: subnet
+              id: id
+              region: region
+              mask: 9
+          - ip:
+            - ip
+            - ip
+            network:
+              subnet: subnet
+              id: id
+              region: region
+              mask: 9
+          date_create: date_create
+          region: region
+          link_slug: link_slug
+          status: UNKNOWN
+        error:
+          code: INTERNAL_ERROR
+          message: message
+      properties:
+        vps:
+          $ref: '#/components/schemas/Manage_VpsInfo'
+        error:
+          $ref: '#/components/schemas/Manage_ChangePinnedResponse_Error'
+      type: object
+    Manage_ChangePinnedResponse_Error:
+      example:
+        code: INTERNAL_ERROR
+        message: message
+      properties:
+        code:
+          enum:
+          - INTERNAL_ERROR
+          format: enum
+          type: string
+        message:
+          type: string
+      type: object
+    Manage_ChangeSshAccessRequest:
+      properties:
+        id:
+          type: string
+        beget_ssh_access_allowed:
+          type: boolean
+      type: object
+    Manage_ChangeSshAccessResponse:
+      example:
+        vps:
+          ui_pin_changed_at: ui_pin_changed_at
+          software:
+            metadata:
+              is_new: true
+              icon: icon
+              logo: logo
+              logo2x: logo2x
+              weight: 3.6160767
+              secondary_color: secondary_color
+              icon2x: icon2x
+              primary_color: primary_color
+              is_pinned: true
+            address: address
+            description_en: description_en
+            description: description
+            display_name: display_name
+            version: version
+            license:
+            - additional_info: additional_info
+              additional_info_en: additional_info_en
+              id: 2
+              type: type
+              display_name: display_name
+              plan: plan
+              primary: true
+              billing:
+                daily:
+                  price_month: 7
+                  price_day: 4.145608029883936
+                monthly:
+                  price_month: 1
+            - additional_info: additional_info
+              additional_info_en: additional_info_en
+              id: 2
+              type: type
+              display_name: display_name
+              plan: plan
+              primary: true
+              billing:
+                daily:
+                  price_month: 7
+                  price_day: 4.145608029883936
+                monthly:
+                  price_month: 1
+            name: name
+            field_value:
+            - label_ru: label_ru
+              variable: variable
+              label_en: label_en
+              type: UNKNOWN
+              value: value
+            - label_ru: label_ru
+              variable: variable
+              label_en: label_en
+              type: UNKNOWN
+              value: value
+            category:
+            - is_main: true
+              icon_svg: icon_svg
+              name: name
+              sys_name: sys_name
+              name_en: name_en
+            - is_main: true
+              icon_svg: icon_svg
+              name: name
+              sys_name: sys_name
+              name_en: name_en
+            post_install_alert: true
+            slug: slug
+            status: PENDING
+          configuration:
+            memory: 1
+            price_month: 2.3021358869347655
+            bandwidth_public: 5
+            custom: true
+            available: true
+            disk_size: 6
+            cpu_count: 0
+            price_day: 5.637376656633329
+            name: name
+            id: id
+            region: region
+            configurable: true
+            group: group
+          description: description
+          restoring: true
+          additional_ip_address:
+          - additional_ip_address
+          - additional_ip_address
+          unarchiving: true
+          ui_pinned: true
+          archived: true
+          hostname: hostname
+          disk_used: disk_used
+          unblocking: true
+          project_id: project_id
+          software_domain: software_domain
+          id: id
+          manage_enabled: true
+          slug: slug
+          migrating: true
+          host_unavailable: true
+          has_password: true
+          technical_domain: technical_domain
+          ip_address: ip_address
+          display_name: display_name
+          rescue_mode: true
+          disk_left: disk_left
+          beget_ssh_access_allowed: true
+          ssh_keys:
+          - name: name
+            fingerprint: fingerprint
+            vps_id:
+            - vps_id
+            - vps_id
+            id: 7
+          - name: name
+            fingerprint: fingerprint
+            vps_id:
+            - vps_id
+            - vps_id
             id: 7
           private_network:
           - ip:
@@ -3397,10 +3947,15 @@ components:
           type: string
         configuration_group:
           type: string
+        ui_pinned:
+          type: boolean
+        project_id:
+          type: string
       type: object
     Manage_CreateVpsResponse:
       example:
         vps:
+          ui_pin_changed_at: ui_pin_changed_at
           software:
             metadata:
               is_new: true
@@ -3490,10 +4045,12 @@ components:
           - additional_ip_address
           - additional_ip_address
           unarchiving: true
+          ui_pinned: true
           archived: true
           hostname: hostname
           disk_used: disk_used
           unblocking: true
+          project_id: project_id
           software_domain: software_domain
           id: id
           manage_enabled: true
@@ -3510,9 +4067,15 @@ components:
           ssh_keys:
           - name: name
             fingerprint: fingerprint
+            vps_id:
+            - vps_id
+            - vps_id
             id: 7
           - name: name
             fingerprint: fingerprint
+            vps_id:
+            - vps_id
+            - vps_id
             id: 7
           private_network:
           - ip:
@@ -3659,6 +4222,7 @@ components:
     Manage_DetachFromPrivateNetworkResponse:
       example:
         vps:
+          ui_pin_changed_at: ui_pin_changed_at
           software:
             metadata:
               is_new: true
@@ -3748,10 +4312,12 @@ components:
           - additional_ip_address
           - additional_ip_address
           unarchiving: true
+          ui_pinned: true
           archived: true
           hostname: hostname
           disk_used: disk_used
           unblocking: true
+          project_id: project_id
           software_domain: software_domain
           id: id
           manage_enabled: true
@@ -3768,9 +4334,15 @@ components:
           ssh_keys:
           - name: name
             fingerprint: fingerprint
+            vps_id:
+            - vps_id
+            - vps_id
             id: 7
           - name: name
             fingerprint: fingerprint
+            vps_id:
+            - vps_id
+            - vps_id
             id: 7
           private_network:
           - ip:
@@ -3819,6 +4391,7 @@ components:
     Manage_DetachIpAddressResponse:
       example:
         vps:
+          ui_pin_changed_at: ui_pin_changed_at
           software:
             metadata:
               is_new: true
@@ -3908,10 +4481,12 @@ components:
           - additional_ip_address
           - additional_ip_address
           unarchiving: true
+          ui_pinned: true
           archived: true
           hostname: hostname
           disk_used: disk_used
           unblocking: true
+          project_id: project_id
           software_domain: software_domain
           id: id
           manage_enabled: true
@@ -3928,9 +4503,15 @@ components:
           ssh_keys:
           - name: name
             fingerprint: fingerprint
+            vps_id:
+            - vps_id
+            - vps_id
             id: 7
           - name: name
             fingerprint: fingerprint
+            vps_id:
+            - vps_id
+            - vps_id
             id: 7
           private_network:
           - ip:
@@ -3979,6 +4560,7 @@ components:
     Manage_DetachSshKeyResponse:
       example:
         vps:
+          ui_pin_changed_at: ui_pin_changed_at
           software:
             metadata:
               is_new: true
@@ -4068,10 +4650,12 @@ components:
           - additional_ip_address
           - additional_ip_address
           unarchiving: true
+          ui_pinned: true
           archived: true
           hostname: hostname
           disk_used: disk_used
           unblocking: true
+          project_id: project_id
           software_domain: software_domain
           id: id
           manage_enabled: true
@@ -4088,9 +4672,15 @@ components:
           ssh_keys:
           - name: name
             fingerprint: fingerprint
+            vps_id:
+            - vps_id
+            - vps_id
             id: 7
           - name: name
             fingerprint: fingerprint
+            vps_id:
+            - vps_id
+            - vps_id
             id: 7
           private_network:
           - ip:
@@ -4131,6 +4721,7 @@ components:
           enum:
           - INTERNAL_ERROR
           - SERVICE_DISABLED
+          - GUEST_OS_KEY_MANAGE_FAILED
           format: enum
           type: string
         message:
@@ -4139,6 +4730,7 @@ components:
     Manage_DisablePostInstallAlertResponse:
       example:
         vps:
+          ui_pin_changed_at: ui_pin_changed_at
           software:
             metadata:
               is_new: true
@@ -4228,10 +4820,12 @@ components:
           - additional_ip_address
           - additional_ip_address
           unarchiving: true
+          ui_pinned: true
           archived: true
           hostname: hostname
           disk_used: disk_used
           unblocking: true
+          project_id: project_id
           software_domain: software_domain
           id: id
           manage_enabled: true
@@ -4248,9 +4842,15 @@ components:
           ssh_keys:
           - name: name
             fingerprint: fingerprint
+            vps_id:
+            - vps_id
+            - vps_id
             id: 7
           - name: name
             fingerprint: fingerprint
+            vps_id:
+            - vps_id
+            - vps_id
             id: 7
           private_network:
           - ip:
@@ -4390,6 +4990,7 @@ components:
     Manage_GetInfoResponse:
       example:
         vps:
+          ui_pin_changed_at: ui_pin_changed_at
           software:
             metadata:
               is_new: true
@@ -4479,10 +5080,12 @@ components:
           - additional_ip_address
           - additional_ip_address
           unarchiving: true
+          ui_pinned: true
           archived: true
           hostname: hostname
           disk_used: disk_used
           unblocking: true
+          project_id: project_id
           software_domain: software_domain
           id: id
           manage_enabled: true
@@ -4499,9 +5102,15 @@ components:
           ssh_keys:
           - name: name
             fingerprint: fingerprint
+            vps_id:
+            - vps_id
+            - vps_id
             id: 7
           - name: name
             fingerprint: fingerprint
+            vps_id:
+            - vps_id
+            - vps_id
             id: 7
           private_network:
           - ip:
@@ -4605,8 +5214,10 @@ components:
       type: object
     Manage_GetListResponse:
       example:
+        total_count: 0
         vps:
-        - software:
+        - ui_pin_changed_at: ui_pin_changed_at
+          software:
             metadata:
               is_new: true
               icon: icon
@@ -4695,10 +5306,12 @@ components:
           - additional_ip_address
           - additional_ip_address
           unarchiving: true
+          ui_pinned: true
           archived: true
           hostname: hostname
           disk_used: disk_used
           unblocking: true
+          project_id: project_id
           software_domain: software_domain
           id: id
           manage_enabled: true
@@ -4715,9 +5328,15 @@ components:
           ssh_keys:
           - name: name
             fingerprint: fingerprint
+            vps_id:
+            - vps_id
+            - vps_id
             id: 7
           - name: name
             fingerprint: fingerprint
+            vps_id:
+            - vps_id
+            - vps_id
             id: 7
           private_network:
           - ip:
@@ -4740,7 +5359,8 @@ components:
           region: region
           link_slug: link_slug
           status: UNKNOWN
-        - software:
+        - ui_pin_changed_at: ui_pin_changed_at
+          software:
             metadata:
               is_new: true
               icon: icon
@@ -4829,10 +5449,12 @@ components:
           - additional_ip_address
           - additional_ip_address
           unarchiving: true
+          ui_pinned: true
           archived: true
           hostname: hostname
           disk_used: disk_used
           unblocking: true
+          project_id: project_id
           software_domain: software_domain
           id: id
           manage_enabled: true
@@ -4849,9 +5471,15 @@ components:
           ssh_keys:
           - name: name
             fingerprint: fingerprint
+            vps_id:
+            - vps_id
+            - vps_id
             id: 7
           - name: name
             fingerprint: fingerprint
+            vps_id:
+            - vps_id
+            - vps_id
             id: 7
           private_network:
           - ip:
@@ -4879,6 +5507,9 @@ components:
           items:
             $ref: '#/components/schemas/Manage_VpsInfo'
           type: array
+        total_count:
+          format: uint32
+          type: integer
       type: object
     Manage_GetRegionListResponse:
       example:
@@ -5007,6 +5638,7 @@ components:
     Manage_RebootVpsResponse:
       example:
         vps:
+          ui_pin_changed_at: ui_pin_changed_at
           software:
             metadata:
               is_new: true
@@ -5096,10 +5728,12 @@ components:
           - additional_ip_address
           - additional_ip_address
           unarchiving: true
+          ui_pinned: true
           archived: true
           hostname: hostname
           disk_used: disk_used
           unblocking: true
+          project_id: project_id
           software_domain: software_domain
           id: id
           manage_enabled: true
@@ -5116,9 +5750,15 @@ components:
           ssh_keys:
           - name: name
             fingerprint: fingerprint
+            vps_id:
+            - vps_id
+            - vps_id
             id: 7
           - name: name
             fingerprint: fingerprint
+            vps_id:
+            - vps_id
+            - vps_id
             id: 7
           private_network:
           - ip:
@@ -5185,6 +5825,7 @@ components:
     Manage_ReinstallResponse:
       example:
         vps:
+          ui_pin_changed_at: ui_pin_changed_at
           software:
             metadata:
               is_new: true
@@ -5274,10 +5915,12 @@ components:
           - additional_ip_address
           - additional_ip_address
           unarchiving: true
+          ui_pinned: true
           archived: true
           hostname: hostname
           disk_used: disk_used
           unblocking: true
+          project_id: project_id
           software_domain: software_domain
           id: id
           manage_enabled: true
@@ -5294,9 +5937,15 @@ components:
           ssh_keys:
           - name: name
             fingerprint: fingerprint
+            vps_id:
+            - vps_id
+            - vps_id
             id: 7
           - name: name
             fingerprint: fingerprint
+            vps_id:
+            - vps_id
+            - vps_id
             id: 7
           private_network:
           - ip:
@@ -5434,6 +6083,7 @@ components:
     Manage_RemoveVpsResponse:
       example:
         vps:
+          ui_pin_changed_at: ui_pin_changed_at
           software:
             metadata:
               is_new: true
@@ -5523,10 +6173,12 @@ components:
           - additional_ip_address
           - additional_ip_address
           unarchiving: true
+          ui_pinned: true
           archived: true
           hostname: hostname
           disk_used: disk_used
           unblocking: true
+          project_id: project_id
           software_domain: software_domain
           id: id
           manage_enabled: true
@@ -5543,9 +6195,15 @@ components:
           ssh_keys:
           - name: name
             fingerprint: fingerprint
+            vps_id:
+            - vps_id
+            - vps_id
             id: 7
           - name: name
             fingerprint: fingerprint
+            vps_id:
+            - vps_id
+            - vps_id
             id: 7
           private_network:
           - ip:
@@ -5621,6 +6279,7 @@ components:
     Manage_ResetPasswordResponse:
       example:
         vps:
+          ui_pin_changed_at: ui_pin_changed_at
           software:
             metadata:
               is_new: true
@@ -5710,10 +6369,12 @@ components:
           - additional_ip_address
           - additional_ip_address
           unarchiving: true
+          ui_pinned: true
           archived: true
           hostname: hostname
           disk_used: disk_used
           unblocking: true
+          project_id: project_id
           software_domain: software_domain
           id: id
           manage_enabled: true
@@ -5730,9 +6391,15 @@ components:
           ssh_keys:
           - name: name
             fingerprint: fingerprint
+            vps_id:
+            - vps_id
+            - vps_id
             id: 7
           - name: name
             fingerprint: fingerprint
+            vps_id:
+            - vps_id
+            - vps_id
             id: 7
           private_network:
           - ip:
@@ -5773,6 +6440,7 @@ components:
           enum:
           - INTERNAL_ERROR
           - SERVICE_DISABLED
+          - GUEST_OS_RESET_PASSWORD_FAILED
           format: enum
           type: string
         message:
@@ -5781,6 +6449,7 @@ components:
     Manage_ResetVpsResponse:
       example:
         vps:
+          ui_pin_changed_at: ui_pin_changed_at
           software:
             metadata:
               is_new: true
@@ -5870,10 +6539,12 @@ components:
           - additional_ip_address
           - additional_ip_address
           unarchiving: true
+          ui_pinned: true
           archived: true
           hostname: hostname
           disk_used: disk_used
           unblocking: true
+          project_id: project_id
           software_domain: software_domain
           id: id
           manage_enabled: true
@@ -5890,9 +6561,15 @@ components:
           ssh_keys:
           - name: name
             fingerprint: fingerprint
+            vps_id:
+            - vps_id
+            - vps_id
             id: 7
           - name: name
             fingerprint: fingerprint
+            vps_id:
+            - vps_id
+            - vps_id
             id: 7
           private_network:
           - ip:
@@ -5952,6 +6629,7 @@ components:
     Manage_StartRescueResponse:
       example:
         vps:
+          ui_pin_changed_at: ui_pin_changed_at
           software:
             metadata:
               is_new: true
@@ -6041,10 +6719,12 @@ components:
           - additional_ip_address
           - additional_ip_address
           unarchiving: true
+          ui_pinned: true
           archived: true
           hostname: hostname
           disk_used: disk_used
           unblocking: true
+          project_id: project_id
           software_domain: software_domain
           id: id
           manage_enabled: true
@@ -6061,9 +6741,15 @@ components:
           ssh_keys:
           - name: name
             fingerprint: fingerprint
+            vps_id:
+            - vps_id
+            - vps_id
             id: 7
           - name: name
             fingerprint: fingerprint
+            vps_id:
+            - vps_id
+            - vps_id
             id: 7
           private_network:
           - ip:
@@ -6113,6 +6799,7 @@ components:
     Manage_StartVpsResponse:
       example:
         vps:
+          ui_pin_changed_at: ui_pin_changed_at
           software:
             metadata:
               is_new: true
@@ -6202,10 +6889,12 @@ components:
           - additional_ip_address
           - additional_ip_address
           unarchiving: true
+          ui_pinned: true
           archived: true
           hostname: hostname
           disk_used: disk_used
           unblocking: true
+          project_id: project_id
           software_domain: software_domain
           id: id
           manage_enabled: true
@@ -6222,9 +6911,15 @@ components:
           ssh_keys:
           - name: name
             fingerprint: fingerprint
+            vps_id:
+            - vps_id
+            - vps_id
             id: 7
           - name: name
             fingerprint: fingerprint
+            vps_id:
+            - vps_id
+            - vps_id
             id: 7
           private_network:
           - ip:
@@ -6274,6 +6969,7 @@ components:
     Manage_StopRescueResponse:
       example:
         vps:
+          ui_pin_changed_at: ui_pin_changed_at
           software:
             metadata:
               is_new: true
@@ -6363,10 +7059,12 @@ components:
           - additional_ip_address
           - additional_ip_address
           unarchiving: true
+          ui_pinned: true
           archived: true
           hostname: hostname
           disk_used: disk_used
           unblocking: true
+          project_id: project_id
           software_domain: software_domain
           id: id
           manage_enabled: true
@@ -6383,9 +7081,15 @@ components:
           ssh_keys:
           - name: name
             fingerprint: fingerprint
+            vps_id:
+            - vps_id
+            - vps_id
             id: 7
           - name: name
             fingerprint: fingerprint
+            vps_id:
+            - vps_id
+            - vps_id
             id: 7
           private_network:
           - ip:
@@ -6435,6 +7139,7 @@ components:
     Manage_StopVpsResponse:
       example:
         vps:
+          ui_pin_changed_at: ui_pin_changed_at
           software:
             metadata:
               is_new: true
@@ -6524,10 +7229,12 @@ components:
           - additional_ip_address
           - additional_ip_address
           unarchiving: true
+          ui_pinned: true
           archived: true
           hostname: hostname
           disk_used: disk_used
           unblocking: true
+          project_id: project_id
           software_domain: software_domain
           id: id
           manage_enabled: true
@@ -6544,9 +7251,15 @@ components:
           ssh_keys:
           - name: name
             fingerprint: fingerprint
+            vps_id:
+            - vps_id
+            - vps_id
             id: 7
           - name: name
             fingerprint: fingerprint
+            vps_id:
+            - vps_id
+            - vps_id
             id: 7
           private_network:
           - ip:
@@ -6596,6 +7309,7 @@ components:
     Manage_UnarchiveResponse:
       example:
         vps:
+          ui_pin_changed_at: ui_pin_changed_at
           software:
             metadata:
               is_new: true
@@ -6685,10 +7399,12 @@ components:
           - additional_ip_address
           - additional_ip_address
           unarchiving: true
+          ui_pinned: true
           archived: true
           hostname: hostname
           disk_used: disk_used
           unblocking: true
+          project_id: project_id
           software_domain: software_domain
           id: id
           manage_enabled: true
@@ -6705,9 +7421,15 @@ components:
           ssh_keys:
           - name: name
             fingerprint: fingerprint
+            vps_id:
+            - vps_id
+            - vps_id
             id: 7
           - name: name
             fingerprint: fingerprint
+            vps_id:
+            - vps_id
+            - vps_id
             id: 7
           private_network:
           - ip:
@@ -6748,6 +7470,7 @@ components:
     Manage_UpdateInfoResponse:
       example:
         vps:
+          ui_pin_changed_at: ui_pin_changed_at
           software:
             metadata:
               is_new: true
@@ -6837,10 +7560,12 @@ components:
           - additional_ip_address
           - additional_ip_address
           unarchiving: true
+          ui_pinned: true
           archived: true
           hostname: hostname
           disk_used: disk_used
           unblocking: true
+          project_id: project_id
           software_domain: software_domain
           id: id
           manage_enabled: true
@@ -6857,9 +7582,15 @@ components:
           ssh_keys:
           - name: name
             fingerprint: fingerprint
+            vps_id:
+            - vps_id
+            - vps_id
             id: 7
           - name: name
             fingerprint: fingerprint
+            vps_id:
+            - vps_id
+            - vps_id
             id: 7
           private_network:
           - ip:
@@ -6958,6 +7689,7 @@ components:
       type: object
     Manage_VpsInfo:
       example:
+        ui_pin_changed_at: ui_pin_changed_at
         software:
           metadata:
             is_new: true
@@ -7047,10 +7779,12 @@ components:
         - additional_ip_address
         - additional_ip_address
         unarchiving: true
+        ui_pinned: true
         archived: true
         hostname: hostname
         disk_used: disk_used
         unblocking: true
+        project_id: project_id
         software_domain: software_domain
         id: id
         manage_enabled: true
@@ -7067,9 +7801,15 @@ components:
         ssh_keys:
         - name: name
           fingerprint: fingerprint
+          vps_id:
+          - vps_id
+          - vps_id
           id: 7
         - name: name
           fingerprint: fingerprint
+          vps_id:
+          - vps_id
+          - vps_id
           id: 7
         private_network:
         - ip:
@@ -7169,6 +7909,12 @@ components:
         link_slug:
           type: string
         region:
+          type: string
+        ui_pinned:
+          type: boolean
+        ui_pin_changed_at:
+          type: string
+        project_id:
           type: string
       type: object
     Marketplace_DomainField:
@@ -8305,6 +9051,35 @@ components:
         message:
           type: string
       type: object
+    Network_RemovePrivateNetworkResponse:
+      example:
+        error:
+          code: INTERNAL_ERROR
+          message: message
+        network:
+          subnet: subnet
+          id: id
+          region: region
+          mask: 9
+      properties:
+        network:
+          $ref: '#/components/schemas/Structures_PrivateNetwork'
+        error:
+          $ref: '#/components/schemas/Network_RemovePrivateNetworkResponse_Error'
+      type: object
+    Network_RemovePrivateNetworkResponse_Error:
+      example:
+        code: INTERNAL_ERROR
+        message: message
+      properties:
+        code:
+          enum:
+          - INTERNAL_ERROR
+          format: enum
+          type: string
+        message:
+          type: string
+      type: object
     Network_SuggestPrivateAddressRequest:
       properties:
         network_id:
@@ -8357,6 +9132,7 @@ components:
         snapshot:
           vps_name: vps_name
           size: size
+          vps_exists: true
           date_create: date_create
           configuration:
             memory: 1
@@ -8471,6 +9247,7 @@ components:
         snapshot:
           vps_name: vps_name
           size: size
+          vps_exists: true
           date_create: date_create
           configuration:
             memory: 1
@@ -8560,6 +9337,7 @@ components:
         snapshot:
         - vps_name: vps_name
           size: size
+          vps_exists: true
           date_create: date_create
           configuration:
             memory: 1
@@ -8642,6 +9420,7 @@ components:
           status: CREATING
         - vps_name: vps_name
           size: size
+          vps_exists: true
           date_create: date_create
           configuration:
             memory: 1
@@ -8740,6 +9519,7 @@ components:
           snapshot:
             vps_name: vps_name
             size: size
+            vps_exists: true
             date_create: date_create
             configuration:
               memory: 1
@@ -8830,6 +9610,7 @@ components:
           snapshot:
             vps_name: vps_name
             size: size
+            vps_exists: true
             date_create: date_create
             configuration:
               memory: 1
@@ -8925,6 +9706,7 @@ components:
         snapshot:
           vps_name: vps_name
           size: size
+          vps_exists: true
           date_create: date_create
           configuration:
             memory: 1
@@ -9053,6 +9835,7 @@ components:
         snapshot:
           vps_name: vps_name
           size: size
+          vps_exists: true
           date_create: date_create
           configuration:
             memory: 1
@@ -9179,6 +9962,7 @@ components:
           snapshot:
             vps_name: vps_name
             size: size
+            vps_exists: true
             date_create: date_create
             configuration:
               memory: 1
@@ -9290,6 +10074,7 @@ components:
       example:
         vps_name: vps_name
         size: size
+        vps_exists: true
         date_create: date_create
         configuration:
           memory: 1
@@ -9377,6 +10162,8 @@ components:
           type: string
         vps_name:
           type: string
+        vps_exists:
+          type: boolean
         date_create:
           type: string
         size:
@@ -9512,6 +10299,9 @@ components:
         key:
           name: name
           fingerprint: fingerprint
+          vps_id:
+          - vps_id
+          - vps_id
           id: 7
       properties:
         key:
@@ -9540,9 +10330,15 @@ components:
         keys:
         - name: name
           fingerprint: fingerprint
+          vps_id:
+          - vps_id
+          - vps_id
           id: 7
         - name: name
           fingerprint: fingerprint
+          vps_id:
+          - vps_id
+          - vps_id
           id: 7
       properties:
         keys:
@@ -9558,6 +10354,9 @@ components:
         key:
           name: name
           fingerprint: fingerprint
+          vps_id:
+          - vps_id
+          - vps_id
           id: 7
       properties:
         key:
@@ -9574,6 +10373,46 @@ components:
           enum:
           - INTERNAL_ERROR
           - KEY_IN_USE
+          format: enum
+          type: string
+        message:
+          type: string
+      type: object
+    SshKey_UpdateRequest:
+      properties:
+        id:
+          format: uint32
+          type: integer
+        name:
+          type: string
+      type: object
+    SshKey_UpdateResponse:
+      example:
+        error:
+          code: INTERNAL_ERROR
+          message: message
+        key:
+          name: name
+          fingerprint: fingerprint
+          vps_id:
+          - vps_id
+          - vps_id
+          id: 7
+      properties:
+        key:
+          $ref: '#/components/schemas/Structures_SshKeyInfo'
+        error:
+          $ref: '#/components/schemas/SshKey_UpdateResponse_Error'
+      type: object
+    SshKey_UpdateResponse_Error:
+      example:
+        code: INTERNAL_ERROR
+        message: message
+      properties:
+        code:
+          enum:
+          - INTERNAL_ERROR
+          - INVALID_NAME
           format: enum
           type: string
         message:
@@ -10629,6 +11468,9 @@ components:
       example:
         name: name
         fingerprint: fingerprint
+        vps_id:
+        - vps_id
+        - vps_id
         id: 7
       properties:
         id:
@@ -10638,6 +11480,10 @@ components:
           type: string
         fingerprint:
           type: string
+        vps_id:
+          items:
+            type: string
+          type: array
       type: object
   securitySchemes:
     bearerAuth:

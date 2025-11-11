@@ -8,6 +8,7 @@ Method | HTTP request | Description
 [**NetworkServiceGetNetworkInfo**](NetworkServiceApi.md#NetworkServiceGetNetworkInfo) | **Get** /v1/vps/network | 
 [**NetworkServiceOrderIpAddress**](NetworkServiceApi.md#NetworkServiceOrderIpAddress) | **Post** /v1/vps/network | 
 [**NetworkServiceRemoveIpAddress**](NetworkServiceApi.md#NetworkServiceRemoveIpAddress) | **Delete** /v1/vps/network/{ip_address} | 
+[**NetworkServiceRemovePrivateNetwork**](NetworkServiceApi.md#NetworkServiceRemovePrivateNetwork) | **Delete** /v1/vps/private-network/{network_id} | 
 [**NetworkServiceSuggestPrivateAddress**](NetworkServiceApi.md#NetworkServiceSuggestPrivateAddress) | **Post** /v1/vps/private-network/{network_id}/suggested-address | 
 
 
@@ -78,7 +79,7 @@ Name | Type | Description  | Notes
 
 ## NetworkServiceGetNetworkInfo
 
-> NetworkGetNetworkInfoResponse NetworkServiceGetNetworkInfo(ctx).Execute()
+> NetworkGetNetworkInfoResponse NetworkServiceGetNetworkInfo(ctx).Filter(filter).Execute()
 
 
 
@@ -95,10 +96,11 @@ import (
 )
 
 func main() {
+    filter := "filter_example" // string |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.NetworkServiceApi.NetworkServiceGetNetworkInfo(context.Background()).Execute()
+    resp, r, err := apiClient.NetworkServiceApi.NetworkServiceGetNetworkInfo(context.Background()).Filter(filter).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `NetworkServiceApi.NetworkServiceGetNetworkInfo``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -110,12 +112,16 @@ func main() {
 
 ### Path Parameters
 
-This endpoint does not need any parameter.
+
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiNetworkServiceGetNetworkInfoRequest struct via the builder pattern
 
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **filter** | **string** |  | 
 
 ### Return type
 
@@ -252,6 +258,74 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**NetworkRemoveIpAddressResponse**](NetworkRemoveIpAddressResponse.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## NetworkServiceRemovePrivateNetwork
+
+> NetworkRemovePrivateNetworkResponse NetworkServiceRemovePrivateNetwork(ctx, networkId).Execute()
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    networkId := "networkId_example" // string | 
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.NetworkServiceApi.NetworkServiceRemovePrivateNetwork(context.Background(), networkId).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `NetworkServiceApi.NetworkServiceRemovePrivateNetwork``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `NetworkServiceRemovePrivateNetwork`: NetworkRemovePrivateNetworkResponse
+    fmt.Fprintf(os.Stdout, "Response from `NetworkServiceApi.NetworkServiceRemovePrivateNetwork`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**networkId** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiNetworkServiceRemovePrivateNetworkRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**NetworkRemovePrivateNetworkResponse**](NetworkRemovePrivateNetworkResponse.md)
 
 ### Authorization
 

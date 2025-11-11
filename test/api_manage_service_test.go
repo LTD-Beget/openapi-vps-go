@@ -67,6 +67,20 @@ func Test_begetOpenapiVps_ManageServiceApiService(t *testing.T) {
 
     })
 
+    t.Run("Test ManageServiceApiService ManageServiceBindProject", func(t *testing.T) {
+
+        t.Skip("skip test")  // remove to run test
+
+        var id string
+
+        resp, httpRes, err := apiClient.ManageServiceApi.ManageServiceBindProject(context.Background(), id).Execute()
+
+        require.Nil(t, err)
+        require.NotNil(t, resp)
+        assert.Equal(t, 200, httpRes.StatusCode)
+
+    })
+
     t.Run("Test ManageServiceApiService ManageServiceChangeConfiguration", func(t *testing.T) {
 
         t.Skip("skip test")  // remove to run test
@@ -74,6 +88,20 @@ func Test_begetOpenapiVps_ManageServiceApiService(t *testing.T) {
         var id string
 
         resp, httpRes, err := apiClient.ManageServiceApi.ManageServiceChangeConfiguration(context.Background(), id).Execute()
+
+        require.Nil(t, err)
+        require.NotNil(t, resp)
+        assert.Equal(t, 200, httpRes.StatusCode)
+
+    })
+
+    t.Run("Test ManageServiceApiService ManageServiceChangePinned", func(t *testing.T) {
+
+        t.Skip("skip test")  // remove to run test
+
+        var id string
+
+        resp, httpRes, err := apiClient.ManageServiceApi.ManageServiceChangePinned(context.Background(), id).Execute()
 
         require.Nil(t, err)
         require.NotNil(t, resp)

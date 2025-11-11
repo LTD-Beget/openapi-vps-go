@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **Id** | Pointer to **string** |  | [optional] 
 **VpsId** | Pointer to **string** |  | [optional] 
 **VpsName** | Pointer to **string** |  | [optional] 
+**VpsExists** | Pointer to **bool** |  | [optional] 
 **DateCreate** | Pointer to **string** |  | [optional] 
 **Size** | Pointer to **string** |  | [optional] 
 **Status** | Pointer to **string** |  | [optional] 
@@ -109,6 +110,31 @@ SetVpsName sets VpsName field to given value.
 `func (o *SnapshotSnapshot) HasVpsName() bool`
 
 HasVpsName returns a boolean if a field has been set.
+
+### GetVpsExists
+
+`func (o *SnapshotSnapshot) GetVpsExists() bool`
+
+GetVpsExists returns the VpsExists field if non-nil, zero value otherwise.
+
+### GetVpsExistsOk
+
+`func (o *SnapshotSnapshot) GetVpsExistsOk() (*bool, bool)`
+
+GetVpsExistsOk returns a tuple with the VpsExists field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetVpsExists
+
+`func (o *SnapshotSnapshot) SetVpsExists(v bool)`
+
+SetVpsExists sets VpsExists field to given value.
+
+### HasVpsExists
+
+`func (o *SnapshotSnapshot) HasVpsExists() bool`
+
+HasVpsExists returns a boolean if a field has been set.
 
 ### GetDateCreate
 

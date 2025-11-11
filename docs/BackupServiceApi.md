@@ -14,7 +14,7 @@ Method | HTTP request | Description
 
 ## BackupServiceGetAvailableCopies
 
-> BackupGetAvailableCopiesResponse BackupServiceGetAvailableCopies(ctx).Execute()
+> BackupGetAvailableCopiesResponse BackupServiceGetAvailableCopies(ctx).Filter(filter).Execute()
 
 
 
@@ -31,10 +31,11 @@ import (
 )
 
 func main() {
+    filter := "filter_example" // string |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.BackupServiceApi.BackupServiceGetAvailableCopies(context.Background()).Execute()
+    resp, r, err := apiClient.BackupServiceApi.BackupServiceGetAvailableCopies(context.Background()).Filter(filter).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `BackupServiceApi.BackupServiceGetAvailableCopies``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -46,12 +47,16 @@ func main() {
 
 ### Path Parameters
 
-This endpoint does not need any parameter.
+
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiBackupServiceGetAvailableCopiesRequest struct via the builder pattern
 
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **filter** | **string** |  | 
 
 ### Return type
 

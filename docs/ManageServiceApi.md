@@ -7,7 +7,9 @@ Method | HTTP request | Description
 [**ManageServiceAttachIpAddress**](ManageServiceApi.md#ManageServiceAttachIpAddress) | **Post** /v1/vps/{id}/network/{ip_address} | 
 [**ManageServiceAttachSshKey**](ManageServiceApi.md#ManageServiceAttachSshKey) | **Post** /v1/vps/{id}/sshKey/{ssh_key_id} | 
 [**ManageServiceAttachToPrivateNetwork**](ManageServiceApi.md#ManageServiceAttachToPrivateNetwork) | **Post** /v1/vps/{id}/private-network/{network_id} | 
+[**ManageServiceBindProject**](ManageServiceApi.md#ManageServiceBindProject) | **Put** /v1/vps/server/{id}/project | 
 [**ManageServiceChangeConfiguration**](ManageServiceApi.md#ManageServiceChangeConfiguration) | **Put** /v1/vps/server/{id}/configuration | 
+[**ManageServiceChangePinned**](ManageServiceApi.md#ManageServiceChangePinned) | **Put** /v1/vps/server/{id}/pin | 
 [**ManageServiceChangeSshAccess**](ManageServiceApi.md#ManageServiceChangeSshAccess) | **Put** /v1/vps/{id}/ssh/access | 
 [**ManageServiceCheckSoftwareRequirements**](ManageServiceApi.md#ManageServiceCheckSoftwareRequirements) | **Post** /v1/vps/software/requirements | 
 [**ManageServiceCreateVps**](ManageServiceApi.md#ManageServiceCreateVps) | **Post** /v1/vps/server | 
@@ -255,6 +257,76 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## ManageServiceBindProject
+
+> ManageBindProjectResponse ManageServiceBindProject(ctx, id).ManageBindProjectRequest(manageBindProjectRequest).Execute()
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    id := "id_example" // string | 
+    manageBindProjectRequest := *openapiclient.NewManageBindProjectRequest() // ManageBindProjectRequest | 
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.ManageServiceApi.ManageServiceBindProject(context.Background(), id).ManageBindProjectRequest(manageBindProjectRequest).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `ManageServiceApi.ManageServiceBindProject``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `ManageServiceBindProject`: ManageBindProjectResponse
+    fmt.Fprintf(os.Stdout, "Response from `ManageServiceApi.ManageServiceBindProject`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**id** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiManageServiceBindProjectRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **manageBindProjectRequest** | [**ManageBindProjectRequest**](ManageBindProjectRequest.md) |  | 
+
+### Return type
+
+[**ManageBindProjectResponse**](ManageBindProjectResponse.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## ManageServiceChangeConfiguration
 
 > ManageChangeConfigurationResponse ManageServiceChangeConfiguration(ctx, id).ManageChangeConfigurationRequest(manageChangeConfigurationRequest).Execute()
@@ -310,6 +382,76 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**ManageChangeConfigurationResponse**](ManageChangeConfigurationResponse.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## ManageServiceChangePinned
+
+> ManageChangePinnedResponse ManageServiceChangePinned(ctx, id).ManageChangePinnedRequest(manageChangePinnedRequest).Execute()
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    id := "id_example" // string | 
+    manageChangePinnedRequest := *openapiclient.NewManageChangePinnedRequest() // ManageChangePinnedRequest | 
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.ManageServiceApi.ManageServiceChangePinned(context.Background(), id).ManageChangePinnedRequest(manageChangePinnedRequest).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `ManageServiceApi.ManageServiceChangePinned``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `ManageServiceChangePinned`: ManageChangePinnedResponse
+    fmt.Fprintf(os.Stdout, "Response from `ManageServiceApi.ManageServiceChangePinned`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**id** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiManageServiceChangePinnedRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **manageChangePinnedRequest** | [**ManageChangePinnedRequest**](ManageChangePinnedRequest.md) |  | 
+
+### Return type
+
+[**ManageChangePinnedResponse**](ManageChangePinnedResponse.md)
 
 ### Authorization
 
@@ -1134,7 +1276,7 @@ Name | Type | Description  | Notes
 
 ## ManageServiceGetList
 
-> ManageGetListResponse ManageServiceGetList(ctx).Execute()
+> ManageGetListResponse ManageServiceGetList(ctx).Offset(offset).Limit(limit).Filter(filter).Sort(sort).Execute()
 
 
 
@@ -1151,10 +1293,14 @@ import (
 )
 
 func main() {
+    offset := int32(56) // int32 |  (optional)
+    limit := int32(56) // int32 |  (optional)
+    filter := "filter_example" // string |  (optional)
+    sort := "sort_example" // string |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.ManageServiceApi.ManageServiceGetList(context.Background()).Execute()
+    resp, r, err := apiClient.ManageServiceApi.ManageServiceGetList(context.Background()).Offset(offset).Limit(limit).Filter(filter).Sort(sort).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `ManageServiceApi.ManageServiceGetList``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -1166,12 +1312,19 @@ func main() {
 
 ### Path Parameters
 
-This endpoint does not need any parameter.
+
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiManageServiceGetListRequest struct via the builder pattern
 
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **offset** | **int32** |  | 
+ **limit** | **int32** |  | 
+ **filter** | **string** |  | 
+ **sort** | **string** |  | 
 
 ### Return type
 
@@ -1916,7 +2069,7 @@ Name | Type | Description  | Notes
 
 ## ManageServiceStopVps
 
-> ManageStopVpsResponse ManageServiceStopVps(ctx, id).Execute()
+> ManageStopVpsResponse ManageServiceStopVps(ctx, id).Force(force).Execute()
 
 
 
@@ -1934,10 +2087,11 @@ import (
 
 func main() {
     id := "id_example" // string | 
+    force := true // bool |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.ManageServiceApi.ManageServiceStopVps(context.Background(), id).Execute()
+    resp, r, err := apiClient.ManageServiceApi.ManageServiceStopVps(context.Background(), id).Force(force).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `ManageServiceApi.ManageServiceStopVps``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -1963,6 +2117,7 @@ Other parameters are passed through a pointer to a apiManageServiceStopVpsReques
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **force** | **bool** |  | 
 
 ### Return type
 

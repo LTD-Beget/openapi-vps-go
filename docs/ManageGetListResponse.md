@@ -5,6 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Vps** | Pointer to [**[]ManageVpsInfo**](ManageVpsInfo.md) |  | [optional] 
+**TotalCount** | Pointer to **int32** |  | [optional] 
 
 ## Methods
 
@@ -49,6 +50,31 @@ SetVps sets Vps field to given value.
 `func (o *ManageGetListResponse) HasVps() bool`
 
 HasVps returns a boolean if a field has been set.
+
+### GetTotalCount
+
+`func (o *ManageGetListResponse) GetTotalCount() int32`
+
+GetTotalCount returns the TotalCount field if non-nil, zero value otherwise.
+
+### GetTotalCountOk
+
+`func (o *ManageGetListResponse) GetTotalCountOk() (*int32, bool)`
+
+GetTotalCountOk returns a tuple with the TotalCount field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTotalCount
+
+`func (o *ManageGetListResponse) SetTotalCount(v int32)`
+
+SetTotalCount sets TotalCount field to given value.
+
+### HasTotalCount
+
+`func (o *ManageGetListResponse) HasTotalCount() bool`
+
+HasTotalCount returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

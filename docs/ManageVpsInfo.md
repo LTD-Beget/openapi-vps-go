@@ -33,6 +33,9 @@ Name | Type | Description | Notes
 **Software** | Pointer to [**StructuresInstalledSoftwareInfo**](StructuresInstalledSoftwareInfo.md) |  | [optional] 
 **LinkSlug** | Pointer to **string** |  | [optional] 
 **Region** | Pointer to **string** |  | [optional] 
+**UiPinned** | Pointer to **bool** |  | [optional] 
+**UiPinChangedAt** | Pointer to **string** |  | [optional] 
+**ProjectId** | Pointer to **string** |  | [optional] 
 
 ## Methods
 
@@ -777,6 +780,81 @@ SetRegion sets Region field to given value.
 `func (o *ManageVpsInfo) HasRegion() bool`
 
 HasRegion returns a boolean if a field has been set.
+
+### GetUiPinned
+
+`func (o *ManageVpsInfo) GetUiPinned() bool`
+
+GetUiPinned returns the UiPinned field if non-nil, zero value otherwise.
+
+### GetUiPinnedOk
+
+`func (o *ManageVpsInfo) GetUiPinnedOk() (*bool, bool)`
+
+GetUiPinnedOk returns a tuple with the UiPinned field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetUiPinned
+
+`func (o *ManageVpsInfo) SetUiPinned(v bool)`
+
+SetUiPinned sets UiPinned field to given value.
+
+### HasUiPinned
+
+`func (o *ManageVpsInfo) HasUiPinned() bool`
+
+HasUiPinned returns a boolean if a field has been set.
+
+### GetUiPinChangedAt
+
+`func (o *ManageVpsInfo) GetUiPinChangedAt() string`
+
+GetUiPinChangedAt returns the UiPinChangedAt field if non-nil, zero value otherwise.
+
+### GetUiPinChangedAtOk
+
+`func (o *ManageVpsInfo) GetUiPinChangedAtOk() (*string, bool)`
+
+GetUiPinChangedAtOk returns a tuple with the UiPinChangedAt field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetUiPinChangedAt
+
+`func (o *ManageVpsInfo) SetUiPinChangedAt(v string)`
+
+SetUiPinChangedAt sets UiPinChangedAt field to given value.
+
+### HasUiPinChangedAt
+
+`func (o *ManageVpsInfo) HasUiPinChangedAt() bool`
+
+HasUiPinChangedAt returns a boolean if a field has been set.
+
+### GetProjectId
+
+`func (o *ManageVpsInfo) GetProjectId() string`
+
+GetProjectId returns the ProjectId field if non-nil, zero value otherwise.
+
+### GetProjectIdOk
+
+`func (o *ManageVpsInfo) GetProjectIdOk() (*string, bool)`
+
+GetProjectIdOk returns a tuple with the ProjectId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetProjectId
+
+`func (o *ManageVpsInfo) SetProjectId(v string)`
+
+SetProjectId sets ProjectId field to given value.
+
+### HasProjectId
+
+`func (o *ManageVpsInfo) HasProjectId() bool`
+
+HasProjectId returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
