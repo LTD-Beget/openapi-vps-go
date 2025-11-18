@@ -36,6 +36,9 @@ Name | Type | Description | Notes
 **UiPinned** | Pointer to **bool** |  | [optional] 
 **UiPinChangedAt** | Pointer to **string** |  | [optional] 
 **ProjectId** | Pointer to **string** |  | [optional] 
+**SoftwareId** | Pointer to **string** |  | [optional] 
+**SnapshotId** | Pointer to **string** |  | [optional] 
+**ImageId** | Pointer to **string** |  | [optional] 
 
 ## Methods
 
@@ -855,6 +858,81 @@ SetProjectId sets ProjectId field to given value.
 `func (o *ManageVpsInfo) HasProjectId() bool`
 
 HasProjectId returns a boolean if a field has been set.
+
+### GetSoftwareId
+
+`func (o *ManageVpsInfo) GetSoftwareId() string`
+
+GetSoftwareId returns the SoftwareId field if non-nil, zero value otherwise.
+
+### GetSoftwareIdOk
+
+`func (o *ManageVpsInfo) GetSoftwareIdOk() (*string, bool)`
+
+GetSoftwareIdOk returns a tuple with the SoftwareId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSoftwareId
+
+`func (o *ManageVpsInfo) SetSoftwareId(v string)`
+
+SetSoftwareId sets SoftwareId field to given value.
+
+### HasSoftwareId
+
+`func (o *ManageVpsInfo) HasSoftwareId() bool`
+
+HasSoftwareId returns a boolean if a field has been set.
+
+### GetSnapshotId
+
+`func (o *ManageVpsInfo) GetSnapshotId() string`
+
+GetSnapshotId returns the SnapshotId field if non-nil, zero value otherwise.
+
+### GetSnapshotIdOk
+
+`func (o *ManageVpsInfo) GetSnapshotIdOk() (*string, bool)`
+
+GetSnapshotIdOk returns a tuple with the SnapshotId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSnapshotId
+
+`func (o *ManageVpsInfo) SetSnapshotId(v string)`
+
+SetSnapshotId sets SnapshotId field to given value.
+
+### HasSnapshotId
+
+`func (o *ManageVpsInfo) HasSnapshotId() bool`
+
+HasSnapshotId returns a boolean if a field has been set.
+
+### GetImageId
+
+`func (o *ManageVpsInfo) GetImageId() string`
+
+GetImageId returns the ImageId field if non-nil, zero value otherwise.
+
+### GetImageIdOk
+
+`func (o *ManageVpsInfo) GetImageIdOk() (*string, bool)`
+
+GetImageIdOk returns a tuple with the ImageId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetImageId
+
+`func (o *ManageVpsInfo) SetImageId(v string)`
+
+SetImageId sets ImageId field to given value.
+
+### HasImageId
+
+`func (o *ManageVpsInfo) HasImageId() bool`
+
+HasImageId returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

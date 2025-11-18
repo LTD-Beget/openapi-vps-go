@@ -1,7 +1,7 @@
 openapi: 3.0.3
 info:
   title: API Облачных серверов
-  version: v1.7.3
+  version: v1.7.4
 servers:
 - url: https://api.beget.com
 security:
@@ -2719,6 +2719,7 @@ components:
             region: region
             configurable: true
             group: group
+          snapshot_id: snapshot_id
           description: description
           restoring: true
           additional_ip_address:
@@ -2727,6 +2728,7 @@ components:
           unarchiving: true
           ui_pinned: true
           archived: true
+          software_id: software_id
           hostname: hostname
           disk_used: disk_used
           unblocking: true
@@ -2776,6 +2778,7 @@ components:
               mask: 9
           date_create: date_create
           region: region
+          image_id: image_id
           link_slug: link_slug
           status: UNKNOWN
         error:
@@ -2889,6 +2892,7 @@ components:
             region: region
             configurable: true
             group: group
+          snapshot_id: snapshot_id
           description: description
           restoring: true
           additional_ip_address:
@@ -2897,6 +2901,7 @@ components:
           unarchiving: true
           ui_pinned: true
           archived: true
+          software_id: software_id
           hostname: hostname
           disk_used: disk_used
           unblocking: true
@@ -2946,6 +2951,7 @@ components:
               mask: 9
           date_create: date_create
           region: region
+          image_id: image_id
           link_slug: link_slug
           status: UNKNOWN
         error:
@@ -3068,6 +3074,7 @@ components:
             region: region
             configurable: true
             group: group
+          snapshot_id: snapshot_id
           description: description
           restoring: true
           additional_ip_address:
@@ -3076,6 +3083,7 @@ components:
           unarchiving: true
           ui_pinned: true
           archived: true
+          software_id: software_id
           hostname: hostname
           disk_used: disk_used
           unblocking: true
@@ -3125,6 +3133,7 @@ components:
               mask: 9
           date_create: date_create
           region: region
+          image_id: image_id
           link_slug: link_slug
           status: UNKNOWN
         error:
@@ -3249,6 +3258,7 @@ components:
             region: region
             configurable: true
             group: group
+          snapshot_id: snapshot_id
           description: description
           restoring: true
           additional_ip_address:
@@ -3257,6 +3267,7 @@ components:
           unarchiving: true
           ui_pinned: true
           archived: true
+          software_id: software_id
           hostname: hostname
           disk_used: disk_used
           unblocking: true
@@ -3306,6 +3317,7 @@ components:
               mask: 9
           date_create: date_create
           region: region
+          image_id: image_id
           link_slug: link_slug
           status: UNKNOWN
         error:
@@ -3428,6 +3440,7 @@ components:
             region: region
             configurable: true
             group: group
+          snapshot_id: snapshot_id
           description: description
           restoring: true
           additional_ip_address:
@@ -3436,6 +3449,7 @@ components:
           unarchiving: true
           ui_pinned: true
           archived: true
+          software_id: software_id
           hostname: hostname
           disk_used: disk_used
           unblocking: true
@@ -3485,6 +3499,7 @@ components:
               mask: 9
           date_create: date_create
           region: region
+          image_id: image_id
           link_slug: link_slug
           status: UNKNOWN
         error:
@@ -3608,6 +3623,7 @@ components:
             region: region
             configurable: true
             group: group
+          snapshot_id: snapshot_id
           description: description
           restoring: true
           additional_ip_address:
@@ -3616,6 +3632,7 @@ components:
           unarchiving: true
           ui_pinned: true
           archived: true
+          software_id: software_id
           hostname: hostname
           disk_used: disk_used
           unblocking: true
@@ -3665,6 +3682,7 @@ components:
               mask: 9
           date_create: date_create
           region: region
+          image_id: image_id
           link_slug: link_slug
           status: UNKNOWN
         error:
@@ -3783,6 +3801,7 @@ components:
             region: region
             configurable: true
             group: group
+          snapshot_id: snapshot_id
           description: description
           restoring: true
           additional_ip_address:
@@ -3791,6 +3810,7 @@ components:
           unarchiving: true
           ui_pinned: true
           archived: true
+          software_id: software_id
           hostname: hostname
           disk_used: disk_used
           unblocking: true
@@ -3840,6 +3860,7 @@ components:
               mask: 9
           date_create: date_create
           region: region
+          image_id: image_id
           link_slug: link_slug
           status: UNKNOWN
         error:
@@ -4039,6 +4060,7 @@ components:
             region: region
             configurable: true
             group: group
+          snapshot_id: snapshot_id
           description: description
           restoring: true
           additional_ip_address:
@@ -4047,6 +4069,7 @@ components:
           unarchiving: true
           ui_pinned: true
           archived: true
+          software_id: software_id
           hostname: hostname
           disk_used: disk_used
           unblocking: true
@@ -4096,6 +4119,7 @@ components:
               mask: 9
           date_create: date_create
           region: region
+          image_id: image_id
           link_slug: link_slug
           status: UNKNOWN
         error:
@@ -4306,6 +4330,7 @@ components:
             region: region
             configurable: true
             group: group
+          snapshot_id: snapshot_id
           description: description
           restoring: true
           additional_ip_address:
@@ -4314,6 +4339,7 @@ components:
           unarchiving: true
           ui_pinned: true
           archived: true
+          software_id: software_id
           hostname: hostname
           disk_used: disk_used
           unblocking: true
@@ -4363,6 +4389,7 @@ components:
               mask: 9
           date_create: date_create
           region: region
+          image_id: image_id
           link_slug: link_slug
           status: UNKNOWN
         error:
@@ -4475,6 +4502,7 @@ components:
             region: region
             configurable: true
             group: group
+          snapshot_id: snapshot_id
           description: description
           restoring: true
           additional_ip_address:
@@ -4483,6 +4511,7 @@ components:
           unarchiving: true
           ui_pinned: true
           archived: true
+          software_id: software_id
           hostname: hostname
           disk_used: disk_used
           unblocking: true
@@ -4532,6 +4561,7 @@ components:
               mask: 9
           date_create: date_create
           region: region
+          image_id: image_id
           link_slug: link_slug
           status: UNKNOWN
         error:
@@ -4644,6 +4674,7 @@ components:
             region: region
             configurable: true
             group: group
+          snapshot_id: snapshot_id
           description: description
           restoring: true
           additional_ip_address:
@@ -4652,6 +4683,7 @@ components:
           unarchiving: true
           ui_pinned: true
           archived: true
+          software_id: software_id
           hostname: hostname
           disk_used: disk_used
           unblocking: true
@@ -4701,6 +4733,7 @@ components:
               mask: 9
           date_create: date_create
           region: region
+          image_id: image_id
           link_slug: link_slug
           status: UNKNOWN
         error:
@@ -4814,6 +4847,7 @@ components:
             region: region
             configurable: true
             group: group
+          snapshot_id: snapshot_id
           description: description
           restoring: true
           additional_ip_address:
@@ -4822,6 +4856,7 @@ components:
           unarchiving: true
           ui_pinned: true
           archived: true
+          software_id: software_id
           hostname: hostname
           disk_used: disk_used
           unblocking: true
@@ -4871,6 +4906,7 @@ components:
               mask: 9
           date_create: date_create
           region: region
+          image_id: image_id
           link_slug: link_slug
           status: UNKNOWN
       properties:
@@ -5074,6 +5110,7 @@ components:
             region: region
             configurable: true
             group: group
+          snapshot_id: snapshot_id
           description: description
           restoring: true
           additional_ip_address:
@@ -5082,6 +5119,7 @@ components:
           unarchiving: true
           ui_pinned: true
           archived: true
+          software_id: software_id
           hostname: hostname
           disk_used: disk_used
           unblocking: true
@@ -5131,6 +5169,7 @@ components:
               mask: 9
           date_create: date_create
           region: region
+          image_id: image_id
           link_slug: link_slug
           status: UNKNOWN
       properties:
@@ -5300,6 +5339,7 @@ components:
             region: region
             configurable: true
             group: group
+          snapshot_id: snapshot_id
           description: description
           restoring: true
           additional_ip_address:
@@ -5308,6 +5348,7 @@ components:
           unarchiving: true
           ui_pinned: true
           archived: true
+          software_id: software_id
           hostname: hostname
           disk_used: disk_used
           unblocking: true
@@ -5357,6 +5398,7 @@ components:
               mask: 9
           date_create: date_create
           region: region
+          image_id: image_id
           link_slug: link_slug
           status: UNKNOWN
         - ui_pin_changed_at: ui_pin_changed_at
@@ -5443,6 +5485,7 @@ components:
             region: region
             configurable: true
             group: group
+          snapshot_id: snapshot_id
           description: description
           restoring: true
           additional_ip_address:
@@ -5451,6 +5494,7 @@ components:
           unarchiving: true
           ui_pinned: true
           archived: true
+          software_id: software_id
           hostname: hostname
           disk_used: disk_used
           unblocking: true
@@ -5500,6 +5544,7 @@ components:
               mask: 9
           date_create: date_create
           region: region
+          image_id: image_id
           link_slug: link_slug
           status: UNKNOWN
       properties:
@@ -5722,6 +5767,7 @@ components:
             region: region
             configurable: true
             group: group
+          snapshot_id: snapshot_id
           description: description
           restoring: true
           additional_ip_address:
@@ -5730,6 +5776,7 @@ components:
           unarchiving: true
           ui_pinned: true
           archived: true
+          software_id: software_id
           hostname: hostname
           disk_used: disk_used
           unblocking: true
@@ -5779,6 +5826,7 @@ components:
               mask: 9
           date_create: date_create
           region: region
+          image_id: image_id
           link_slug: link_slug
           status: UNKNOWN
         error:
@@ -5909,6 +5957,7 @@ components:
             region: region
             configurable: true
             group: group
+          snapshot_id: snapshot_id
           description: description
           restoring: true
           additional_ip_address:
@@ -5917,6 +5966,7 @@ components:
           unarchiving: true
           ui_pinned: true
           archived: true
+          software_id: software_id
           hostname: hostname
           disk_used: disk_used
           unblocking: true
@@ -5966,6 +6016,7 @@ components:
               mask: 9
           date_create: date_create
           region: region
+          image_id: image_id
           link_slug: link_slug
           status: UNKNOWN
         error:
@@ -6167,6 +6218,7 @@ components:
             region: region
             configurable: true
             group: group
+          snapshot_id: snapshot_id
           description: description
           restoring: true
           additional_ip_address:
@@ -6175,6 +6227,7 @@ components:
           unarchiving: true
           ui_pinned: true
           archived: true
+          software_id: software_id
           hostname: hostname
           disk_used: disk_used
           unblocking: true
@@ -6224,6 +6277,7 @@ components:
               mask: 9
           date_create: date_create
           region: region
+          image_id: image_id
           link_slug: link_slug
           status: UNKNOWN
         error:
@@ -6363,6 +6417,7 @@ components:
             region: region
             configurable: true
             group: group
+          snapshot_id: snapshot_id
           description: description
           restoring: true
           additional_ip_address:
@@ -6371,6 +6426,7 @@ components:
           unarchiving: true
           ui_pinned: true
           archived: true
+          software_id: software_id
           hostname: hostname
           disk_used: disk_used
           unblocking: true
@@ -6420,6 +6476,7 @@ components:
               mask: 9
           date_create: date_create
           region: region
+          image_id: image_id
           link_slug: link_slug
           status: UNKNOWN
         error:
@@ -6533,6 +6590,7 @@ components:
             region: region
             configurable: true
             group: group
+          snapshot_id: snapshot_id
           description: description
           restoring: true
           additional_ip_address:
@@ -6541,6 +6599,7 @@ components:
           unarchiving: true
           ui_pinned: true
           archived: true
+          software_id: software_id
           hostname: hostname
           disk_used: disk_used
           unblocking: true
@@ -6590,6 +6649,7 @@ components:
               mask: 9
           date_create: date_create
           region: region
+          image_id: image_id
           link_slug: link_slug
           status: UNKNOWN
         error:
@@ -6713,6 +6773,7 @@ components:
             region: region
             configurable: true
             group: group
+          snapshot_id: snapshot_id
           description: description
           restoring: true
           additional_ip_address:
@@ -6721,6 +6782,7 @@ components:
           unarchiving: true
           ui_pinned: true
           archived: true
+          software_id: software_id
           hostname: hostname
           disk_used: disk_used
           unblocking: true
@@ -6770,6 +6832,7 @@ components:
               mask: 9
           date_create: date_create
           region: region
+          image_id: image_id
           link_slug: link_slug
           status: UNKNOWN
         error:
@@ -6883,6 +6946,7 @@ components:
             region: region
             configurable: true
             group: group
+          snapshot_id: snapshot_id
           description: description
           restoring: true
           additional_ip_address:
@@ -6891,6 +6955,7 @@ components:
           unarchiving: true
           ui_pinned: true
           archived: true
+          software_id: software_id
           hostname: hostname
           disk_used: disk_used
           unblocking: true
@@ -6940,6 +7005,7 @@ components:
               mask: 9
           date_create: date_create
           region: region
+          image_id: image_id
           link_slug: link_slug
           status: UNKNOWN
         error:
@@ -7053,6 +7119,7 @@ components:
             region: region
             configurable: true
             group: group
+          snapshot_id: snapshot_id
           description: description
           restoring: true
           additional_ip_address:
@@ -7061,6 +7128,7 @@ components:
           unarchiving: true
           ui_pinned: true
           archived: true
+          software_id: software_id
           hostname: hostname
           disk_used: disk_used
           unblocking: true
@@ -7110,6 +7178,7 @@ components:
               mask: 9
           date_create: date_create
           region: region
+          image_id: image_id
           link_slug: link_slug
           status: UNKNOWN
         error:
@@ -7223,6 +7292,7 @@ components:
             region: region
             configurable: true
             group: group
+          snapshot_id: snapshot_id
           description: description
           restoring: true
           additional_ip_address:
@@ -7231,6 +7301,7 @@ components:
           unarchiving: true
           ui_pinned: true
           archived: true
+          software_id: software_id
           hostname: hostname
           disk_used: disk_used
           unblocking: true
@@ -7280,6 +7351,7 @@ components:
               mask: 9
           date_create: date_create
           region: region
+          image_id: image_id
           link_slug: link_slug
           status: UNKNOWN
         error:
@@ -7393,6 +7465,7 @@ components:
             region: region
             configurable: true
             group: group
+          snapshot_id: snapshot_id
           description: description
           restoring: true
           additional_ip_address:
@@ -7401,6 +7474,7 @@ components:
           unarchiving: true
           ui_pinned: true
           archived: true
+          software_id: software_id
           hostname: hostname
           disk_used: disk_used
           unblocking: true
@@ -7450,6 +7524,7 @@ components:
               mask: 9
           date_create: date_create
           region: region
+          image_id: image_id
           link_slug: link_slug
           status: UNKNOWN
       properties:
@@ -7554,6 +7629,7 @@ components:
             region: region
             configurable: true
             group: group
+          snapshot_id: snapshot_id
           description: description
           restoring: true
           additional_ip_address:
@@ -7562,6 +7638,7 @@ components:
           unarchiving: true
           ui_pinned: true
           archived: true
+          software_id: software_id
           hostname: hostname
           disk_used: disk_used
           unblocking: true
@@ -7611,6 +7688,7 @@ components:
               mask: 9
           date_create: date_create
           region: region
+          image_id: image_id
           link_slug: link_slug
           status: UNKNOWN
         error:
@@ -7773,6 +7851,7 @@ components:
           region: region
           configurable: true
           group: group
+        snapshot_id: snapshot_id
         description: description
         restoring: true
         additional_ip_address:
@@ -7781,6 +7860,7 @@ components:
         unarchiving: true
         ui_pinned: true
         archived: true
+        software_id: software_id
         hostname: hostname
         disk_used: disk_used
         unblocking: true
@@ -7830,6 +7910,7 @@ components:
             mask: 9
         date_create: date_create
         region: region
+        image_id: image_id
         link_slug: link_slug
         status: UNKNOWN
       properties:
@@ -7915,6 +7996,12 @@ components:
         ui_pin_changed_at:
           type: string
         project_id:
+          type: string
+        software_id:
+          type: string
+        snapshot_id:
+          type: string
+        image_id:
           type: string
       type: object
     Marketplace_DomainField:
