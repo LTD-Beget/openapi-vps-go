@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Code** | Pointer to **string** |  | [optional] 
 **Message** | Pointer to **string** |  | [optional] 
+**VpsNetworkUse** | Pointer to [**NetworkRemovePrivateNetworkResponseErrorVpsNetworkUseError**](NetworkRemovePrivateNetworkResponseErrorVpsNetworkUseError.md) |  | [optional] 
 
 ## Methods
 
@@ -75,6 +76,31 @@ SetMessage sets Message field to given value.
 `func (o *NetworkRemovePrivateNetworkResponseError) HasMessage() bool`
 
 HasMessage returns a boolean if a field has been set.
+
+### GetVpsNetworkUse
+
+`func (o *NetworkRemovePrivateNetworkResponseError) GetVpsNetworkUse() NetworkRemovePrivateNetworkResponseErrorVpsNetworkUseError`
+
+GetVpsNetworkUse returns the VpsNetworkUse field if non-nil, zero value otherwise.
+
+### GetVpsNetworkUseOk
+
+`func (o *NetworkRemovePrivateNetworkResponseError) GetVpsNetworkUseOk() (*NetworkRemovePrivateNetworkResponseErrorVpsNetworkUseError, bool)`
+
+GetVpsNetworkUseOk returns a tuple with the VpsNetworkUse field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetVpsNetworkUse
+
+`func (o *NetworkRemovePrivateNetworkResponseError) SetVpsNetworkUse(v NetworkRemovePrivateNetworkResponseErrorVpsNetworkUseError)`
+
+SetVpsNetworkUse sets VpsNetworkUse field to given value.
+
+### HasVpsNetworkUse
+
+`func (o *NetworkRemovePrivateNetworkResponseError) HasVpsNetworkUse() bool`
+
+HasVpsNetworkUse returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

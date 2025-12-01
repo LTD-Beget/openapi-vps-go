@@ -1,7 +1,7 @@
 openapi: 3.0.3
 info:
   title: API Облачных серверов
-  version: v1.7.4
+  version: v1.7.5
 servers:
 - url: https://api.beget.com
 security:
@@ -9143,6 +9143,10 @@ components:
         error:
           code: INTERNAL_ERROR
           message: message
+          vps_network_use:
+            vps_id:
+            - vps_id
+            - vps_id
         network:
           subnet: subnet
           id: id
@@ -9158,14 +9162,32 @@ components:
       example:
         code: INTERNAL_ERROR
         message: message
+        vps_network_use:
+          vps_id:
+          - vps_id
+          - vps_id
       properties:
         code:
           enum:
           - INTERNAL_ERROR
+          - NETWORK_IN_USE
           format: enum
           type: string
         message:
           type: string
+        vps_network_use:
+          $ref: '#/components/schemas/Network_RemovePrivateNetworkResponse_Error_VpsNetworkUseError'
+      type: object
+    Network_RemovePrivateNetworkResponse_Error_VpsNetworkUseError:
+      example:
+        vps_id:
+        - vps_id
+        - vps_id
+      properties:
+        vps_id:
+          items:
+            type: string
+          type: array
       type: object
     Network_SuggestPrivateAddressRequest:
       properties:
