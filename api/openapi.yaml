@@ -1,7 +1,7 @@
 openapi: 3.0.3
 info:
   title: API Облачных серверов
-  version: v1.7.6
+  version: v1.7.7
 servers:
 - url: https://api.beget.com
 security:
