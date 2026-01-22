@@ -10,469 +10,469 @@ Testing ManageServiceApiService
 package begetOpenapiVps
 
 import (
-    "context"
-    "github.com/stretchr/testify/assert"
-    "github.com/stretchr/testify/require"
-    "testing"
-    openapiclient "./openapi"
+	"context"
+	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
+	"testing"
+	openapiclient "github.com/LTD-Beget/openapi-vps-go"
 )
 
 func Test_begetOpenapiVps_ManageServiceApiService(t *testing.T) {
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
 
-    t.Run("Test ManageServiceApiService ManageServiceAttachIpAddress", func(t *testing.T) {
+	t.Run("Test ManageServiceApiService ManageServiceAttachIpAddress", func(t *testing.T) {
 
-        t.Skip("skip test")  // remove to run test
+		t.Skip("skip test")  // remove to run test
 
-        var id string
-        var ipAddress string
+		var id string
+		var ipAddress string
 
-        resp, httpRes, err := apiClient.ManageServiceApi.ManageServiceAttachIpAddress(context.Background(), id, ipAddress).Execute()
+		resp, httpRes, err := apiClient.ManageServiceApi.ManageServiceAttachIpAddress(context.Background(), id, ipAddress).Execute()
 
-        require.Nil(t, err)
-        require.NotNil(t, resp)
-        assert.Equal(t, 200, httpRes.StatusCode)
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
 
-    })
+	})
 
-    t.Run("Test ManageServiceApiService ManageServiceAttachSshKey", func(t *testing.T) {
+	t.Run("Test ManageServiceApiService ManageServiceAttachSshKey", func(t *testing.T) {
 
-        t.Skip("skip test")  // remove to run test
+		t.Skip("skip test")  // remove to run test
 
-        var id string
-        var sshKeyId int32
+		var id string
+		var sshKeyId int32
 
-        resp, httpRes, err := apiClient.ManageServiceApi.ManageServiceAttachSshKey(context.Background(), id, sshKeyId).Execute()
+		resp, httpRes, err := apiClient.ManageServiceApi.ManageServiceAttachSshKey(context.Background(), id, sshKeyId).Execute()
 
-        require.Nil(t, err)
-        require.NotNil(t, resp)
-        assert.Equal(t, 200, httpRes.StatusCode)
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
 
-    })
+	})
 
-    t.Run("Test ManageServiceApiService ManageServiceAttachToPrivateNetwork", func(t *testing.T) {
+	t.Run("Test ManageServiceApiService ManageServiceAttachToPrivateNetwork", func(t *testing.T) {
 
-        t.Skip("skip test")  // remove to run test
+		t.Skip("skip test")  // remove to run test
 
-        var id string
-        var networkId string
+		var id string
+		var networkId string
 
-        resp, httpRes, err := apiClient.ManageServiceApi.ManageServiceAttachToPrivateNetwork(context.Background(), id, networkId).Execute()
+		resp, httpRes, err := apiClient.ManageServiceApi.ManageServiceAttachToPrivateNetwork(context.Background(), id, networkId).Execute()
 
-        require.Nil(t, err)
-        require.NotNil(t, resp)
-        assert.Equal(t, 200, httpRes.StatusCode)
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
 
-    })
+	})
 
-    t.Run("Test ManageServiceApiService ManageServiceBindProject", func(t *testing.T) {
+	t.Run("Test ManageServiceApiService ManageServiceBindProject", func(t *testing.T) {
 
-        t.Skip("skip test")  // remove to run test
+		t.Skip("skip test")  // remove to run test
 
-        var id string
+		var id string
 
-        resp, httpRes, err := apiClient.ManageServiceApi.ManageServiceBindProject(context.Background(), id).Execute()
+		resp, httpRes, err := apiClient.ManageServiceApi.ManageServiceBindProject(context.Background(), id).Execute()
 
-        require.Nil(t, err)
-        require.NotNil(t, resp)
-        assert.Equal(t, 200, httpRes.StatusCode)
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
 
-    })
+	})
 
-    t.Run("Test ManageServiceApiService ManageServiceChangeConfiguration", func(t *testing.T) {
+	t.Run("Test ManageServiceApiService ManageServiceChangeConfiguration", func(t *testing.T) {
 
-        t.Skip("skip test")  // remove to run test
+		t.Skip("skip test")  // remove to run test
 
-        var id string
+		var id string
 
-        resp, httpRes, err := apiClient.ManageServiceApi.ManageServiceChangeConfiguration(context.Background(), id).Execute()
+		resp, httpRes, err := apiClient.ManageServiceApi.ManageServiceChangeConfiguration(context.Background(), id).Execute()
 
-        require.Nil(t, err)
-        require.NotNil(t, resp)
-        assert.Equal(t, 200, httpRes.StatusCode)
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
 
-    })
+	})
 
-    t.Run("Test ManageServiceApiService ManageServiceChangePinned", func(t *testing.T) {
+	t.Run("Test ManageServiceApiService ManageServiceChangePinned", func(t *testing.T) {
 
-        t.Skip("skip test")  // remove to run test
+		t.Skip("skip test")  // remove to run test
 
-        var id string
+		var id string
 
-        resp, httpRes, err := apiClient.ManageServiceApi.ManageServiceChangePinned(context.Background(), id).Execute()
+		resp, httpRes, err := apiClient.ManageServiceApi.ManageServiceChangePinned(context.Background(), id).Execute()
 
-        require.Nil(t, err)
-        require.NotNil(t, resp)
-        assert.Equal(t, 200, httpRes.StatusCode)
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
 
-    })
+	})
 
-    t.Run("Test ManageServiceApiService ManageServiceChangeSshAccess", func(t *testing.T) {
+	t.Run("Test ManageServiceApiService ManageServiceChangeSshAccess", func(t *testing.T) {
 
-        t.Skip("skip test")  // remove to run test
+		t.Skip("skip test")  // remove to run test
 
-        var id string
+		var id string
 
-        resp, httpRes, err := apiClient.ManageServiceApi.ManageServiceChangeSshAccess(context.Background(), id).Execute()
+		resp, httpRes, err := apiClient.ManageServiceApi.ManageServiceChangeSshAccess(context.Background(), id).Execute()
 
-        require.Nil(t, err)
-        require.NotNil(t, resp)
-        assert.Equal(t, 200, httpRes.StatusCode)
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
 
-    })
+	})
 
-    t.Run("Test ManageServiceApiService ManageServiceCheckSoftwareRequirements", func(t *testing.T) {
+	t.Run("Test ManageServiceApiService ManageServiceCheckSoftwareRequirements", func(t *testing.T) {
 
-        t.Skip("skip test")  // remove to run test
+		t.Skip("skip test")  // remove to run test
 
-        resp, httpRes, err := apiClient.ManageServiceApi.ManageServiceCheckSoftwareRequirements(context.Background()).Execute()
+		resp, httpRes, err := apiClient.ManageServiceApi.ManageServiceCheckSoftwareRequirements(context.Background()).Execute()
 
-        require.Nil(t, err)
-        require.NotNil(t, resp)
-        assert.Equal(t, 200, httpRes.StatusCode)
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
 
-    })
+	})
 
-    t.Run("Test ManageServiceApiService ManageServiceCreateVps", func(t *testing.T) {
+	t.Run("Test ManageServiceApiService ManageServiceCreateVps", func(t *testing.T) {
 
-        t.Skip("skip test")  // remove to run test
+		t.Skip("skip test")  // remove to run test
 
-        resp, httpRes, err := apiClient.ManageServiceApi.ManageServiceCreateVps(context.Background()).Execute()
+		resp, httpRes, err := apiClient.ManageServiceApi.ManageServiceCreateVps(context.Background()).Execute()
 
-        require.Nil(t, err)
-        require.NotNil(t, resp)
-        assert.Equal(t, 200, httpRes.StatusCode)
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
 
-    })
+	})
 
-    t.Run("Test ManageServiceApiService ManageServiceDetachFromPrivateNetwork", func(t *testing.T) {
+	t.Run("Test ManageServiceApiService ManageServiceDetachFromPrivateNetwork", func(t *testing.T) {
 
-        t.Skip("skip test")  // remove to run test
+		t.Skip("skip test")  // remove to run test
 
-        var id string
-        var networkId string
+		var id string
+		var networkId string
 
-        resp, httpRes, err := apiClient.ManageServiceApi.ManageServiceDetachFromPrivateNetwork(context.Background(), id, networkId).Execute()
+		resp, httpRes, err := apiClient.ManageServiceApi.ManageServiceDetachFromPrivateNetwork(context.Background(), id, networkId).Execute()
 
-        require.Nil(t, err)
-        require.NotNil(t, resp)
-        assert.Equal(t, 200, httpRes.StatusCode)
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
 
-    })
+	})
 
-    t.Run("Test ManageServiceApiService ManageServiceDetachIpAddress", func(t *testing.T) {
+	t.Run("Test ManageServiceApiService ManageServiceDetachIpAddress", func(t *testing.T) {
 
-        t.Skip("skip test")  // remove to run test
+		t.Skip("skip test")  // remove to run test
 
-        var ipAddress string
+		var ipAddress string
 
-        resp, httpRes, err := apiClient.ManageServiceApi.ManageServiceDetachIpAddress(context.Background(), ipAddress).Execute()
+		resp, httpRes, err := apiClient.ManageServiceApi.ManageServiceDetachIpAddress(context.Background(), ipAddress).Execute()
 
-        require.Nil(t, err)
-        require.NotNil(t, resp)
-        assert.Equal(t, 200, httpRes.StatusCode)
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
 
-    })
+	})
 
-    t.Run("Test ManageServiceApiService ManageServiceDetachSshKey", func(t *testing.T) {
+	t.Run("Test ManageServiceApiService ManageServiceDetachSshKey", func(t *testing.T) {
 
-        t.Skip("skip test")  // remove to run test
+		t.Skip("skip test")  // remove to run test
 
-        var id string
-        var sshKeyId int32
+		var id string
+		var sshKeyId int32
 
-        resp, httpRes, err := apiClient.ManageServiceApi.ManageServiceDetachSshKey(context.Background(), id, sshKeyId).Execute()
+		resp, httpRes, err := apiClient.ManageServiceApi.ManageServiceDetachSshKey(context.Background(), id, sshKeyId).Execute()
 
-        require.Nil(t, err)
-        require.NotNil(t, resp)
-        assert.Equal(t, 200, httpRes.StatusCode)
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
 
-    })
+	})
 
-    t.Run("Test ManageServiceApiService ManageServiceDisablePostInstallAlert", func(t *testing.T) {
+	t.Run("Test ManageServiceApiService ManageServiceDisablePostInstallAlert", func(t *testing.T) {
 
-        t.Skip("skip test")  // remove to run test
+		t.Skip("skip test")  // remove to run test
 
-        var id string
+		var id string
 
-        resp, httpRes, err := apiClient.ManageServiceApi.ManageServiceDisablePostInstallAlert(context.Background(), id).Execute()
+		resp, httpRes, err := apiClient.ManageServiceApi.ManageServiceDisablePostInstallAlert(context.Background(), id).Execute()
 
-        require.Nil(t, err)
-        require.NotNil(t, resp)
-        assert.Equal(t, 200, httpRes.StatusCode)
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
 
-    })
+	})
 
-    t.Run("Test ManageServiceApiService ManageServiceGetAvailableConfiguration", func(t *testing.T) {
+	t.Run("Test ManageServiceApiService ManageServiceGetAvailableConfiguration", func(t *testing.T) {
 
-        t.Skip("skip test")  // remove to run test
+		t.Skip("skip test")  // remove to run test
 
-        resp, httpRes, err := apiClient.ManageServiceApi.ManageServiceGetAvailableConfiguration(context.Background()).Execute()
+		resp, httpRes, err := apiClient.ManageServiceApi.ManageServiceGetAvailableConfiguration(context.Background()).Execute()
 
-        require.Nil(t, err)
-        require.NotNil(t, resp)
-        assert.Equal(t, 200, httpRes.StatusCode)
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
 
-    })
+	})
 
-    t.Run("Test ManageServiceApiService ManageServiceGetFileManagerSettings", func(t *testing.T) {
+	t.Run("Test ManageServiceApiService ManageServiceGetFileManagerSettings", func(t *testing.T) {
 
-        t.Skip("skip test")  // remove to run test
+		t.Skip("skip test")  // remove to run test
 
-        var id string
+		var id string
 
-        resp, httpRes, err := apiClient.ManageServiceApi.ManageServiceGetFileManagerSettings(context.Background(), id).Execute()
+		resp, httpRes, err := apiClient.ManageServiceApi.ManageServiceGetFileManagerSettings(context.Background(), id).Execute()
 
-        require.Nil(t, err)
-        require.NotNil(t, resp)
-        assert.Equal(t, 200, httpRes.StatusCode)
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
 
-    })
+	})
 
-    t.Run("Test ManageServiceApiService ManageServiceGetHistory", func(t *testing.T) {
+	t.Run("Test ManageServiceApiService ManageServiceGetHistory", func(t *testing.T) {
 
-        t.Skip("skip test")  // remove to run test
+		t.Skip("skip test")  // remove to run test
 
-        var id string
+		var id string
 
-        resp, httpRes, err := apiClient.ManageServiceApi.ManageServiceGetHistory(context.Background(), id).Execute()
+		resp, httpRes, err := apiClient.ManageServiceApi.ManageServiceGetHistory(context.Background(), id).Execute()
 
-        require.Nil(t, err)
-        require.NotNil(t, resp)
-        assert.Equal(t, 200, httpRes.StatusCode)
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
 
-    })
+	})
 
-    t.Run("Test ManageServiceApiService ManageServiceGetInfo", func(t *testing.T) {
+	t.Run("Test ManageServiceApiService ManageServiceGetInfo", func(t *testing.T) {
 
-        t.Skip("skip test")  // remove to run test
+		t.Skip("skip test")  // remove to run test
 
-        var id string
+		var id string
 
-        resp, httpRes, err := apiClient.ManageServiceApi.ManageServiceGetInfo(context.Background(), id).Execute()
+		resp, httpRes, err := apiClient.ManageServiceApi.ManageServiceGetInfo(context.Background(), id).Execute()
 
-        require.Nil(t, err)
-        require.NotNil(t, resp)
-        assert.Equal(t, 200, httpRes.StatusCode)
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
 
-    })
+	})
 
-    t.Run("Test ManageServiceApiService ManageServiceGetInstalledSoftware", func(t *testing.T) {
+	t.Run("Test ManageServiceApiService ManageServiceGetInstalledSoftware", func(t *testing.T) {
 
-        t.Skip("skip test")  // remove to run test
+		t.Skip("skip test")  // remove to run test
 
-        var id string
+		var id string
 
-        resp, httpRes, err := apiClient.ManageServiceApi.ManageServiceGetInstalledSoftware(context.Background(), id).Execute()
+		resp, httpRes, err := apiClient.ManageServiceApi.ManageServiceGetInstalledSoftware(context.Background(), id).Execute()
 
-        require.Nil(t, err)
-        require.NotNil(t, resp)
-        assert.Equal(t, 200, httpRes.StatusCode)
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
 
-    })
+	})
 
-    t.Run("Test ManageServiceApiService ManageServiceGetList", func(t *testing.T) {
+	t.Run("Test ManageServiceApiService ManageServiceGetList", func(t *testing.T) {
 
-        t.Skip("skip test")  // remove to run test
+		t.Skip("skip test")  // remove to run test
 
-        resp, httpRes, err := apiClient.ManageServiceApi.ManageServiceGetList(context.Background()).Execute()
+		resp, httpRes, err := apiClient.ManageServiceApi.ManageServiceGetList(context.Background()).Execute()
 
-        require.Nil(t, err)
-        require.NotNil(t, resp)
-        assert.Equal(t, 200, httpRes.StatusCode)
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
 
-    })
+	})
 
-    t.Run("Test ManageServiceApiService ManageServiceGetRegionList", func(t *testing.T) {
+	t.Run("Test ManageServiceApiService ManageServiceGetRegionList", func(t *testing.T) {
 
-        t.Skip("skip test")  // remove to run test
+		t.Skip("skip test")  // remove to run test
 
-        resp, httpRes, err := apiClient.ManageServiceApi.ManageServiceGetRegionList(context.Background()).Execute()
+		resp, httpRes, err := apiClient.ManageServiceApi.ManageServiceGetRegionList(context.Background()).Execute()
 
-        require.Nil(t, err)
-        require.NotNil(t, resp)
-        assert.Equal(t, 200, httpRes.StatusCode)
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
 
-    })
+	})
 
-    t.Run("Test ManageServiceApiService ManageServiceGetStatuses", func(t *testing.T) {
+	t.Run("Test ManageServiceApiService ManageServiceGetStatuses", func(t *testing.T) {
 
-        t.Skip("skip test")  // remove to run test
+		t.Skip("skip test")  // remove to run test
 
-        resp, httpRes, err := apiClient.ManageServiceApi.ManageServiceGetStatuses(context.Background()).Execute()
+		resp, httpRes, err := apiClient.ManageServiceApi.ManageServiceGetStatuses(context.Background()).Execute()
 
-        require.Nil(t, err)
-        require.NotNil(t, resp)
-        assert.Equal(t, 200, httpRes.StatusCode)
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
 
-    })
+	})
 
-    t.Run("Test ManageServiceApiService ManageServiceRebootVps", func(t *testing.T) {
+	t.Run("Test ManageServiceApiService ManageServiceRebootVps", func(t *testing.T) {
 
-        t.Skip("skip test")  // remove to run test
+		t.Skip("skip test")  // remove to run test
 
-        var id string
+		var id string
 
-        resp, httpRes, err := apiClient.ManageServiceApi.ManageServiceRebootVps(context.Background(), id).Execute()
+		resp, httpRes, err := apiClient.ManageServiceApi.ManageServiceRebootVps(context.Background(), id).Execute()
 
-        require.Nil(t, err)
-        require.NotNil(t, resp)
-        assert.Equal(t, 200, httpRes.StatusCode)
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
 
-    })
+	})
 
-    t.Run("Test ManageServiceApiService ManageServiceReinstall", func(t *testing.T) {
+	t.Run("Test ManageServiceApiService ManageServiceReinstall", func(t *testing.T) {
 
-        t.Skip("skip test")  // remove to run test
+		t.Skip("skip test")  // remove to run test
 
-        var id string
+		var id string
 
-        resp, httpRes, err := apiClient.ManageServiceApi.ManageServiceReinstall(context.Background(), id).Execute()
+		resp, httpRes, err := apiClient.ManageServiceApi.ManageServiceReinstall(context.Background(), id).Execute()
 
-        require.Nil(t, err)
-        require.NotNil(t, resp)
-        assert.Equal(t, 200, httpRes.StatusCode)
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
 
-    })
+	})
 
-    t.Run("Test ManageServiceApiService ManageServiceRemoveVps", func(t *testing.T) {
+	t.Run("Test ManageServiceApiService ManageServiceRemoveVps", func(t *testing.T) {
 
-        t.Skip("skip test")  // remove to run test
+		t.Skip("skip test")  // remove to run test
 
-        var id string
+		var id string
 
-        resp, httpRes, err := apiClient.ManageServiceApi.ManageServiceRemoveVps(context.Background(), id).Execute()
+		resp, httpRes, err := apiClient.ManageServiceApi.ManageServiceRemoveVps(context.Background(), id).Execute()
 
-        require.Nil(t, err)
-        require.NotNil(t, resp)
-        assert.Equal(t, 200, httpRes.StatusCode)
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
 
-    })
+	})
 
-    t.Run("Test ManageServiceApiService ManageServiceReserveVpsSubdomain", func(t *testing.T) {
+	t.Run("Test ManageServiceApiService ManageServiceReserveVpsSubdomain", func(t *testing.T) {
 
-        t.Skip("skip test")  // remove to run test
+		t.Skip("skip test")  // remove to run test
 
-        resp, httpRes, err := apiClient.ManageServiceApi.ManageServiceReserveVpsSubdomain(context.Background()).Execute()
+		resp, httpRes, err := apiClient.ManageServiceApi.ManageServiceReserveVpsSubdomain(context.Background()).Execute()
 
-        require.Nil(t, err)
-        require.NotNil(t, resp)
-        assert.Equal(t, 200, httpRes.StatusCode)
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
 
-    })
+	})
 
-    t.Run("Test ManageServiceApiService ManageServiceResetPassword", func(t *testing.T) {
+	t.Run("Test ManageServiceApiService ManageServiceResetPassword", func(t *testing.T) {
 
-        t.Skip("skip test")  // remove to run test
+		t.Skip("skip test")  // remove to run test
 
-        var id string
+		var id string
 
-        resp, httpRes, err := apiClient.ManageServiceApi.ManageServiceResetPassword(context.Background(), id).Execute()
+		resp, httpRes, err := apiClient.ManageServiceApi.ManageServiceResetPassword(context.Background(), id).Execute()
 
-        require.Nil(t, err)
-        require.NotNil(t, resp)
-        assert.Equal(t, 200, httpRes.StatusCode)
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
 
-    })
+	})
 
-    t.Run("Test ManageServiceApiService ManageServiceResetVps", func(t *testing.T) {
+	t.Run("Test ManageServiceApiService ManageServiceResetVps", func(t *testing.T) {
 
-        t.Skip("skip test")  // remove to run test
+		t.Skip("skip test")  // remove to run test
 
-        var id string
+		var id string
 
-        resp, httpRes, err := apiClient.ManageServiceApi.ManageServiceResetVps(context.Background(), id).Execute()
+		resp, httpRes, err := apiClient.ManageServiceApi.ManageServiceResetVps(context.Background(), id).Execute()
 
-        require.Nil(t, err)
-        require.NotNil(t, resp)
-        assert.Equal(t, 200, httpRes.StatusCode)
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
 
-    })
+	})
 
-    t.Run("Test ManageServiceApiService ManageServiceStartRescue", func(t *testing.T) {
+	t.Run("Test ManageServiceApiService ManageServiceStartRescue", func(t *testing.T) {
 
-        t.Skip("skip test")  // remove to run test
+		t.Skip("skip test")  // remove to run test
 
-        var id string
+		var id string
 
-        resp, httpRes, err := apiClient.ManageServiceApi.ManageServiceStartRescue(context.Background(), id).Execute()
+		resp, httpRes, err := apiClient.ManageServiceApi.ManageServiceStartRescue(context.Background(), id).Execute()
 
-        require.Nil(t, err)
-        require.NotNil(t, resp)
-        assert.Equal(t, 200, httpRes.StatusCode)
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
 
-    })
+	})
 
-    t.Run("Test ManageServiceApiService ManageServiceStartVps", func(t *testing.T) {
+	t.Run("Test ManageServiceApiService ManageServiceStartVps", func(t *testing.T) {
 
-        t.Skip("skip test")  // remove to run test
+		t.Skip("skip test")  // remove to run test
 
-        var id string
+		var id string
 
-        resp, httpRes, err := apiClient.ManageServiceApi.ManageServiceStartVps(context.Background(), id).Execute()
+		resp, httpRes, err := apiClient.ManageServiceApi.ManageServiceStartVps(context.Background(), id).Execute()
 
-        require.Nil(t, err)
-        require.NotNil(t, resp)
-        assert.Equal(t, 200, httpRes.StatusCode)
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
 
-    })
+	})
 
-    t.Run("Test ManageServiceApiService ManageServiceStopRescue", func(t *testing.T) {
+	t.Run("Test ManageServiceApiService ManageServiceStopRescue", func(t *testing.T) {
 
-        t.Skip("skip test")  // remove to run test
+		t.Skip("skip test")  // remove to run test
 
-        var id string
+		var id string
 
-        resp, httpRes, err := apiClient.ManageServiceApi.ManageServiceStopRescue(context.Background(), id).Execute()
+		resp, httpRes, err := apiClient.ManageServiceApi.ManageServiceStopRescue(context.Background(), id).Execute()
 
-        require.Nil(t, err)
-        require.NotNil(t, resp)
-        assert.Equal(t, 200, httpRes.StatusCode)
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
 
-    })
+	})
 
-    t.Run("Test ManageServiceApiService ManageServiceStopVps", func(t *testing.T) {
+	t.Run("Test ManageServiceApiService ManageServiceStopVps", func(t *testing.T) {
 
-        t.Skip("skip test")  // remove to run test
+		t.Skip("skip test")  // remove to run test
 
-        var id string
+		var id string
 
-        resp, httpRes, err := apiClient.ManageServiceApi.ManageServiceStopVps(context.Background(), id).Execute()
+		resp, httpRes, err := apiClient.ManageServiceApi.ManageServiceStopVps(context.Background(), id).Execute()
 
-        require.Nil(t, err)
-        require.NotNil(t, resp)
-        assert.Equal(t, 200, httpRes.StatusCode)
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
 
-    })
+	})
 
-    t.Run("Test ManageServiceApiService ManageServiceUnarchive", func(t *testing.T) {
+	t.Run("Test ManageServiceApiService ManageServiceUnarchive", func(t *testing.T) {
 
-        t.Skip("skip test")  // remove to run test
+		t.Skip("skip test")  // remove to run test
 
-        var id string
+		var id string
 
-        resp, httpRes, err := apiClient.ManageServiceApi.ManageServiceUnarchive(context.Background(), id).Execute()
+		resp, httpRes, err := apiClient.ManageServiceApi.ManageServiceUnarchive(context.Background(), id).Execute()
 
-        require.Nil(t, err)
-        require.NotNil(t, resp)
-        assert.Equal(t, 200, httpRes.StatusCode)
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
 
-    })
+	})
 
-    t.Run("Test ManageServiceApiService ManageServiceUpdateInfo", func(t *testing.T) {
+	t.Run("Test ManageServiceApiService ManageServiceUpdateInfo", func(t *testing.T) {
 
-        t.Skip("skip test")  // remove to run test
+		t.Skip("skip test")  // remove to run test
 
-        var id string
+		var id string
 
-        resp, httpRes, err := apiClient.ManageServiceApi.ManageServiceUpdateInfo(context.Background(), id).Execute()
+		resp, httpRes, err := apiClient.ManageServiceApi.ManageServiceUpdateInfo(context.Background(), id).Execute()
 
-        require.Nil(t, err)
-        require.NotNil(t, resp)
-        assert.Equal(t, 200, httpRes.StatusCode)
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
 
-    })
+	})
 
 }

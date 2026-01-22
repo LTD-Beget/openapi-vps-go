@@ -24,7 +24,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/LTD-Beget/openapi-vps-go"
 )
 
 func main() {
@@ -104,7 +104,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/LTD-Beget/openapi-vps-go"
 )
 
 func main() {

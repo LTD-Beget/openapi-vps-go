@@ -10,85 +10,85 @@ Testing BackupServiceApiService
 package begetOpenapiVps
 
 import (
-    "context"
-    "github.com/stretchr/testify/assert"
-    "github.com/stretchr/testify/require"
-    "testing"
-    openapiclient "./openapi"
+	"context"
+	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
+	"testing"
+	openapiclient "github.com/LTD-Beget/openapi-vps-go"
 )
 
 func Test_begetOpenapiVps_BackupServiceApiService(t *testing.T) {
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
 
-    t.Run("Test BackupServiceApiService BackupServiceGetAvailableCopies", func(t *testing.T) {
+	t.Run("Test BackupServiceApiService BackupServiceGetAvailableCopies", func(t *testing.T) {
 
-        t.Skip("skip test")  // remove to run test
+		t.Skip("skip test")  // remove to run test
 
-        resp, httpRes, err := apiClient.BackupServiceApi.BackupServiceGetAvailableCopies(context.Background()).Execute()
+		resp, httpRes, err := apiClient.BackupServiceApi.BackupServiceGetAvailableCopies(context.Background()).Execute()
 
-        require.Nil(t, err)
-        require.NotNil(t, resp)
-        assert.Equal(t, 200, httpRes.StatusCode)
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
 
-    })
+	})
 
-    t.Run("Test BackupServiceApiService BackupServiceGetBackupFileList", func(t *testing.T) {
+	t.Run("Test BackupServiceApiService BackupServiceGetBackupFileList", func(t *testing.T) {
 
-        t.Skip("skip test")  // remove to run test
+		t.Skip("skip test")  // remove to run test
 
-        var id string
-        var copyId string
+		var id string
+		var copyId string
 
-        resp, httpRes, err := apiClient.BackupServiceApi.BackupServiceGetBackupFileList(context.Background(), id, copyId).Execute()
+		resp, httpRes, err := apiClient.BackupServiceApi.BackupServiceGetBackupFileList(context.Background(), id, copyId).Execute()
 
-        require.Nil(t, err)
-        require.NotNil(t, resp)
-        assert.Equal(t, 200, httpRes.StatusCode)
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
 
-    })
+	})
 
-    t.Run("Test BackupServiceApiService BackupServiceGetOrders", func(t *testing.T) {
+	t.Run("Test BackupServiceApiService BackupServiceGetOrders", func(t *testing.T) {
 
-        t.Skip("skip test")  // remove to run test
+		t.Skip("skip test")  // remove to run test
 
-        resp, httpRes, err := apiClient.BackupServiceApi.BackupServiceGetOrders(context.Background()).Execute()
+		resp, httpRes, err := apiClient.BackupServiceApi.BackupServiceGetOrders(context.Background()).Execute()
 
-        require.Nil(t, err)
-        require.NotNil(t, resp)
-        assert.Equal(t, 200, httpRes.StatusCode)
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
 
-    })
+	})
 
-    t.Run("Test BackupServiceApiService BackupServiceRestoreFile", func(t *testing.T) {
+	t.Run("Test BackupServiceApiService BackupServiceRestoreFile", func(t *testing.T) {
 
-        t.Skip("skip test")  // remove to run test
+		t.Skip("skip test")  // remove to run test
 
-        var id string
-        var copyId string
+		var id string
+		var copyId string
 
-        resp, httpRes, err := apiClient.BackupServiceApi.BackupServiceRestoreFile(context.Background(), id, copyId).Execute()
+		resp, httpRes, err := apiClient.BackupServiceApi.BackupServiceRestoreFile(context.Background(), id, copyId).Execute()
 
-        require.Nil(t, err)
-        require.NotNil(t, resp)
-        assert.Equal(t, 200, httpRes.StatusCode)
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
 
-    })
+	})
 
-    t.Run("Test BackupServiceApiService BackupServiceRestoreServer", func(t *testing.T) {
+	t.Run("Test BackupServiceApiService BackupServiceRestoreServer", func(t *testing.T) {
 
-        t.Skip("skip test")  // remove to run test
+		t.Skip("skip test")  // remove to run test
 
-        var id string
-        var copyId string
+		var id string
+		var copyId string
 
-        resp, httpRes, err := apiClient.BackupServiceApi.BackupServiceRestoreServer(context.Background(), id, copyId).Execute()
+		resp, httpRes, err := apiClient.BackupServiceApi.BackupServiceRestoreServer(context.Background(), id, copyId).Execute()
 
-        require.Nil(t, err)
-        require.NotNil(t, resp)
-        assert.Equal(t, 200, httpRes.StatusCode)
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
 
-    })
+	})
 
 }
