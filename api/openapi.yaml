@@ -1,7 +1,7 @@
 openapi: 3.0.3
 info:
   title: API Облачных серверов
-  version: v1.7.8
+  version: v1.7.9
 servers:
 - url: https://api.beget.com
 security:
@@ -4187,6 +4187,8 @@ components:
           - BLACKLISTED_PASSWORD
           - INVALID_LINK_SLUG
           - NOT_ENOUGH_SPACE
+          - SOFTWARE_TEMPORARY_UNAVAILABLE
+          - IMAGE_REGION_MISMATCH
           format: enum
           type: string
         message:
@@ -8180,6 +8182,7 @@ components:
           description: description
           display_name: display_name
           version: version
+          is_available: true
           license:
           - additional_info: additional_info
             additional_info_en: additional_info_en
@@ -8367,6 +8370,7 @@ components:
           description: description
           display_name: display_name
           version: version
+          is_available: true
           license:
           - additional_info: additional_info
             additional_info_en: additional_info_en
@@ -8547,6 +8551,7 @@ components:
           description: description
           display_name: display_name
           version: version
+          is_available: true
           license:
           - additional_info: additional_info
             additional_info_en: additional_info_en
@@ -8757,6 +8762,7 @@ components:
         description: description
         display_name: display_name
         version: version
+        is_available: true
         license:
         - additional_info: additional_info
           additional_info_en: additional_info_en
@@ -8953,6 +8959,8 @@ components:
           items:
             $ref: '#/components/schemas/Structures_SoftwareLicense'
           type: array
+        is_available:
+          type: boolean
       type: object
     Marketplace_SoftwareInfo_Requirements:
       example:

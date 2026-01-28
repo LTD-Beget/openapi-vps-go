@@ -18,6 +18,7 @@ Name | Type | Description | Notes
 **DocumentationSlug** | Pointer to **string** |  | [optional] 
 **UnattendedInstallAvailable** | Pointer to **bool** |  | [optional] 
 **License** | Pointer to [**[]StructuresSoftwareLicense**](StructuresSoftwareLicense.md) |  | [optional] 
+**IsAvailable** | Pointer to **bool** |  | [optional] 
 
 ## Methods
 
@@ -387,6 +388,31 @@ SetLicense sets License field to given value.
 `func (o *MarketplaceSoftwareInfo) HasLicense() bool`
 
 HasLicense returns a boolean if a field has been set.
+
+### GetIsAvailable
+
+`func (o *MarketplaceSoftwareInfo) GetIsAvailable() bool`
+
+GetIsAvailable returns the IsAvailable field if non-nil, zero value otherwise.
+
+### GetIsAvailableOk
+
+`func (o *MarketplaceSoftwareInfo) GetIsAvailableOk() (*bool, bool)`
+
+GetIsAvailableOk returns a tuple with the IsAvailable field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIsAvailable
+
+`func (o *MarketplaceSoftwareInfo) SetIsAvailable(v bool)`
+
+SetIsAvailable sets IsAvailable field to given value.
+
+### HasIsAvailable
+
+`func (o *MarketplaceSoftwareInfo) HasIsAvailable() bool`
+
+HasIsAvailable returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
