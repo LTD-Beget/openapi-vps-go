@@ -1,7 +1,7 @@
 openapi: 3.0.3
 info:
   title: API Облачных серверов
-  version: v1.7.9
+  version: v1.7.10
 servers:
 - url: https://api.beget.com
 security:
@@ -6302,6 +6302,7 @@ components:
           - INVALID_STATE
           - SERVICE_DISABLED
           - ALREADY_REMOVING
+          - IMAGE_EXPORT_IN_PROGRESS
           format: enum
           type: string
         message:
