@@ -1,7 +1,7 @@
 openapi: 3.0.3
 info:
   title: API Облачных серверов
-  version: v1.7.10
+  version: v1.8.0
 servers:
 - url: https://api.beget.com
 security:
@@ -673,6 +673,12 @@ paths:
         schema:
           type: string
         style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Manage_RemoveVpsRequest'
+        required: true
       responses:
         "200":
           content:
@@ -2254,6 +2260,7 @@ components:
           - ALREADY_RESTORING
           - INVALID_TARGET
           - REGION_MISMATCH
+          - LIVE_RESTORE_WITHOUT_PUBLIC_IP_NOT_SUPPORTED
           format: enum
           type: string
         message:
@@ -2727,6 +2734,7 @@ components:
           - additional_ip_address
           unarchiving: true
           ui_pinned: true
+          display_rank: display_rank
           archived: true
           software_id: software_id
           hostname: hostname
@@ -2900,6 +2908,7 @@ components:
           - additional_ip_address
           unarchiving: true
           ui_pinned: true
+          display_rank: display_rank
           archived: true
           software_id: software_id
           hostname: hostname
@@ -3082,6 +3091,7 @@ components:
           - additional_ip_address
           unarchiving: true
           ui_pinned: true
+          display_rank: display_rank
           archived: true
           software_id: software_id
           hostname: hostname
@@ -3266,6 +3276,7 @@ components:
           - additional_ip_address
           unarchiving: true
           ui_pinned: true
+          display_rank: display_rank
           archived: true
           software_id: software_id
           hostname: hostname
@@ -3448,6 +3459,7 @@ components:
           - additional_ip_address
           unarchiving: true
           ui_pinned: true
+          display_rank: display_rank
           archived: true
           software_id: software_id
           hostname: hostname
@@ -3535,6 +3547,10 @@ components:
           type: string
         ui_pinned:
           type: boolean
+        after_rank:
+          type: string
+        before_rank:
+          type: string
       type: object
     Manage_ChangePinnedResponse:
       example:
@@ -3631,6 +3647,7 @@ components:
           - additional_ip_address
           unarchiving: true
           ui_pinned: true
+          display_rank: display_rank
           archived: true
           software_id: software_id
           hostname: hostname
@@ -3809,6 +3826,7 @@ components:
           - additional_ip_address
           unarchiving: true
           ui_pinned: true
+          display_rank: display_rank
           archived: true
           software_id: software_id
           hostname: hostname
@@ -3972,6 +3990,14 @@ components:
           type: boolean
         project_id:
           type: string
+        ui_pinned_after_rank:
+          type: string
+        ui_pinned_before_rank:
+          type: string
+        network_interfaces:
+          items:
+            $ref: '#/components/schemas/Manage_NetworkInterface'
+          type: array
       type: object
     Manage_CreateVpsResponse:
       example:
@@ -4068,6 +4094,7 @@ components:
           - additional_ip_address
           unarchiving: true
           ui_pinned: true
+          display_rank: display_rank
           archived: true
           software_id: software_id
           hostname: hostname
@@ -4189,6 +4216,10 @@ components:
           - NOT_ENOUGH_SPACE
           - SOFTWARE_TEMPORARY_UNAVAILABLE
           - IMAGE_REGION_MISMATCH
+          - ADDRESS_NOT_OWNED
+          - MULTIPLE_IPS_NOT_SUPPORTED_YET
+          - CONFLICTING_NETWORK_FIELDS
+          - UNSUPPORTED_IP_VERSION
           format: enum
           type: string
         message:
@@ -4340,6 +4371,7 @@ components:
           - additional_ip_address
           unarchiving: true
           ui_pinned: true
+          display_rank: display_rank
           archived: true
           software_id: software_id
           hostname: hostname
@@ -4412,6 +4444,7 @@ components:
           enum:
           - INTERNAL_ERROR
           - GUEST_OS_ERROR
+          - CANNOT_DETACH_LAST_IP_ADDRESS
           format: enum
           type: string
         message:
@@ -4512,6 +4545,7 @@ components:
           - additional_ip_address
           unarchiving: true
           ui_pinned: true
+          display_rank: display_rank
           archived: true
           software_id: software_id
           hostname: hostname
@@ -4584,6 +4618,10 @@ components:
           enum:
           - INTERNAL_ERROR
           - GUEST_OS_REMOVE_IP_ADDRESS_FAILED
+          - CANNOT_DETACH_LAST_IP_ADDRESS
+          - IP_NOT_BELONGS_TO_VPS
+          - IP_ADDRESS_HAS_ACTIVE_LICENSE
+          - IP_ADDRESS_HAS_PENDING_SOFTWARE
           format: enum
           type: string
         message:
@@ -4684,6 +4722,7 @@ components:
           - additional_ip_address
           unarchiving: true
           ui_pinned: true
+          display_rank: display_rank
           archived: true
           software_id: software_id
           hostname: hostname
@@ -4857,6 +4896,7 @@ components:
           - additional_ip_address
           unarchiving: true
           ui_pinned: true
+          display_rank: display_rank
           archived: true
           software_id: software_id
           hostname: hostname
@@ -5005,6 +5045,7 @@ components:
           enum:
           - INTERNAL_ERROR
           - SSH_ACCESS_NOT_ALLOWED
+          - SSH_ACCESS_REQUIRES_PUBLIC_IP_ADDRESS
           format: enum
           type: string
         message:
@@ -5120,6 +5161,7 @@ components:
           - additional_ip_address
           unarchiving: true
           ui_pinned: true
+          display_rank: display_rank
           archived: true
           software_id: software_id
           hostname: hostname
@@ -5349,6 +5391,7 @@ components:
           - additional_ip_address
           unarchiving: true
           ui_pinned: true
+          display_rank: display_rank
           archived: true
           software_id: software_id
           hostname: hostname
@@ -5495,6 +5538,7 @@ components:
           - additional_ip_address
           unarchiving: true
           ui_pinned: true
+          display_rank: display_rank
           archived: true
           software_id: software_id
           hostname: hostname
@@ -5675,10 +5719,51 @@ components:
         has_error:
           type: boolean
       type: object
+    Manage_NetworkInterface:
+      properties:
+        public:
+          $ref: '#/components/schemas/Manage_PublicInterface'
+        private:
+          $ref: '#/components/schemas/Manage_PrivateInterface'
+      type: object
+    Manage_PrivateInterface:
+      properties:
+        network_id:
+          type: string
+        allocate_new:
+          properties: {}
+          type: object
+        specific:
+          $ref: '#/components/schemas/Manage_PrivateInterface_AllocateSpecificPrivateIp'
+      type: object
+    Manage_PrivateInterface_AllocateNewPrivateIp:
+      properties: {}
+      type: object
+    Manage_PrivateInterface_AllocateSpecificPrivateIp:
+      properties:
+        address:
+          type: string
+      type: object
     Manage_PrivateNetworkInfo:
       properties:
         id:
           type: string
+        address:
+          type: string
+      type: object
+    Manage_PublicInterface:
+      properties:
+        allocate_new:
+          properties: {}
+          type: object
+        existing:
+          $ref: '#/components/schemas/Manage_PublicInterface_UseExistingPublicIp'
+      type: object
+    Manage_PublicInterface_AllocateNewPublicIp:
+      properties: {}
+      type: object
+    Manage_PublicInterface_UseExistingPublicIp:
+      properties:
         address:
           type: string
       type: object
@@ -5777,6 +5862,7 @@ components:
           - additional_ip_address
           unarchiving: true
           ui_pinned: true
+          display_rank: display_rank
           archived: true
           software_id: software_id
           hostname: hostname
@@ -5967,6 +6053,7 @@ components:
           - additional_ip_address
           unarchiving: true
           ui_pinned: true
+          display_rank: display_rank
           archived: true
           software_id: software_id
           hostname: hostname
@@ -6133,6 +6220,17 @@ components:
         error_text_en:
           type: string
       type: object
+    Manage_RemoveVpsRequest:
+      properties:
+        id:
+          type: string
+        ip_action:
+          enum:
+          - DELETE
+          - RELEASE
+          format: enum
+          type: string
+      type: object
     Manage_RemoveVpsResponse:
       example:
         vps:
@@ -6228,6 +6326,7 @@ components:
           - additional_ip_address
           unarchiving: true
           ui_pinned: true
+          display_rank: display_rank
           archived: true
           software_id: software_id
           hostname: hostname
@@ -6303,6 +6402,7 @@ components:
           - SERVICE_DISABLED
           - ALREADY_REMOVING
           - IMAGE_EXPORT_IN_PROGRESS
+          - IP_LIMIT_EXCEEDED
           format: enum
           type: string
         message:
@@ -6429,6 +6529,7 @@ components:
           - additional_ip_address
           unarchiving: true
           ui_pinned: true
+          display_rank: display_rank
           archived: true
           software_id: software_id
           hostname: hostname
@@ -6602,6 +6703,7 @@ components:
           - additional_ip_address
           unarchiving: true
           ui_pinned: true
+          display_rank: display_rank
           archived: true
           software_id: software_id
           hostname: hostname
@@ -6785,6 +6887,7 @@ components:
           - additional_ip_address
           unarchiving: true
           ui_pinned: true
+          display_rank: display_rank
           archived: true
           software_id: software_id
           hostname: hostname
@@ -6958,6 +7061,7 @@ components:
           - additional_ip_address
           unarchiving: true
           ui_pinned: true
+          display_rank: display_rank
           archived: true
           software_id: software_id
           hostname: hostname
@@ -7131,6 +7235,7 @@ components:
           - additional_ip_address
           unarchiving: true
           ui_pinned: true
+          display_rank: display_rank
           archived: true
           software_id: software_id
           hostname: hostname
@@ -7304,6 +7409,7 @@ components:
           - additional_ip_address
           unarchiving: true
           ui_pinned: true
+          display_rank: display_rank
           archived: true
           software_id: software_id
           hostname: hostname
@@ -7477,6 +7583,7 @@ components:
           - additional_ip_address
           unarchiving: true
           ui_pinned: true
+          display_rank: display_rank
           archived: true
           software_id: software_id
           hostname: hostname
@@ -7641,6 +7748,7 @@ components:
           - additional_ip_address
           unarchiving: true
           ui_pinned: true
+          display_rank: display_rank
           archived: true
           software_id: software_id
           hostname: hostname
@@ -7863,6 +7971,7 @@ components:
         - additional_ip_address
         unarchiving: true
         ui_pinned: true
+        display_rank: display_rank
         archived: true
         software_id: software_id
         hostname: hostname
@@ -8006,6 +8115,8 @@ components:
         snapshot_id:
           type: string
         image_id:
+          type: string
+        display_rank:
           type: string
       type: object
     Marketplace_DomainField:
@@ -8177,6 +8288,7 @@ components:
             memory: 5
             disk_size: 1
             cpu_count: 6
+          requires_public_ip: true
           documentation_slug: documentation_slug
           unattended_install_available: true
           description_en: description_en
@@ -8365,6 +8477,7 @@ components:
             memory: 5
             disk_size: 1
             cpu_count: 6
+          requires_public_ip: true
           documentation_slug: documentation_slug
           unattended_install_available: true
           description_en: description_en
@@ -8546,6 +8659,7 @@ components:
             memory: 5
             disk_size: 1
             cpu_count: 6
+          requires_public_ip: true
           documentation_slug: documentation_slug
           unattended_install_available: true
           description_en: description_en
@@ -8757,6 +8871,7 @@ components:
           memory: 5
           disk_size: 1
           cpu_count: 6
+        requires_public_ip: true
         documentation_slug: documentation_slug
         unattended_install_available: true
         description_en: description_en
@@ -8962,6 +9077,8 @@ components:
           type: array
         is_available:
           type: boolean
+        requires_public_ip:
+          type: boolean
       type: object
     Marketplace_SoftwareInfo_Requirements:
       example:
@@ -9143,6 +9260,9 @@ components:
           enum:
           - INTERNAL_ERROR
           - GUEST_OS_REMOVE_IP_ADDRESS_FAILED
+          - CANNOT_DETACH_LAST_IP_ADDRESS
+          - IP_ADDRESS_HAS_ACTIVE_LICENSE
+          - IP_ADDRESS_HAS_PENDING_SOFTWARE
           format: enum
           type: string
         message:

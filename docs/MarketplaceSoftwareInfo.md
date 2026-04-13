@@ -19,6 +19,7 @@ Name | Type | Description | Notes
 **UnattendedInstallAvailable** | Pointer to **bool** |  | [optional] 
 **License** | Pointer to [**[]StructuresSoftwareLicense**](StructuresSoftwareLicense.md) |  | [optional] 
 **IsAvailable** | Pointer to **bool** |  | [optional] 
+**RequiresPublicIp** | Pointer to **bool** |  | [optional] 
 
 ## Methods
 
@@ -413,6 +414,31 @@ SetIsAvailable sets IsAvailable field to given value.
 `func (o *MarketplaceSoftwareInfo) HasIsAvailable() bool`
 
 HasIsAvailable returns a boolean if a field has been set.
+
+### GetRequiresPublicIp
+
+`func (o *MarketplaceSoftwareInfo) GetRequiresPublicIp() bool`
+
+GetRequiresPublicIp returns the RequiresPublicIp field if non-nil, zero value otherwise.
+
+### GetRequiresPublicIpOk
+
+`func (o *MarketplaceSoftwareInfo) GetRequiresPublicIpOk() (*bool, bool)`
+
+GetRequiresPublicIpOk returns a tuple with the RequiresPublicIp field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRequiresPublicIp
+
+`func (o *MarketplaceSoftwareInfo) SetRequiresPublicIp(v bool)`
+
+SetRequiresPublicIp sets RequiresPublicIp field to given value.
+
+### HasRequiresPublicIp
+
+`func (o *MarketplaceSoftwareInfo) HasRequiresPublicIp() bool`
+
+HasRequiresPublicIp returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
